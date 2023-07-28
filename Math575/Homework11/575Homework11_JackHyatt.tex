@@ -1,0 +1,121 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 11 (Due April 21, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 575 - Discrete Mathematics II - Spring 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\m
+	\text{ }\text{ }\text{ }\text{ }\text{ } Collaborators: Chance
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+
+
+\item Prove that if $H$ is a graph with chromatic number $\chi(H) \geq 3$, then\footnote{We say a function $f(n)$ is $o(n^2)$ if $\lim_{n \to \infty} \frac{f(n)}{n^2} =0$. I.e., we view this as a small (positive or negative) error that becomes negligible proportionally as $n$ grows. Do not worry about calculating this error precisely.}
+ \[\operatorname{ex}(n, H)\geq \left(1-\frac{1}{\chi(H)-1}\right) \frac{n^2}{2} + o(n^2).\]
+
+\begin{proof}
+	Let $k$ be $\chi(H)-1$. If a graph is $k$ colorable, that means $H$ is not a subgraph, since the chromatic number of a graph is $\geq$ the chromatic number of every subgraph.\\
+	Let $G$ be a complete $k$-partite graph on $n$ vertices where the partitions are as balanced as possible. Then the number of edges will be ${k\choose 2}\frac{n^2}{k^2}$ since every pair of partitions will have roughly the $n/k$ vertices map to the other $n/k$ vertices. Since $n^2$ might not be divisible by $k^2$, we'll just tack on an $o(n^2)$.\\
+	${k\choose 2}\frac{n^2}{k^2}$ simplifies down to $\frac{k(k-1)}{2}\frac{n^2}{k^2}$ which simplifies to $(1-\frac{1}{k})\frac{n^2}{2}$, our desired result.
+\end{proof}
+
+\medskip
+
+
+\item Prove that $\operatorname{ex}(n,P_n) = {n-1 \choose 2}$. 
+
+\begin{proof}
+	To show that $\operatorname{ex}(n,P_n) \geq {n-1 \choose 2}$, we can make a $K_{n-1}$ graph and add a vertex with no edges. This $n$-vertex graph has ${n-1 \choose 2}$ edges and no $P_n$ as a subgraph.\\
+	Showing $\operatorname{ex}(n,P_n) \leq {n-1 \choose 2}$. BWOC, let $G$ be a graph on $n$ vertices with $|E(G)| \geq {n-1 \choose 2}+1$. Let us then add an edge (ignoring the case when we can't since that would make the graph complete and trivial), we'll call $e$. So we now have $|E(G)| > {n-1 \choose 2}+1$. Since we know $\operatorname{ex}(n,C_n) = {n-1 \choose 2}+1$, $G$ must have a Hamiltonian cycle we'll call $C$. Let us now remove $e$ from $G$. We now have $\geq {n-1 \choose 2}+1$ edges.\\
+	\textbf{Case 1:} $e\in C$. Then we have turned $C$ into a path that hits all the vertices, which is a $P_n$ path.\\
+	\textbf{Case 2:} $e\nin C$. Then we still have a Hamiltonian path, which means we also have a $P_n$ as a subgraph.\\
+	So for any graph with $\geq {n-1 \choose 2}+1$ edges, we will have a $P_n$ subgraph $\implies \operatorname{ex}(n,P_n) \leq {n-1 \choose 2}$.
+\end{proof}
+\medskip 
+
+\item Prove that $\operatorname{ex}(n, K_{1,m}) \leq (m-1)n/2$. Moreover, show that for any $m \in \mathbb N$, this bound is attainable when $n\geq m$ is even.
+
+\begin{proof}
+	To show $\operatorname{ex}(n, K_{1,m}) \leq (m-1)n/2$, it suffices to show that a graph $G$ with $>(m-1)n/2$ edges will have a vertex of deg $\geq m$.\\
+	Let $G$ be a $n$-vertex graph with $|E(G)|>\frac{(m-1)n}{2}$. We know that $|E(G)| = dn/2$, where $d$ is the average degree. So we then have that the average degree, $d$, is greater than $m-1$. This means there must be at least one vertex that has degree $\geq m$.
+\end{proof}
+
+\medskip
+
+{\em Hint: for the construction, recall that $\chi'(K_n) = n-1$ whenever $n$ is even.}
+
+\medskip
+
+\item In this problem we will prove $\operatorname{ex}(n, K_{2,m}) \leq \frac{1}{2}(m-1)^{1/2} n^{3/2} + \frac{n}{4}$.
+\begin{enumerate}
+\item Use pigeonhole principle to prove that if $G$ is an $n$-vertex graph with $\sum_{v \in V(G)} {d(v) \choose 2} > (m-1){n \choose 2}$, then $G$ contains $K_{2,m}$ as a subgraph. 
+\begin{proof}
+	Let $G$ be an $n$-vertex graph with $\sum_{v \in V(G)} {d(v) \choose 2} > (m-1){n \choose 2}$.\\
+	What the left side of the inequality can be interpreted as doing is summing the number of pairs of neighbors a vertex has for all vertices. So the left side counts the number of distinct $P_3$ subgraphs.\\
+	Let us define "boxes" for every pair of vertices. So there are ${n\choose2}$ boxes. Now let us put each distinct $P_3$ subgraph in a box based off of the end points of the $P_3$. We have more than $(m-1){n\choose2}$ distinct $P_3$, so there must be a box with at least $m$ paths. The union of all the paths in that box will be a $K_{2,\geq m}$.
+\end{proof}
+\item Use Cauchy-Schwarz to prove that \[\sum_{v \in V(G)} {d(v) \choose 2} \geq e\left(\frac{2e}{n} - 1\right)\] where $e =|E(G)|$.
+
+\begin{proof}
+	
+	\begin{align*}
+		\sum_{v \in V(G)} {d(v) \choose 2} 
+		&= \sum_{v \in V(G)} \frac{d(v)(d(v)-1)}{2}\\
+		&= \frac{1}{2} \sum_{v \in V(G)} d(v)^2 - \frac{1}{2} \sum_{v \in V(G)} d(v)\\
+		&= \frac{1}{2} \sum_{v \in V(G)} d(v)^2 - e\\
+		&= \frac{1}{n}(\frac{n}{2} \sum_{v \in V(G)} d(v)^2) - e\\
+		&= \frac{1}{n}(\frac{1}{2} \sum_{v \in V(G)}1^2 \sum_{v \in V(G)} d(v)^2) - e\\
+		\text{By Cauchy-Schwarz\qquad} &\geq \frac{1}{2n} (\sum_{v \in V(G)}d(v))^2 - e\\
+		&= \frac{1}{2n} (2e)^2 - e\\
+		&= e(\frac{2e}{n} - 1)
+	\end{align*}
+\end{proof}
+
+\item Use parts (a) and (b) to conclude that if $e > \frac{1}{2}(m-1)^{1/2} n^{3/2} + \frac{n}{4}$, then $G$ contains $K_{2,m}$. 
+\begin{proof}
+	Let $G$ be a $n$-vertex graph with $e > \frac{1}{2}(m-1)^{1/2} n^{3/2} + \frac{n}{4}$. Then
+	\begin{align*}
+		e(\frac{2e}{n}-1) &> \left(\frac{1}{2}(m-1)^{1/2} n^{3/2} + \frac{n}{4}\right)\left(\frac{(m-1)^{1/2} n^{3/2} + \frac{n}{2}}{n}-1\right)\\
+		&= \left(\frac{1}{2}(m-1)^{1/2} n^{3/2} + \frac{n}{4}\right)\left((m-1)^{1/2} n^{1/2} -\frac{1}{2}\right)\\
+		&= \frac{1}{2}(m-1)n^2-\frac{n}{8}\\
+		&= (m-1)(\frac{n^2}{2}-\frac{n}{8(m-1)})\\
+		&>(m-1)(\frac{n^2-n}{2})\\
+		&= (m-1){n\choose2}
+	\end{align*}
+	So then using part (b), we get 
+	\[\sum_{v \in V(G)} {d(v) \choose 2} \geq e\left(\frac{2e}{n} - 1\right) > (m-1){n\choose2}\]
+	So by part (a), we can say $\operatorname{ex}(n, K_{2,m}) \leq \frac{1}{2}(m-1)^{1/2} n^{3/2} + \frac{n}{4}$.
+\end{proof}
+
+\end{enumerate}
+
+\medskip 
+
+\item Let $X$ be any set of $n$ points in the plane $\mathbb R^2$. Use question 4 to prove that there are at most $\frac{\sqrt{2}}{2} n^{3/2} + \frac{n}{4}$ pairs of points in $X$ that have (Euclidean) distance exactly 1. 
+
+\begin{proof}
+	Let $X$ be any set of $n$ points in the plane $\mathbb R^2$ with edges between the points iff the pair has a Euclidean distance of exactly 1. Then to show the desired fact, it suffices to show there is no $K_{2,3}$ subgraph, since plugging in $3$ into question 4's result will give that result.\\
+	Let us choose 2 points in $X$ that do not have an edge. We will now create a unit circle around each of those two points. If another point lies on the circle, that means it will have an edge between it and the center point. There would be a $K_{2,3}$ if the two circles intersected at 3 points, but this is not possible for 2 distinct circles.
+\end{proof}
+
+\end{enumerate}
+
+\end{document}

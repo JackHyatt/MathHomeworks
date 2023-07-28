@@ -1,0 +1,122 @@
+\documentclass[12pt]{letter}
+\usepackage{amsmath,amsfonts,amsthm,amstext,amssymb,fullpage,framed,graphicx,color,graphicx}
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+\textbf{Math 574H  \hfill Homework 3 \hfill Fall 2022} \\
+\end{center}
+
+
+$\bullet$ Due Monday, 9/12/2022 in class.
+
+$\bullet$ Unless stated otherwise, you must explain or prove your work.
+
+\noindent
+
+\medskip 
+
+\begin{enumerate}
+
+
+\item We consider the permutations of $\{1,2,3,4,5,6\}$.
+\begin{enumerate}
+\item Write the first 15 permutations in lexicographical order.\\\\
+123456,123465,123546,123564,123645,\\
+123654,124356,124365,124536,124563,\\
+124635,124653,125346,125364,125436.
+\item What is the next largest permutation after $265431$?\\\\
+Find the first pair of increasing numbers, which is 2 and 6. Then swap 2 with the next largest number after it, which is 3. Then order the numbers past 3 from low to high. So the next largest permutation is 312456.
+\item Let $a_1 a_2 \ldots a_n$ be a permutation of $\{1, 2, \ldots, n\}$. Find a general method for constructing the previous permutation in lexicographical order of $a_1a_2 \ldots a_n$.\\\\
+Find the last pair of decreasing numbers, then swap the first number of that pair, we'll call $a_i$, with the greatest number that is less than and to the right of $a_i$. Then order the numbers to the right of the new $a_i$ from greatest to least.
+\item Use part (c) to find the permutation before $265431$.\\\\
+265413.
+\end{enumerate}
+
+\medskip
+
+\item Write the next largest subset of size $6$ of $\{1, \ldots, 9\}$ for each of the following subsets.
+\begin{enumerate}
+	\item $\{2,3,4,5,6,7\}$\\\\
+	$\{2,3,4,5,6,8\}$\\
+	\item $\{3,4,6,7,8,9\}$\\\\
+	$\{3,5,6,7,8,9\}$\\
+	\item $\{1,2,4,7,8,9\}$\\\\
+	$\{1,2,5,6,7,8\}$
+\end{enumerate} 
+
+\medskip
+
+\item 200 people are entered into a drawing where each person has an equal chance to win. What's the probability that Alice, Bob, and Charlie win the first, second, and third place prize respectively if
+\begin{enumerate}
+\item no one can win more than one prize?\\\\
+Alice has a 1 out of 200 chance of winning first place. Then she is taken out of the running, so there are 199 people left for Bob to next win. Same logic for Charlie. This is just $\frac{1}{200}\cdot \frac{1}{199}\cdot \frac{1}{198}$ 
+\item winning more than one prize is allowed?\\\\
+Each of them has a 1 out of 200 chance of winning the respective prize, so then then all of them winning is the odd multiplied together, then divided by 6 because there are 6 combinations of them winning and only 1 is the correct combination. This is just $\frac{1}{200}\cdot \frac{1}{200}\cdot \frac{1}{200}$ 
+\end{enumerate}
+
+\medskip
+
+\item You are dealt a 5-card hand from a standard 52-card deck at random. \footnote{You can search wikipedia for ``List of poker hands" to understand each of the following definitions.}
+\begin{itemize}
+\item Let $A$ be the event that your hand contains at least two 7's.
+\item Let $B$ be the event that your hand contains a four of a kind. 
+\item Let $C$ be the event that your hand contains a flush (including royal flush and straight flush). 
+\end{itemize}
+\begin{enumerate}
+\item Compute the probabilities $p(A), p(B),$ and $p(C)$.\\\\
+These probabilities will be valid hands over total hands.\\
+So $p(A)$ is  $\frac{\binom{4}{2}\binom{50}{3}}{\binom{52}{5}}$ by choosing 2 sevens, then the other 3 cards from the remaining 50 cards, then dividing by total hands.\\
+So $p(B)$ is  $\frac{\binom{13}{1}\binom{48}{1}}{\binom{52}{5}}$ by choosing a value to be the 4 of a kind, then the other 1 card from the remaining 48 cards, then dividing by total hands.\\
+So $p(C)$ is  $\frac{\binom{4}{1}\binom{13}{5}}{\binom{52}{5}}$ by choosing a suit, then the 5 values to be in the hand, then dividing by total hands.\\
+\item Compute $p(B | A)$. Are $A$ and $B$ independent?\\\\
+$p(B | A) = \frac{p(B \cap A)}{p(A)} = \frac{\frac{48}{\binom{52}{5}}}{\frac{\binom{4}{2}\binom{50}{3}}{\binom{52}{5}}} = \frac{48}{\binom{4}{2}\binom{50}{3}}$\\
+The two aren't independent, because otherwise $p(B | A)$ was not equal to $p(B)$.
+\item Compute $p(A | C)$. Are $A$ and $C$ independent?\\\\
+$p(A | C) = 0$ since to get 4 sevens, there has to be multiple suits, the flush prevents that.
+\end{enumerate}
+
+\medskip
+\item Prove that if $E$ and $F$ are events, then \[p(E \cap F) \geq p(E) + p(F) - 1.\] When does equality hold? That is, what conditions on $E$ and $F$ imply that $p(E \cap F) = p(E) + p(F) - 1$? 
+
+\begin{proof}
+	Rearrange the inequality to be \[1\geq p(E) + p(F) - p(E\cap F)\]
+	\[1\geq p(E\cup F)\]
+	which is true since probabilities are between 0 and 1. The inequality is an equality when $p(E\cup F)$ is certain to happen.
+\end{proof}
+
+\medskip
+
+\item Prove that for all $n \geq 2$, if $E_1, E_2, \ldots, E_n$ are $n$ events then \[p(E_1 \cap E_2 \cap \ldots \cap E_n) \geq p(E_1) + p(E_2) + \ldots + p(E_n) - (n-1).\]\\
+\begin{proof}
+	Let's use induction. The base case for $n=2$ is already done in question 5.Now to show for n+1 case.\\
+	Assume $p(E_1\cap E_2\cap\ldots\cap E_n)\geq p(E_1)+p(E_2)+\ldots+p(E_n)-(n-1)$.
+	\[p(E_1\cap E_2\cap\ldots\cap E_{n+1}) = p(E_1\cap E_2\cap\ldots\cap (E_n\cap E_{n+1}))\]
+	\[\geq p(E_1)+p(E_2)+\ldots p(E_n\cap E_{n+1})-(n-1) \qquad\text{Used I.H.}\] 
+	\[\geq p(E_1)+p(E_2)+\ldots p(E_n)+p(E_{n+1})-(n-2)\qquad\text{Used Base Case}\] 
+\end{proof}
+
+
+\medskip
+
+
+\item Prove that for all $n \geq 2$, if $E_1, E_2, \ldots, E_n$ are $n$ events from a finite sample space, then \[p(E_1 \cup E_2 \cup \ldots \cup E_n) \leq p(E_1) + p(E_2) + \ldots + p(E_n).\]
+\begin{proof}
+	Group $E_2 \cup \ldots \cup E_n$ as one event. Then \[p(E_1 \cup E_2 \cup \ldots \cup E_n) = p(E_1) + p(E_2 \cup \ldots \cup E_n) - p(E_1 \cap (E_2 \cup \ldots\cup E_n))\]
+	\[= p(E_1)+p(E_2)+p(E_3\cup\ldots\cup E_n) - p(E_1 \cap (E_2 \cup \ldots\cup E_n))-p(E_2 \cap (E_3 \cup \ldots\cup E_n))\]
+	\[\vdots\]
+	\[= p(E_1)+\ldots+p(E_n) -p(E_1\cap(E_2\cup\ldots\cup E_n))-\ldots -p(E_{n-1}\cap E_n) \]
+	\[\leq p(E_1)+\ldots +p(E_n)\]
+\end{proof}
+
+
+\item A bit string of length 12 is generated at random. Let $A$ be the event that the string contains six consecutive 1s. Let $B$ be the event that the first bit is 0. Determine $p(A), p(B), p(A \cap B), p(A | B)$ and $p(B|A)$. Compare the quantities $p(B)$ with $p(B|A)$ and $p(A)$ with $p(A|B)$ and briefly interpret your results.\\\\
+$p(A)$ is $\frac{2^6+6\cdot2^5}{2^{12}}$ from previous homework.\\
+$p(B)$ will be $\frac{1}{2}$ since the first bit is either 1 or 0 and the other bits do not matter.\\
+For $p(A \cap B)$, take the first bit to be 0 and recalculate total ways for A but for 11 bits. This gives us $2^5+5\cdot2^4$ valid ways. So the probability is $\frac{2^5+5\cdot2^4}{2^{12}}$.\\
+$p(A | B) = \frac{p(A\cap B)}{p(B)} = 2\cdot\frac{2^5+5\cdot2^4}{2^{12}} = \frac{7}{128}$\\
+$p(B|A) = \frac{p(A\cap B)}{p(A)} = \frac{\frac{2^5+5\cdot2^4}{2^{12}}}{\frac{2^6+6\cdot2^5}{2^{12}}} = \frac{2^5+5\cdot2^4}{2^6+6\cdot2^5} = \frac{7}{16}$\\
+A's chance goes down when B is given, which makes sense since it pretty much gets rid of a digit for A to use. And B's chance goes down too when A is given, which also makes sense since those consecutive 1's has a chance of using the first digit.
+\end{enumerate}
+
+\end{document}

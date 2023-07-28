@@ -1,0 +1,169 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage[normalem,normalbf]{ulem}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 10 (Due Oct 31, 2022)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 574 - Discrete Mathamatics - Fall 2022} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\medskip 
+
+
+
+\begin{enumerate}
+
+\item An integer is called {\em squarefree} if it is not divisible by the square of a positive integer greater than 1. Find the number of squarefree positive integers less than 100.\\\\
+The number of squarefree positive integers less than 100 will equal total numbers minus number of non-squarefree integers. Let $A_i$ be the set of numbers less than 100 that are divisible by $i^2$. Since the numbers are 99 or less, the largest square number that could divide it is 81. \\
+So the sets we need to consider are $A_2,A_3,A_4,A_5,A_6,A_7,A_8,$ and $A_9.$
+Except we only need to consider the squares of primes, since the squares of composite numbers are multiples are squares of primes. So really the only sets we need to consider are $A_2,A_3,A_5,$ and $A_7$.\\
+So the total number of squarefree numbers will be
+	\[99 - [A_2\cup A_3\cup A_5\cup A_7]\]
+	\[= 99 - [|A_2|+|A_3|+|A_5|+|A_7|\]
+	\[- |A_2\cap A_3|- |A_2\cap A_5|- |A_2\cap A_7| - |A_3\cap A_5| - |A_3\cap A_7| - |A_5\cap A_7| \]
+	\[+ |A_2\cap A_3 \cap A_5| + |A_7\cap A_3 \cap A_5| + |A_2\cap A_7 \cap A_5| + |A_2\cap A_3 \cap A_7| \]
+	\[- |A_2\cap A_3 \cap A_5 \cap A_7|]\]
+
+Since multiplication is nice, $A_i\cup A_j = A_{ij}$. In the above equation, most of the intersecting sets will be 0, since $A_9$ is the highest any can be that still has elements in it. With this knowledge, our equation now becomes
+
+\[99 - \left[|A_2|+|A_3|+|A_5|+|A_7|-|A_6|\right]\]
+
+The formula for the amount of numbers divisible by i that are below 99 is simply just $|A_i| = \lfloor\frac{99}{i}\rfloor$. So the total number of squarefree numbers is 
+\[99 - \lfloor\frac{99}{2}\rfloor-\lfloor\frac{99}{3}\rfloor-\lfloor\frac{99}{5}\rfloor\lfloor\frac{99}{7}\rfloor + \lfloor\frac{99}{6}\rfloor = 61\]
+
+\medskip
+
+\item Give a double counting proof of the following: for $n, k \in \mathbb N$ with $k \leq n$, 
+\[{n - 1 \choose k-1} = \sum_{j=0}^{k-1} (-1)^j {k \choose j} {n+k-1 - j \choose k-1-j}.\]
+{\em Hint: show that both sides counts the number of ways to place $n$ indistinguishable objects in $k$ distinguishable boxes such that each box gets at least one object}.\\
+\begin{proof}
+	LHS: This counts ways to distribute $n-1$ elements into $k$ sets s.t. each set gets at least 1 element.\\
+	RHS: Let $A_i$ be a set of ways to distribute the elements into $k$ sets s.t. set i does not get any elements. Then the ways to distribute $n-1$ elements into k sets with each set having at least one element is the total ways to distribute minus sets where at least one set has no elements.
+	\begin{flalign*}
+		\binom{n+k-1}{k-1} - |\bigcup_{i=1}^{k}A_i|\\
+		=\binom{n+k-1}{k-1} - \left[\sum_{j=1}^{k}(-1)^{j+1}(\sum_{1\leq i_1 <\ldots<i_j\leq k}|A_{i_1}\cap\ldots \cap A_{i_j}|)\right] &&\text{[By P.I.E]}\\
+	\end{flalign*}
+	$|A_{i_1}\cap\ldots \cap A_{i_j}|$ will equal $\binom{n+k-j-1}{k-1-j}$ since we are excluding j sets, and there will be $\binom{k}{j}$ of those. So
+	\[=\binom{n+k-1}{k-1} - \sum_{j=1}^{k-1} (-1)^{j+1} {k \choose j} {n+k-1 - j \choose k-1-j}\]
+	\[=\sum_{j=0}^{k-1} (-1)^j {k \choose j} {n+k-1 - j \choose k-1-j}\]
+\end{proof}
+
+\medskip
+
+
+\item We want to tile a $1\times m$ row using $1\times 1$ colored tiles. Suppose we have $n$ different colors to work with, and tiles of the same color are indistinguishable.
+\begin{enumerate}
+\item For $m \geq n$, use Inclusion/Exclusion to determine the number of different ways to tile the $1 \times m$ row such that each color is used at least once.\\\\ 
+Let $A_i$ be the set of ways to make the string of length m out of n colors without color i. Since we want to find the number of ways to create a string of length m out of n colors s.t. each color is used once, we want total number of ways to create the string with no restrictions minus the ways to create the string not using each color.
+\begin{flalign*}
+	&=n^m - |\bigcup_{i=1}^{n}A_i|\\
+	&=n^m - \left[\sum_{k=1}^{n}(-1)^{k+1}(\sum_{1\leq i_1 <\ldots<i_k\leq n}|A_{i_1}\cap\ldots \cap A_{i_k}|)\right] &&\text{[By P.I.E]}\\
+\end{flalign*}
+$|A_{i_1}\cap\ldots \cap A_{i_k}|$ will equal $(n-k)^m$ since we then just have n-k options for each of the m spots, and there will be $\binom{n}{k}$ of those $(n-k)^m$'s.
+\begin{flalign*}
+	&=n^m - \left[\sum_{k=1}^{n}(-1)^{k+1}\binom{n}{k}(n-k)^m\right]\\
+	& = \sum_{k=0}^{n}(-1)^k\binom{n}{k}(n-k)^m
+\end{flalign*}
+\item What can you say about part (a) when $m = n$? What should your summation simplify to?\\\\
+When $m=n$, that means there are the same number of tiles and colors, meaning we can only use each color once. And since we must use each color once, this is just the permutations of the colors, which is $m!$. So somehow (seems like a hard problem, will be left to the grader as an exercise), the summation simplifies to $m!$.
+\end{enumerate}
+
+
+\medskip
+
+\item Consider the following relations defined on the set $\{a,b,c\}$. For each relation, determine whether it is symmetric, reflexive, transitive.  If a property does not hold, give a reason why.
+
+\begin{enumerate}
+\item $R_1 = \{(a,b), (a,c), (c,c), (b,b), (c,b), (b,c)\}$.\\\\
+Not symmetric since $(a,b)$ is in but not $(b,a)$. Not reflexive because $(a,a)$ is not in the relation. It is transitive.\\
+\item $R_2 = \{(a,a), (b,b), (a,b), (b,a)\}$.\\\\
+It is symmetric and transitive. It isn't reflexive since $(c,c)$ is not in the relation.
+\end{enumerate} 
+
+
+\medskip
+
+\item Let $A$ be the set of all people in the world. Consider the following relations defined on the set $A$. For each relation, determine whether it is symmetric, reflexive, transitive.  If a property does not hold, give a reason why.
+
+\begin{enumerate}
+\item $R_1$ defined on $A$ as $x R_1 y$ if person $x$ and person $y$ are born in the same year.\\\\
+It is reflexive, symmetric, and transitive.\\
+\item $R_2$ defined on $A$ as $x R_2 y$ if the heights of person $x$ and person $y$ are within two inches of each other.\\\\
+It is reflexive and symmetric. It isn't reflexive since person x can be 50, z be 52, and y be 54. So $x R_2 z$ and $z R_2 y$, but x is not related to y.\\
+\item $R_3$ defined on $A$ as $x R_3 y$ if person $x$ has met person $y$.\\\\
+It is reflexive and symmetric. It is not transitive since x could meet z and z could meet y, but x never met y.
+\end{enumerate}
+
+\medskip
+
+\item State whether each of the following relations is an symmetric, reflexive, transitive. If a property does not hold, give a reason why.
+\begin{enumerate}
+\item $R_1$ defined on $\mathbb R$ as $x R_1 y$ if and only if $xy \geq 0$.\\\\
+It is reflexive and symmetric. It is not transitive since $1R0$ and $0R{-1}$, but 1 is not related to -1.\medskip
+\item $R_2$ defined on $\mathbb R$ as $x R_2 y$ if and only if $xy > 0$.\\\\
+It is symmetric and transitive. It is not reflexive since 0 is not related with 0, but 0 is a real number. \medskip
+\item $R_3$ defined on $\mathbb R$ as $x R_3 y$ if and only if $|x-y|<1$.\\\\
+It is reflexive and symmetric. It is not transitive since 3R3.5 and 3.5R4, but 3 is not related to 4.
+\end{enumerate}
+
+
+\medskip
+
+
+\item Let $R_1$ be a relation on the set $A$ and $R_2$ be a relation on the set $B$. Let $R$ be the relation defined on $A \times B$ such that $(a,b) R (a',b')$ if and only if $aR_1a'$ and $bR_2b'$. Prove that if $R_1$ and $R_2$ are equivalence relations then $R$ is also an equivalence relation.
+\begin{proof}
+	Assume $R_1$ and $R_2$ are equivalence relations.\\
+	\textbf{Showing R is reflexive:}\\
+	So $\forall a\in A,\enskip aR_1a\medspace$ and $\forall b\in B,\enskip bR_2b$. So then $\forall (a,b)\in A\times B,\enskip (a,b)R(a,b)$.\\
+	\textbf{Showing R is symmetric:}\\
+	Assume $(a,b)R(a',b')$. Then $aR_1a'$ and $bR_2b'$.
+	So $aR_1a' \implies a'R_1a\medspace$ and $bR_2b' \implies b'R_2b.$ So $a'R_1a$ and $b'R_2b$. So $(a',b')R(a,b)$.\\
+	\textbf{Showing R is transitive:}\\
+	Assume $(a,b)R(a',b')\medspace$ and $(a',b')R(a'',b'')$. Then $aR_1a',
+	\medspace a'R_1a'', \medspace bR_2b', $ and $\medspace b'R_2b''$. Since $R_1$ and $R_2$ are transitive, $aR_1a''$ and $bR_2b''$. So $(a,b)R(a'',b'')$.
+\end{proof}
+
+
+\end{enumerate}
+
+
+
+
+\end{document}

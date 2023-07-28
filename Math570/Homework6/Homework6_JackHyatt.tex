@@ -1,0 +1,267 @@
+% !TeX document-id = {f8b4ae2f-4b04-4d78-b73d-1181c3afc951}
+% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape]
+
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage[normalem,normalbf]{ulem}
+\usepackage{svg}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+\setcounter{MaxMatrixCols}{12}
+
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 6 (Due Nov 4, 2022)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 570 - Discrete Optimization - Fall 2022} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+	
+	\medskip 
+	
+	\begin{exercise}{1} For the network below with source $s$ and sink $t$, apply the Ford-Fulkerson algorithm with breadth-first search (a.k.a.~BFS, a.k.a., Edmonds-Karp, where the vertices are to be considered in alphabetical order except for the source vertex).  The edge weights are the integer values next to the edges.  List the sequence of flows, residual networks, and augmenting paths that the algorithm generates, then state the final flow value and give a cut which witnesses the fact that max flow = min cut.
+		\begin{figure}[h]
+			\begin{center}
+				\begin{tabular}{c}
+					\includesvg[scale=0.45]{network}
+				\end{tabular}
+			\end{center}
+		\end{figure}
+		\\The first path using BFS will be s,d,e,t. Since d to e has the min cap, we add three to all of those edges. Now the network and residual network is:\\\\\\\\\\\\\\\\\\\\
+		\begin{figure}[h]
+			\begin{center}
+				\begin{tabular}{c}
+					\includesvg[scale=0.45]{network1}\qquad
+					\includesvg[scale=0.45]{network1-resid}
+				\end{tabular}
+			\end{center}
+		\end{figure}
+		
+		That flow is 3. The next augmenting path is s,a,b,c,t. Since a to b has the min cap, we add 2 to all of those edges. Now the network residual network is:
+		\begin{figure}[h]
+			\begin{center}
+				\begin{tabular}{c}
+					\includesvg[scale=0.45]{network2}\qquad
+					\includesvg[scale=0.45]{network2-resid}
+				\end{tabular}
+			\end{center}
+		\end{figure}
+		
+		That flow is 5. The next augmenting path is s,d,g,e,t. Since d to g has the min cap, we add 4 to all of those edges. Now the network and residual network is:\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		\begin{figure}[h]
+			\begin{center}
+				\begin{tabular}{c}
+					\includesvg[scale=0.45]{network3}\qquad
+					\includesvg[scale=0.45]{network3-resid}
+				\end{tabular}
+			\end{center}
+		\end{figure}
+	
+		That flow is 9. The next augmenting path is s,f,g,e,t. Since e to t has the min cap, we add 1 to all of those edges. Now the network and residual network is:
+		\begin{figure}[h]
+			\begin{center}
+				\begin{tabular}{c}
+					\includesvg[scale=0.45]{network4}\qquad
+					\includesvg[scale=0.45]{network4-resid}
+				\end{tabular}
+			\end{center}
+		\end{figure}
+	
+		That flow is 10. The next augmenting path is s,f,g,h,t. Since f to g has the min cap, we add 2 to all of those edges. Now the network and residual network is:\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+		\begin{figure}[h]
+			\begin{center}
+				\begin{tabular}{c}
+					\includesvg[scale=0.45]{network5}\qquad
+					\includesvg[scale=0.45]{network5-resid}
+				\end{tabular}
+			\end{center}
+		\end{figure}
+		
+		That is the final step since there are no more augmenting paths in the residual network. So we know that the max flow is $2+7+3=12$. A min cut can be $A=\{s,a,f,d\}$ and $B=\{g,e,b,h,c,t\}$.\\
+		
+	\end{exercise}
+	
+	\begin{exercise}{2} Prove that every regular bipartite graph has a perfect matching.  (Recall that ``regular'' means that the degree of every vertex is the same.)\\\\
+		For this exercise, we need to exclude the graph of even vertexes and no edges, as this is a regular bipartite graph but will not have a perfect matching.\\ 
+		Hall's theorem states that iff every subset of X has sufficiently many neighbors in Y, where X and Y are the distinct sets of a bipartite graph, then there exists a perfect matching. So all we need to show is that in regular bipartite graph, every subset of X will have sufficiently many neighbors.
+		\begin{proof}
+			Assume G is a regular bipartite graph with nodes of at least degree 1. Let X and Y be the two partitions of the bipartite graph.\\
+			First, since G is k-regular (each nodes have degree k) and bipartite, $E(X)=E(Y)$, $E(X) = k|X|$, and similarly, $E(Y)=k|Y|$. So $k|X|=k|Y| \implies |X|=|Y|$. So G is a balanced bipartite graph.\\
+			WLOG, let $S\subseteq X$ with size $n\leq k$. $|E(S)| \leq |E(N(S))|$ since the edges coming out of the neighborhood of S will contain the edges of S, by how neighborhoods work. $|E(S)| = k|S|$ and $|E(N(S))| =  k|N(S)|$.\\
+			So then $|E(S)| \leq |E(N(S))| \implies k|S|\leq k|N(S)| \implies |S|\leq |N(S)|$. So every subset of X will have sufficiently many neighbors.
+		\end{proof}
+	\end{exercise}
+	
+	\begin{exercise}{3} Recall that $C_5$ is the $5$-cycle graph, i.e., $(\mathbb{Z}/5\mathbb{Z},\{\{x,y\}:x-y=\pm 1\})$.
+		\begin{enumerate}
+			\item Use an LP and rounding to find a vertex cover of $C_5$.  What is the approximation ratio you obtain?\\
+			\begin{equation*}
+				\begin{array}{ll@{}ll}
+					\text{minimize}  &  x_1 + x_2 + x_3 + x_4 + x_5 \\
+					\text{subject to}&  x_1 + x_2 \geq 1   \\
+					&  x_2 + x_3 \geq 1   \\
+					&  x_3 + x_4 \geq 1   \\
+					&  x_4 + x_5 \geq 1   \\
+					&  x_5 + x_1 \geq 1   \\
+					&  0 \leq x_{1,2,3,4,5}
+				\end{array}
+			\end{equation*}
+			If we instead look at the dual, we get an LP in a nice standard form.
+			\begin{equation*}
+				\begin{array}{ll@{}ll}
+					\text{maximize}  &  y_1 + y_2 + y_3 + y_4 + y_5 \\
+					\text{subject to}&  y_1 + y_5 \leq 1   \\
+					&  y_1 + y_2 \leq 1   \\ 
+					&  y_2 + y_3 \leq 1   \\
+					&  y_3 + y_4 \leq 1   \\
+					&  y_4 + y_5 \leq 1   \\
+					&  0 \leq x_{1,2,3,4,5}
+				\end{array}
+			\end{equation*}
+			Now to make the tableau and use simplex method.
+			\[\begin{bmatrix}[cccccccccc|c]
+				\circled{1} &  0 &  0 & 0 & 1 & 1 & 0 & 0 & 0 & 0 & 1\\
+				1 &  1 &  0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1\\
+				0 &  1 &  1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 1\\
+				0 &  0 &  1 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1\\
+				0 &  0 &  0 & 1 & 1 & 0 & 0 & 0 & 0 & 1 & 1\\
+				1 &  1 &  1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 0\\
+			\end{bmatrix}\]
+		
+			\[\begin{bmatrix}[cccccccccc|c]
+				1 &  0 &  0 & 0 & 1  & 1  & 0 & 0 & 0 & 0 & 1 \\
+				0 &  \circled{1} &  0 & 0 & -1 & -1 & 1 & 0 & 0 & 0 & 0 \\
+				0 &  1 &  1 & 0 & 0  & 0  & 0 & 1 & 0 & 0 & 1 \\
+				0 &  0 &  1 & 1 & 0  & 0  & 0 & 0 & 1 & 0 & 1 \\
+				0 &  0 &  0 & 1 & 1  & 0  & 0 & 0 & 0 & 1 & 1 \\
+				0 &  1 &  1 & 1 & 0  & -1 & 0 & 0 & 0 & 0 & -1\\
+			\end{bmatrix}\]
+		
+			\[\begin{bmatrix}[cccccccccc|c]
+				1 &  0 &  0 & 0 & 1  & 1  & 0  & 0 & 0 & 0 & 1 \\
+				0 &  1 &  0 & 0 & -1 & -1 & 1  & 0 & 0 & 0 & 0 \\
+				0 &  0 &  \circled{1} & 0 & 1  & 1  & -1 & 1 & 0 & 0 & 1 \\
+				0 &  0 &  1 & 1 & 0  & 0  & 0  & 0 & 1 & 0 & 1 \\
+				0 &  0 &  0 & 1 & 1  & 0  & 0  & 0 & 0 & 1 & 1 \\
+				0 &  0 &  1 & 1 & 1  & 0  & -1 & 0 & 0 & 0 & -1\\
+			\end{bmatrix}\]
+		
+			\[\begin{bmatrix}[cccccccccc|c]
+				1 &  0 &  0 & 0 & 1  & 1  & 0  & 0  & 0 & 0 & 1 \\
+				0 &  1 &  0 & 0 & -1 & -1 & 1  & 0  & 0 & 0 & 0 \\
+				0 &  0 &  1 & 0 & 1  & 1  & -1 & 1  & 0 & 0 & 1 \\
+				0 &  0 &  0 & \circled{1} & -1 & -1 & 1  & -1 & 1 & 0 & 0 \\
+				0 &  0 &  0 & 1 & 1  & 0  & 0  & 0  & 0 & 1 & 1 \\
+				0 &  0 &  0 & 1 & 0  & -1 & 0  & -1 & 0 & 0 & -2\\
+			\end{bmatrix}\]
+		
+			\[\begin{bmatrix}[cccccccccc|c]
+				1 &  0 &  0 & 0 & 1  & 1  & 0  & 0  & 0  & 0 & 1 \\
+				0 &  1 &  0 & 0 & -1 & -1 & 1  & 0  & 0  & 0 & 0 \\
+				0 &  0 &  1 & 0 & 1  & 1  & -1 & 1  & 0  & 0 & 1 \\
+				0 &  0 &  0 & 1 & -1 & -1 & 1  & -1 & 1  & 0 & 0 \\
+				0 &  0 &  0 & 0 & 2  & 1  & -1 & 1  & -1 & 1 & 1 \\
+				0 &  0 &  0 & 0 & 1  & 0  & -1 & 0  & -1 & 0 & -2\\
+			\end{bmatrix}\]
+		
+			\[\begin{bmatrix}[cccccccccc|c]
+				1 &  0 &  0 & 0 & 0  & \frac{1}{2}  & \frac{1}{2}  & -\frac{1}{2}  & \frac{1}{2}  & -\frac{1}{2} & \frac{1}{2} \\
+				0 &  1 &  0 & 0 & 0 & -\frac{1}{2} & \frac{1}{2}  & \frac{1}{2}  & -\frac{1}{2}  & \frac{1}{2} & \frac{1}{2} \\
+				0 &  0 &  1 & 0 & 0  & \frac{1}{2}  & -\frac{1}{2} & \frac{1}{2}  & \frac{1}{2}  & -\frac{1}{2} & \frac{1}{2} \\
+				0 &  0 &  0 & 1 & 0  & -\frac{1}{2} & \frac{1}{2}  & -\frac{1}{2} & \frac{1}{2}  & \frac{1}{2} & \frac{1}{2} \\
+				0 &  0 &  0 & 0 & 1  & \frac{1}{2}  & -\frac{1}{2} & \frac{1}{2}  & -\frac{1}{2} & \frac{1}{2} & \frac{1}{2} \\
+				0 &  0 &  0 & 0 & 0  & -\frac{1}{2}  & -\frac{1}{2} & -\frac{1}{2}  & -\frac{1}{2} & -\frac{1}{2} & -\frac{5}{2}\\
+			\end{bmatrix}\]
+			So the optimal value for the relaxed Dual is 2.5, with each value being 0.5. Looking at the bottom row, 6-10 columns, we find the negative solution to our primal. So rounding our variables, we get a solution to our primal as $(1,1,1,1,1)$ with value of 5. The approximation ratio is $\frac{\text{VAL}_{\text{ILP}}}{\text{MIN}_{\text{ILP}}} = \frac{5}{3}$.\\
+			
+			
+			\item Express an integer linear program whose value gives the independence number of $C_5$, i.e., the size of the largest set so no two vertices of which are adjacent in a $5$-cycle.  Show that the fractional independence number (i.e., the optimal value of the LP without the integrality constraint) is larger than the ordinary independence number.  What is the integrality gap?\\
+			
+			Coincidentally enough, the dual of 3.1 is exactly this problem with the independence numbers. With the work done above, we know that the optimal value for this LP is 2.5. By inspection of $C_5$, we see that its Independence number is 2. So clearly, the LP is larger than the ILP. Since this problem is a maximization problem, the integer gap is $\frac{\text{MIN}_{\text{LP}}}{\text{MIN}_{\text{ILP}}} = \frac{2.5}{2} = \frac{5}{4}$.\\
+		\end{enumerate}
+	\end{exercise}
+	
+	\begin{exercise}{4} Express the following question as a $3\textsc{SAT}$ instance, and then as an ILP (with no objective function): ``Does there exists a BLUE/RED coloring of the natural numbers up to $20$ so that no Pythagorean triple is monochromatic?''  Recall that a {\em Pythagorean triple} is a triple $\{a,b,c\}$ of distinct integers so that $a^2+b^2+c^2$, and {\em monochromatic} means that only one color is used.  \\\\
+		%(BIG BONUS POINTS: Use an LP solver to answer this question for colorings of $[1,100]$.  Attach the input program and output of the solver as your solution, along with a very short explanation of what these things say.  Please turn in your own version of the computation and explanation, although of course you are invited to discuss it with classmates.)
+		
+	There are 6 trios of Pythagorean triples under 20: (3,4,5), (6,8,10), (5,12,13), (9,12,15), (8,15,17), (12,16,20). Let each number, i, in a triple be represented as $x_i$. Let $x_i$ be blue and $\neg x_i$ be red.\\
+	A bad trio will be either $(x_i\wedge x_j\wedge x_k)$ or $(\neg x_i\wedge \neg x_j\wedge \neg x_k)$, when they are all blue or all red. So negating them when OR'ed will give us valid 3SAT clauses. We get $(\neg x_i\vee \neg x_j\vee \neg x_k)\wedge (x_i\vee x_j\vee x_k)$. Our 3SAT is now:
+	\begin{align*}
+		(\neg x_3\vee \neg x_4\vee \neg x_5)\\
+		(x_3\vee x_4\vee x_5)\\
+		(\neg x_6\vee \neg x_8\vee \neg x_{10})\\
+		(x_6\vee x_8\vee x_{10})\\
+		(\neg x_5\vee \neg x_{12}\vee \neg x_{13})\\
+		(x_5\vee x_{12}\vee x_{13})\\
+		(\neg x_9\vee \neg x_{12}\vee \neg x_{15})\\
+		(x_9\vee x_{12}\vee x_{15})\\
+		(\neg x_8\vee \neg x_{15}\vee \neg x_{17})\\
+		(x_8\vee x_{15}\vee x_{17})\\
+		(\neg x_{12}\vee \neg x_{16}\vee \neg x_{20})\\
+		(x_{12}\vee x_{16}\vee x_{20})
+	\end{align*}
+	Turning each clause into an inequality gets us
+	\begin{align*}
+		3 - y_3 - y_4 - y_5 \geq &1\\
+		y_3 + y_4 + y_5 \geq &1\\
+		3 - y_6 - y_8 - y_{10}\geq &1\\
+		y_6 + y_8 + y_{10}\geq &1\\
+		3 - y_5 - y_{12} - y_{13}\geq &1\\
+		y_5 + y_{12} + y_{13}\geq &1\\
+		3 - y_9 - y_{12} - y_{15}\geq &1\\
+		y_9 + y_{12} + y_{15}\geq &1\\
+		3 - y_8 - y_{15} - y_{17}\geq &1\\
+		y_8 + y_{15} + y_{17}\geq &1\\
+		3 - y_{12} - y_{16} - y_{20}\geq &1\\
+		y_{12} + y_{16} + y_{20}\geq &1
+	\end{align*}
+	Getting into standard form is:
+	\begin{align*}
+		y_3 + y_4 + y_5 & \leq2\\
+		-y_3 - y_4 - y_5 & \leq{-1}\\
+		y_6 + y_8 + y_{10}& \leq2\\
+		-y_6 - y_8 - y_{10}& \leq {-1}\\
+		y_5 + y_{12} + y_{13}& \leq 2\\
+		-y_5 - y_{12} - y_{13}& \leq{-1}\\
+		y_9 + y_{12} + y_{15}& \leq 2\\
+		-y_9 - y_{12} - y_{15}& \leq{-1}\\
+		y_8 + y_{15} + y_{17}& \leq 2\\
+		-y_8 - y_{15} - y_{17}& \leq{-1}\\
+		y_{12} + y_{16} + y_{20}& \leq 2\\
+		-y_{12} - y_{16} - y_{20}& \leq{-1}
+	\end{align*}
+	\end{exercise}
+	
+\end{document}

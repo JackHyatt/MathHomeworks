@@ -1,0 +1,131 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage[normalem,normalbf]{ulem}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\DeclareMathOperator{\lcm}{lcm}
+
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 11 (Due Nov 7, 2022)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 574 - Discrete Mathamatics - Fall 2022} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+	
+	\medskip 
+
+
+
+\begin{enumerate}
+
+\item Let $n \in \mathbb N$. Prove that if $a \equiv c \pmod{n}$ and $b \equiv d \pmod{n}$, then $ab \equiv cd \pmod{n}$. 
+\begin{proof}
+	Assume $a \equiv c \pmod{n}$ and $b \equiv d \pmod{n}$. So $\exists x,y \in \mathbb{Z}$ s.t. $a=c+xn$ and $b=d+yn$. So $ab = (c+xn)(d+yn) = cd+n(cy+dx+xyn) \equiv cd \pmod n$.
+\end{proof}
+
+\medskip
+
+\item Which elements of $\mathbb{Z}_{12}$ are invertible?  For each element that is invertible, give its inverse.\medskip\\
+A class will be invertible iff the gcd(a,12)=1, where a is the number we are looking at. By inspection, we see that 1,5,7,11 will fit that criteria. 1 is clearly its own inverse. For the other 3 numbers, we just have to look between them to see which multiply to get $1 \pmod {12}$.\\
+$5\cdot5\equiv1\pmod{12}$\\
+$7\cdot7\equiv1\pmod{12}$\\
+$11\cdot11\equiv1\pmod{12}$ 
+
+\medskip
+\item Let $n \in \mathbb{N}$.  Define a function $f: \mathbb{Z}_n \to \mathbb{Z}_n$ by $f([a]) = [a^2]$.  
+	\begin{enumerate}
+	\item Prove that, if $n = 1$ or $n = 2$, then $f$ is bijective.\medskip\\
+	\textbf{Case n=1:}\\
+	In $\mathbb{Z}_1$, there is only 1 congruence class, namely, [0]. \emph{Obviously}, a function that maps a domain of only [0] to a codomain of only [0] is bijective.\\
+	\textbf{Case n=2:}\\
+	In $\mathbb{Z}_2$, there are 2 congruence class, namely, [0] and [1]. 0 and 1 both have the property where they are their own squares. So 0 goes to 0 and 1 goes to 1. So f is bijective.\\
+	\item Prove that for $n \ge 3$, $f$ is not injective.  (Hint: try to find two different elements $[a] \ne [b]$ such that $f([a]) = f([b])$.) \medskip\\
+	Note: $f([1])=[1]$.\\
+	If we can show that there is another class, a, s.t. $f([a])=[1]$, then we know f isn't injective.\\
+	Looking at $[n-1]$, where $n\geq3$, we see that $f([n-1])=[(n-1)^2] = [n^2-2n+1] = [n(n-2)+1] \equiv [1]$. Since n$\geq$3, we know that $n-1>1$.\qedsymbol
+	\end{enumerate}
+
+
+	
+\medskip
+\item Suppose $m,n \in \mathbb{Z}$ are not both 0.  Let $d = \gcd(m,n)$.  Prove that $\gcd(\frac{m}{d}, \frac{n}{d}) = 1$.\medskip\\
+
+Let $d=\gcd(m,n)$. Using Jeff Bezos' identity, we know that $\exists a,b\in\Z$ s.t. $d=\gcd(m,n)=am+bn$. Since d isn't 0 and divides both m and n, we can divide by d and get $a\frac{m}{d}+b\frac{n}{d}=1$. So since the linear combination of two integers is 1, the lowest positive number, and the gcd of two integers is the smallest positive integer to make out of a linear combination, then $\gcd(\frac{m}{d},\frac{n}{d}) = 1$.
+
+
+\medskip
+\item Let $a, b \in \mathbb{Z}$ not both zero.  Prove or disprove:
+	\begin{enumerate}
+	\item If $\gcd(a,b) = 1$, then $\gcd(a^2, b^2) = 1$.\medskip\\
+	Since a and b are coprime, they have no prime factors in common. Let $a=p_1^{\alpha_1}\cdot p_2^{\alpha_2}\cdot\ldots\cdot p_n^{\alpha_n}$ and $b=q_1^{\beta_1}\cdot q_2^{\beta_2}\cdot\ldots\cdot q_m^{\beta_m}$. Since $p_i\neq q_j$ for any pair i,j, doubling all the powers will not change that fact. So $a^2$ and $b^2$ will not have any common prime factors, being coprime. \qedsymbol
+	\item If $\gcd(a,b) = 1$, then $\gcd(a,2b) = 1$.\medskip\\
+	We see that $a=2$ and $b=3$ will disprove this. $\gcd(2,3)=1$ and $\gcd(2,6)=2$. 
+	\end{enumerate}
+
+
+\medskip
+\item Let $n \in \mathbb{Z}$.  Prove that $\gcd(n,n+2) = 1$ if and only if $n$ is odd.
+\begin{proof}
+	Showing if $\gcd(n,n+2)=1$, then n is odd.\\
+	This is clear since if n was even, then the $\gcd(n,n+2)$ will be two.\\
+	Showing if n is odd, then $\gcd(n,n+2)=1$\\
+	Assume n is odd, then $\exists k\in\Z$ s.t. $n = 2k+1$. Assume towards contradiction that $\gcd(n,n+2)\geq2$. Let $d=\gcd(n,n+2)$. So $d|n$ and $d|n+2$.
+	So then $n\equiv 0 \pmod d$ and $n+2 \equiv 0 \pmod d$. Denote $[a]$ to be $a\pmod d$.
+	\[[n+2]-[n]=[0] \implies [2]=[0] \implies d=2\]
+	So then $2|n$, which makes n even. But we assumed n to be odd, a contradiction.
+\end{proof}
+
+\medskip
+\item Let $a,b \in \mathbb{Z}$ not both zero.  If $\gcd(a,b) = 1$ and $a \mid n$ and $b \mid n$, prove that $ab \mid n$.\medskip\\
+Assume $\gcd(a,b) = 1$ and $a \mid n$ and $b \mid n$. Since a and b are coprime, then they can be written as a product their prime factors and no prime will be in both a and b. Let $a=p_1^{\alpha_1}\cdot p_2^{\alpha_2}\cdot\ldots\cdot p_n^{\alpha_n}$ and $b=q_1^{\beta_1}\cdot q_2^{\beta_2}\cdot\ldots\cdot q_m^{\beta_m}$ where no $p_i=q_j$. Since a and b both divide n, the prime factorization of a and b are in the prime factorization of n. Since a and b share no primes, a and b primes are completely in n's factorization with no overlap. So then $ab \mid n$.
+
+\medskip
+\item Let $a,b \in \mathbb{N}$.  Define the least common multiple $\mathrm{lcm}(a,b)$ as the smallest positive integer that is a multiple of both $a$ and $b$.  Prove that $ab = \mathrm{lcm}(a,b)$ if and only if $\gcd(a,b) = 1$.
+\begin{proof}
+	Showing if $\gcd(a,b)=1$, then $\lcm(a,b)=ab$.\\
+	Assume $\gcd(a,b)=1$. Let $n=\lcm(a,b)$. So $a\mid n$ and $b\mid n$. So $ab\mid n$ using (7). So $\exists k\in\Z$ s.t. $abk=n$. So $ab=\frac{n}{k}$, and $\frac{n}{k}\in\Z$. But $ab$ is a common multiple of a and b, while n is the least common multiple. So that must make $k=1$.\medskip\\
+	Showing if $\lcm(a,b)=ab$, then $\gcd(a,b)=1$ by contrapositive.\\
+	Assume $\gcd(a,b)>1$. Let $d=\gcd(a,b)$. Then $\exists x,y\in\Z$ s.t. $dx=a$ and $dy=b$. Then $dxy$ will divide both a and b. So $\lcm(a,b)\leq dxy < dxdy = ab$. \\So $\gcd(a,b)>1 \implies \lcm(a,b)<ab$.
+\end{proof}
+
+
+\end{enumerate}
+
+
+
+
+\end{document}

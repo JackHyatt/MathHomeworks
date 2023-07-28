@@ -1,0 +1,94 @@
+%% Creator: Inkscape 1.2.1 (9c6d41e410, 2022-07-14), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'network2-resid_svg-tex.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{406.39854011bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.74805963)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{network2-resid_svg-tex.pdf}}%
+    \put(0.27788185,0.63472273){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}a\end{tabular}}}}%
+    \put(0.5596345,0.66784797){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}b\end{tabular}}}}%
+    \put(0.80214248,0.5278434){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}c\end{tabular}}}}%
+    \put(0.94964725,0.2803353){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}t\end{tabular}}}}%
+    \put(0.63463706,0.34283734){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}e\end{tabular}}}}%
+    \put(0.35712789,0.38533874){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}d\end{tabular}}}}%
+    \put(0.48713215,0.05282784){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}g\end{tabular}}}}%
+    \put(0.76714131,0.09532922){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}h\end{tabular}}}}%
+    \put(0.17962207,0.15283112){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}f\end{tabular}}}}%
+    \put(0.02211693,0.43284028){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}s\end{tabular}}}}%
+    \put(0.09181398,0.56701153){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}7\end{tabular}}}}%
+    \put(0.37890688,0.69838207){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.68348831,0.65832574){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.91549964,0.44879034){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.3533053,0.51876302){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}6\end{tabular}}}}%
+    \put(0.62037026,0.50156111){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0.75142576,0.3522763){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5\end{tabular}}}}%
+    \put(0.02515751,0.28230362){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5\end{tabular}}}}%
+    \put(0.2133599,0.26782651){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0.26161699,0.05066989){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.38414038,0.19713825){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0.59459043,0){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.67135931,0.18155505){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.88895828,0.13029401){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{network2-resid_svg-tex.pdf}}%
+    \put(0.47521089,0.40792351){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{network2-resid_svg-tex.pdf}}%
+    \put(0.14404726,0.36762132){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0.20889959,0.443021){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}4\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{network2-resid_svg-tex.pdf}}%
+    \put(0.78581443,0.24009054){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}3\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{network2-resid_svg-tex.pdf}}%
+    \put(0.19900634,0.52406691){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.69576797,0.53655126){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.83405587,0.36980507){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}2\end{tabular}}}}%
+    \put(0.57531296,0.16557306){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}5\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

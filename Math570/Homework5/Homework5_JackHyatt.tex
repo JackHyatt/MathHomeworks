@@ -1,0 +1,161 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+ 
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+\renewcommand{\qedsymbol}{$\blacksquare$}
+ 
+\title{Homework 5 (Due Oct 10, 2022)}
+\author{Professor Cooper\\ %replace with your name
+MATH 570 - Discrete Optimization - Fall 2022} %if necessary, replace with your course title
+
+\maketitle
+
+Justify all of your answers completely.
+
+\begin{exercise}{1} Use complementary slackness to verify that the vector $\mathbf{x} = [9/7,0,1/7]^\mathsf{T}$ is indeed the optimal solution to
+\begin{equation*}
+\begin{array}{ll@{}ll}
+\text{maximize}  & \displaystyle x_1 - 2x_2 + 3x_3 &\\
+\text{subject to}& \displaystyle x_1 + x_2 - 2x_3 \leq 1   \\
+                 & \displaystyle 2x_1 - x_2 - 3x_3 \leq 4 \\
+                 & \displaystyle x_1 + x_2 + 5x_3 \leq 2 \\
+                 & \displaystyle 0 \leq x_{1,2,3}
+\end{array}
+\end{equation*}
+The dual will be 
+\begin{equation*}
+	\begin{array}{ll@{}ll}
+		\text{minimize}  & \displaystyle y_1 + 4y_2 + 2y_3 &\\
+		\text{subject to}& \displaystyle y_1 + 2y_2 + y_3 \geq 1   \\
+		& \displaystyle y_1 - y_2 + y_3 \geq -2 \\
+		& \displaystyle -2y_1 - 3y_2 + 5y_3 \geq 3 \\
+		& \displaystyle 0 \leq y_{1,2,3}
+	\end{array}
+\end{equation*}
+If $x$ is the solution, then the positive components of implies that the constrictions in the dual that match are equalities. We also see that the second constraint in the primal is not tight, so $y_2 = 0$. We are left with this system of equations:
+\begin{equation*}
+	\begin{array}{ll@{}ll}
+		& \displaystyle y_1 + y_3 = 1   \\
+		& \displaystyle -2y_1 + 5y_3 = 3 \\
+	\end{array}
+\end{equation*}
+which gives us $y_1=\frac{2}{7}$ and $y_3=\frac{5}{7}$. We see that $y = [\frac{2}{7},0,\frac{5}{7}]^T$ is $\mathbb{D}$-feasible. Therefore $x$ does solve $\mathbb{P}$. We also observe that plugging in the vectors x and y into their respecting objective functions results the same value($\frac{12}{7})$, so now we are 100\% confident.
+\end{exercise}
+
+\begin{exercise}{2} Directly dualize (but do not solve) the following system.
+\begin{equation*}
+\begin{array}{ll@{}ll}
+\text{maximize}  & \displaystyle x_1 + 3x_2 - x_3 + x_4 + 2x_5 &\\
+\text{subject to}& \displaystyle x_1 \leq 10   \\
+                 & \displaystyle x_1 + x_2 \leq 11 \\
+                 & \displaystyle x_1 + x_2 + x_3 \leq 12 \\
+                 & \displaystyle x_1 + x_2 + x_3 + x_4 + x_5 = 20 \\
+                 & \displaystyle 0 \leq x_1,x_2,x_4,x_5
+\end{array}
+\end{equation*}
+Rewriting the Primal to make it easier to see the dual:
+\begin{equation*}
+	\begin{array}{ll@{}ll}
+		\text{maximize}  & \displaystyle x_1 + 3x_2 - x_3 + x_4 + 2x_5 &\\
+		\text{subject to}& \displaystyle x_1 + 0x_2+ 0x_3+ 0x_4+ 0x_5 \leq 10   \\
+		& \displaystyle x_1 + x_2 + 0x_3+ 0x_4+ 0x_5\leq 11 \\
+		& \displaystyle x_1 + x_2 + x_3 + 0x_5+ 0x_5 \leq 12 \\
+		& \displaystyle x_1 + x_2 + x_3 + x_4 + x_5 = 20 \\
+		& \displaystyle 0 \leq x_1,x_2,x_4,x_5
+	\end{array}
+\end{equation*}
+Inequalities in the primal correspond to implicit constraints in the dual, and the opposite for equalities.
+\begin{equation*}
+	\begin{array}{ll@{}ll}
+		\text{minimize}  & \displaystyle 10y_1 + 11y_2 + 12y_3 + 20y_4 &\\
+		\text{subject to}& \displaystyle y_1 + y_2 + y_3 + y_4 \geq 1 &\\
+		& \displaystyle  y_2 + y_3 + y_4 \geq 3 &\\
+		& \displaystyle  y_3 + y_4 = -1 &\\
+		& \displaystyle  y_4 \geq 1 &\\
+		& \displaystyle  y_4 \geq 2 &\\
+		& \displaystyle 0 \leq y_1,y_2,y_3,
+	\end{array}
+\end{equation*}
+Simplification can be done, but this form shows where each part comes from, so it will be left like this.
+\end{exercise}
+
+\begin{exercise}{3} Prove that the intersection of any family of convex sets is convex.
+	\begin{proof}
+		Let $C$ be the intersection of any family of convex sets. Assume $\ell_1$ and $\ell_2$ are two points that are in $C$. Then for each set, $S$, in the $C$, $\ell_1$ and $\ell_2$ are in $S$. Since $S$ is convex, the line segment between the two, we'll call $\ell$, is contained entirely in $S$. Since $\ell$ is entirely contained in each $S$, then $\ell$ is entirely contained in the intersection of all $S$'s. So $\ell$ is entirely contained in $C$. No assumptions were made on $\ell_1$ or $\ell_2$ besides just being in $C$, so every possible line segment made from 2 points in $C$ is entirely contained in $C$. Therefore, $C$ is convex.
+	\end{proof}
+\end{exercise}
+
+\begin{exercise}{4} Prove or disprove that (a) $\mathbf{x} \in \mathbb{R}^n$ is a vertex of a convex polytope $C$ iff for every vector $\mathbf{y} \in \mathbb{R}^n$, if there is an $\epsilon > 0$ so that $\mathbf{x} + \epsilon \mathbf{y} \not \in C$, then there exists a $\delta > 0$ so that $\mathbf{x} - \delta \mathbf{y} \in C$ and (b) $\mathbf{x} \in \mathbb{R}^n$ is a vertex of a convex polytope $C$ iff for every vector $\mathbf{y} \in \mathbb{R}^n$, if there is an $\epsilon > 0$ so that $\mathbf{x} + \epsilon \mathbf{y} \in C$, then there exists a $\delta > 0$ so that $\mathbf{x} - \delta \mathbf{y} \not \in C$.\\\\
+(a) Disproving with counter example. Let $C$ be the unit square centered at $(1,1)$. Looking at the point$(1,1)$, we see that it is clearly not a vertex. But for every vector $y$ in 2D space, we just need to scale it such that the length is longer than $\frac{\sqrt{2}}{2}$ to get outside of the square. We can also scale $y$ so that its length is less than $\frac{1}{2}$ to make sure we stay inside of the square. Therefore, we have shown that for this point $(1,1)$, we can find a positive $\epsilon$ for every vector $y$ in 2D space to not be in $C$, and finding a $\delta$ such that when subtracting $y$ scaled by $\delta$ we stay in $C$.\\\\
+(b) Disproving by triviality. In the \emph{if} statement "if there is an $\epsilon > 0$ so that $\mathbf{x} + \epsilon \mathbf{y} \in C$, then there exists a $\delta > 0$ so that $\mathbf{x} - \delta \mathbf{y} \not \in C$," the "there exists a $\delta > 0$ so that $\mathbf{x} - \delta \mathbf{y} \not \in C$" is always true. This is because you just have to make $\delta$ longer than the longest line segment possible in the polytope, which will always move the $x$ vector outside of the polytope. This means the \emph{if} statement is always true. Thus no matter when a point is a vertex or not, the \emph{if} statement will be true. So the \emph{iff} statement is not true.
+\end{exercise}
+
+\begin{exercise}{5} Let $C$ be the feasible region for the LP below.  Give the sequence of vertices of $C$ that results from applying the simplex algorithm (with Bland's Rule) to the LP.  For each such vertex/tableaux, what are the corresponding $\mathcal{I}$ and $\mathcal{J}$ from Corollary 1.1 of the ``LP Geometry'' chapter?
+\begin{equation*}
+\begin{array}{ll@{}ll}
+\text{maximize}  & \displaystyle 2x_1 - x_2 + 2x_3 &\\
+\text{subject to}& \displaystyle 2x_1 + x_2 \leq 10   \\
+                 & \displaystyle x_1 + 2x_2 - 2x_3 \leq 20 \\
+                 & \displaystyle x_2 + 2x_3 \leq 5 \\
+                 & \displaystyle 0 \leq x_1,x_2,x_3
+\end{array}
+\end{equation*}
+ The tableau looks like
+\[\begin{bmatrix}[cccccc|c]
+	\circled{2} &  1 &  0 & 1 & 0 & 0 & 10\\
+	1 &  2 & -2 & 0 & 1 & 0 & 20\\
+	0 &  1 &  2 & 0 & 0 & 1 & 5\\
+	2 & -1 &  2 & 0 & 0 & 0 & 0
+\end{bmatrix}\]
+We start at the (0,0,0) vertex, so $\mathcal{I} = \{\}$ and $\mathcal{J} = \{1,2,3\}$.
+\[\begin{bmatrix}[cccccc|c]
+	1 &  1/2 &  0 & 1/2 & 0 & 0 & 5\\
+	0 &  3/2 & -2 & -1/2 & 1 & 0 & 15\\
+	0 &  1 &  \circled{2} & 0 & 0 & 1 & 5\\
+	0 & -2 &  2 & -1 & 0 & 0 & -10
+\end{bmatrix}\]
+We are now at the vertex (5,0,0), so $\mathcal{I} = \{1\}$ and $\mathcal{J} = \{2,3\}$.
+\[\begin{bmatrix}[cccccc|c]
+	1 &  1/2 &  0 &  1/2 & 0 & 0 & 5\\
+	0 &  5/2 &  0 & -1/2 & 1 & 1 & 20\\
+	0 &  1/2 &  1 &   0  & 0 & 1/2 & 5/2\\
+	0 &  -3  &  0 &  -1  & 0 & -1 & -15
+\end{bmatrix}\]
+We are now at the vertex $(5,0,\frac{5}{2})$, so $\mathcal{I} = \{1,3\}$ and $\mathcal{J} = \{3\}$. This vertex is the optimum for the LP.
+
+
+\end{exercise}
+
+
+ 
+\end{document}
+

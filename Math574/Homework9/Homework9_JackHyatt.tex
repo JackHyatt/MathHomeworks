@@ -1,0 +1,166 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 9 (Due Oct 24, 2022)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 574 - Discrete Mathamatics - Fall 2022} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+
+
+\begin{enumerate}
+
+
+\item Find a closed form\footnote{By a {\bf closed form} we mean an algebraic expression
+not involving a summation over a range of values or
+the use of ellipses. For instance, the closed form of the generating function $\sum_{k=0}^nx^k$ is $\frac{1}{1-x}$.} for the generating function for the following sequences.
+\begin{enumerate}
+\item $1,2,4,8,16,32, \ldots$
+\[\sum_{k=0}^{\infty} 2^kx^k= \sum_{k=0}^{\infty} (2x)^k = \frac{1}{1-2k}\]
+\item ${7 \choose 0}, 2^1{7 \choose 1}, 2^2{7 \choose 2}, 2^3{7 \choose 3}, 2^4{7 \choose 4}, 2^5{7 \choose 5}, \ldots$
+\[\sum_{k=0}^{\infty} (2^k\binom{7}{k})x^k = (1+2x)^7\]
+\item $1, -1, 1, -1, 1, -1, \ldots$
+\[\sum_{k=0}^{\infty} (-1)^kx^k = \frac{1}{1+x}\]
+\item $1,0,1,0,1,0,1,0,\ldots$
+\[\sum_{k=0}^{\infty} x^{2k} = \frac{1}{1-x^2}\]
+\end{enumerate}
+
+\medskip
+
+\item If $g(x)$ is the generating function for the sequence $\{a_k\}$, what is the generating function for:
+\begin{enumerate}
+\item $2a_0, 2a_1, 2a_2, 2a_3, \ldots$
+
+\[g^a(x)=\sum_{i=0}^{\infty}2a_ix^i = 2\sum_{i=0}^{\infty}a_ix^i = 2g(x)\]
+
+\item $a_5, a_6, a_7, a_8, a_9, \ldots$
+
+
+\[g^b(x) =  \sum_{i=0}^{\infty}a_{i+5}x^i = \sum_{i=5}^{\infty}a_{i}x^{i-5} = \frac{\sum_{i=5}^{\infty}a_{i}x^{i}}{x^5}=\frac{\sum_{i=0}^{\infty}a_{i}x^{i}-\sum_{i=0}^{4}a_ix^i}{x^5}\]
+\[= \frac{g(x)-\sum_{i=0}^{4}a_ix^i}{x^5}\]
+
+\item $a_1, 2a_2, 3a_3, 4a_4, \ldots$
+
+\[g^c(x) =\sum_{i=1}^{\infty}ia_ix^{i-1} = \frac{d}{dx}\sum_{i=0}^{\infty}a_ix^i = \frac{d}{dx}g(x) \]
+
+\item $a_0 + a_1, a_1 + a_2, a_2 + a_3, a_3 + a_4, \ldots$ 
+
+\[g^d(x) = \sum_{i=0}^{\infty}(a_i+a_{i+1})x^{i} = \sum_{i=0}^{\infty}a_ix^i +\sum_{i=0}^{\infty}a_{i+1}x^i = \sum_{i=0}^{\infty}a_ix^i +\sum_{i=1}^{\infty}a_{i}x^{i-1}= \]
+\[=g(x) +\frac{\sum_{i=0}^{\infty}a_{i}x^{i} -a_0}{x} = g(x) + \frac{g(x) - a_0}{x}= \frac{g(x)(x+1)-a_0}{x}\]
+
+\end{enumerate}
+
+\medskip
+
+\item Let $\{a_k\}$ be the sequence with $a_k = (k+1)(k+2)$ for all $k \geq 0$. Find a closed form for the generating function $f(x) =\sum_{k=0}^\infty a_k x^k$. 
+
+\[f(x)=\sum_{k=0}^\infty (k+1)(k+2) x^k = \sum_{k=2}^\infty (k-1)(k) x^{k-2} = \frac{d^2}{dx^2} \sum_{k=0}^\infty x^k = \frac{d^2}{dx^2} \frac{1}{1-x}\]
+\[= \frac{2}{(1-x)^3}\]
+
+\medskip
+
+\item For each of these generating functions, provide a closed
+formula for the sequence it determines. I.e., give a closed form for the coefficient of $x^k$ for each $k$.
+\begin{enumerate}
+\item $\frac{3x^2}{1+9x}$
+\[\frac{3x^2}{1+9x} = 3x^2\frac{1}{1+9x} = 3x^2\sum_{k=0}^{\infty}(-9^k)x^k = \sum_{k=0}^{\infty}3(-9)^kx^{k+2} = \sum_{k=2}^{\infty}3(-9)^{k-2}x^k\]
+\[\text{So the kth term is } a_k=3(-9)^{k-2} \text{ with initial conditions } a_0=0,a_1=0.\]
+
+\item $(1+x^2)^4$
+\[(1+(x^2))^4 = \sum_{k=0}^{4}\binom{4}{k}x^{2k}\]
+\[\text{By the table, the kth term is} \binom{4}{k/2} \text{ if 2 divides k, 0 if otherwise.}\]
+
+\item $e^{4x} +e^{-4x}$
+\[e^{4x}+e^{-4x} = \sum_{k=0}^\infty \frac{(4x)^k}{k!} +\sum_{k=0}^\infty \frac{(-4x)^k}{k!} = \sum_{k=0}^\infty(\frac{4^k}{k!}+\frac{(-4)^k}{k!})x^k\]
+\[\text{So the kth term in the sequence is } \frac{4^k+(-4)^k}{k!}\]
+\end{enumerate}
+
+\medskip
+
+\item Find the coefficient of $x^{12}$ in the power series of each of the following functions.
+\begin{enumerate}
+\item $x/(1+3x)$
+\[\frac{x}{1+3x} = x\sum_{k=0}^{\infty}(-3x)^k = \sum_{k=0}^{\infty}(-3x)^{k+1}\]
+\[\text{So the coeff of } x^{12} \text{ is just } (-3)^{12}.\]
+\item $1/(1-2x)^8$
+\[\frac{1}{(1-2x)^8}=\sum_{k=0}^{\infty}\binom{7+k}{k}2^kx^k\]
+\[\text{So the coeff of } x^{12} \text{ is just } \binom{19}{12}(2)^{12}.\]
+\end{enumerate}
+
+\medskip
+\item Prove using generating functions that the number of ways to distribute $n$ cookies among $k$ children such that each child receives at least 2 cookies is ${n-k-1 \choose k-1}$. \\\\
+We can represent each child with the generating function $f_i(x)=a_2x^2+a_3x^3+\ldots$, where $f_i(x)$ is the ith child's generating function, each $x^\ell$ represents the number of cookies the child can get, and each $a_\ell$ represents the number of ways to give the child $\ell$ cookies. Since the cookies are indistinguishable, there is only ever 1 way to give $\ell$ cookies. So to find the total ways to give out the cookies to the kids, we just need to multiply all the kids' generating functions together. Note, each $f_i(x)=x^2+x^3+\ldots$
+\[\prod_{i=0}^{k}f_i(x) = (x^2+\ldots)^k = (\sum_{i=2}^{\infty}x^i)^k = (\sum_{i=0}^{\infty}x^{i+2})^k = (x^2\sum_{i=0}^{\infty}x^i)^k=\frac{x^{2k}}{(1-x)^k}\]
+\[=x^{2k}\sum_{i=0}^{\infty}\binom{k+i-1}{i}x^i = \sum_{i=0}^{\infty}\binom{k+i-1}{i}x^{2k+i}\]
+Since we must have at least 2k cookies, each term in the sum represents the number of ways to distribute the cookies for every possible n. So we then let $n=2k+i$, which gives $i=n-2k$.
+\[\binom{k+i-1}{i}x^{2k+i}=\binom{k+n-2k-1}{n-2k}x^{n} = \binom{n-k-1}{n-2k}x^{n} =\binom{n-k-1}{(n-k-1)-(n-2k)}x^{n} \]
+\[= \binom{n-k-1}{k-1}x^{n} \qed\] 
+\medskip
+
+\item Use generating functions to solve the recurrence relation $a_k = 2a_{k-1} -7$ with $a_0 = 1$. \\
+Let $G(x)=\sum_{n=0}^{\infty}a_nx^n$.
+\[G(x)-1 = \sum_{n=1}^{\infty}a_nx^n = \sum_{n=1}^{\infty}[2a_{n-1}x^n-7x^n] = 2\sum_{n=1}^{\infty}a_{n-1}x^n-7\sum_{n=1}^{\infty}x^n\]
+\[=2x\sum_{n=1}^{\infty}a_{n-1}x^{n-1}-7x\sum_{n=1}^{\infty}x^{n-1} = 2x\sum_{n=0}^{\infty}a_{n}x^{n}-7x\sum_{n=0}^{\infty}x^{n} = 2xG(x)-\frac{7x}{1-x}\]
+\[\text{So }G(x)-1=2xG(x)-\frac{7x}{1-x} \implies G(x)=\frac{1-8x}{(1-x)(1-2x)} = \frac{7}{1-x}-\frac{6}{1-2x}\]
+\[= \sum_{n=0}^{\infty}7x^n -\sum_{n=0}^{\infty}6\cdot2^nx^n = \sum_{n=0}^{\infty}(7-6\cdot2^n)x^n\]
+So $a_n = 7-6(2^n)$
+\medskip
+
+\item Let $a_n$ denote the sum of the first $n$ squares, i.e., $a_n = 0^2 +  1^2 + 2^2 + \ldots + n^2$.
+
+\begin{enumerate}
+
+\item Give a recurrence relation for $\{a_n\}$. \\\\
+$a_n=a_{n-1}+n^2$\\
+\item Use part (a) to show that the generating function for $\{a_n\}$ is \[g(x) = (x^2+x)/(1-x)^4.\]
+
+{\em Note: $\sum_{n=1}^\infty n^2 x^n = \frac{x+x^n}{(1-x)^3}$}\\
+\[g(x)-0=\sum_{n=1}^{\infty}a_nx^n = \sum_{n=1}^{\infty}(a_{n-1}+n^2)x^n = \sum_{n=1}^{\infty}a_{n-1}x^n+ \sum_{n=1}^{\infty}n^2x^n  = xg(x)+\frac{x+x^2}{(1-x)^3}\]
+\[\text{So } g(x) = xg(x) + \frac{x+x^2}{(1-x)^3} \implies g(x)=\frac{x^2+x}{(1-x)^4}\]
+
+\item Use part (b) to find an explicit formula for the sum $1^2 + 2^2 + \ldots + n^2$. \\\\
+
+\[\frac{x^2+x}{(1-x)^4}=\frac{1}{(1-x)^2}-\frac{3}{(1-x)^3}+\frac{2}{(1-x)^4}\]
+\[= \sum_{n=0}^{\infty}\binom{n+1}{n}x^n-\sum_{n=0}^{\infty}3\binom{n+2}{n}x^n+\sum_{n=0}^{\infty}2\binom{n+3}{n}x^n\]
+\[= \sum_{n=0}^{\infty}\left(\binom{n+1}{n}-3\binom{n+2}{n}+2\binom{n+3}{n}\right)x^n\]
+So the explicit formula is $\left(\binom{n+1}{n}-3\binom{n+2}{n}+2\binom{n+3}{n}\right)$
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

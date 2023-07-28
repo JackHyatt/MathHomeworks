@@ -1,0 +1,187 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 7 (Due Oct 10, 2022)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 574 - Discrete Mathamatics - Fall 2022} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\begin{enumerate}
+
+
+\item Recall that the Fibonacci numbers satisfy $f_n = f_{n-1} + f_{n-2}$ with initial conditions $f_0 = 0$ and $f_1 = 1$. 
+\begin{enumerate}
+\item Suppose that a sequence $\{b_n\}$ satisfies $b_n = b_{n-1} + b_{n-2}$ with initial conditions $b_0= 1$ and $b_1 = 2$. Use induction to prove that for all $n \geq 0$, $b_n = f_{n+2}$.\\\\
+Base Cases:
+\begin{description}
+	\item[n=0] \hfill \\ $b_0 = 1 = f_2$
+	\item[n=1] \hfill \\ $b_1 = 2 = f_3$
+	\item[n=2] \hfill \\ $b_2 = 3 = f_4$
+\end{description}
+Induction Step: Assume for some $n \in \mathbb{N} \text{ s.t. } n \geq 2$ we have $b_k = f_{k+2}$ for all $0\leq k\leq n$.\\
+Looking at the $n+1$ case:
+\[b_{n+1} = b_n + b_{n-1} = f_{n+2} + f_{n+1} = f_{n+3}\]\qed
+
+\item Suppose that a sequence $\{c_n\}$ satisfies $c_n = c_{n-1} + c_{n-2}$ with initial conditions $c_0= 2$ and $c_1 = 1$. Use induction to prove that for all $n \geq 1$, $c_n = f_{n-1}+f_{n+1}$.\\\\
+Base Cases:
+\begin{description}
+	\item[n=1] \hfill \\ $c_1 = 1 = 0 + 1 = f_0+f_2$
+	\item[n=2] \hfill \\ $c_2 = c_0+c_1 = 2 + 1 = f_1+ f_3$
+\end{description}
+Induction Step: Assume for some $n \in \mathbb{N} \text{ s.t. } n \geq 2$ we have $c_k = f_{k-1}+f_{k+1}$ for all $1\leq k\leq n$.\\
+Looking at the $n+1$ case:
+\[c_{n+1} = c_n + c_{n-1} = f_{n-1}+f_{n+1} + f_{n-2}+f_{n} = (f_{n-1} + f_{n-2})+(f_{n+1}+f_{n})=f_n+f_{n+2}\]\qed
+
+
+\end{enumerate}
+
+\medskip
+
+\item Solve the recurrence relations together with the initial conditions given.
+
+\begin{enumerate}
+\item $a_n = 5a_{n-1} - 6a_{n-2}$ for $n \geq 2$, $a_0=1$, $a_1 = 0$\\\\
+Finding the roots of the characteristic polynomial of the sequence:
+\[p(\lambda) = \lambda^2-5\lambda+6= (\lambda-3)(\lambda-2)=0\]
+\[\text{So } a_n = \alpha_1 (3)^n + \alpha_2 (2)^n\]
+Now to solve for the alpha's, we plug in the initial conditions.
+\[a_0 = \alpha_1 (3)^0 + \alpha_2 (2)^0 = \alpha_1 + \alpha_2 = 1\]
+\[a_1 = \alpha_1 (3)^1 + \alpha_2 (2)^1 = 3\alpha_1 + 2\alpha_2 = 0\]
+Solving this system of equations gives us $\alpha_1 = -2$ and $\alpha_2 = 3$.\\
+So $a_n = -2\cdot3^n + 3\cdot2^n$.\qed
+\item $a_n = 4a_{n-2}$ for $n \geq 2$, $a_0=0$, $a_1=4$\\\\
+Finding the roots of the characteristic polynomial of the sequence:
+\[p(\lambda) = \lambda^2-4= (\lambda-2)(\lambda+2)=0\]
+\[\text{So } a_n = \alpha_1 (2)^n + \alpha_2 (-2)^n\]
+Now to solve for the alpha's, we plug in the initial conditions.
+\[a_0 = \alpha_1 (2)^0 + \alpha_2 (-2)^0 = \alpha_1 + \alpha_2 = 0\]
+\[a_1 = \alpha_1 (2)^1 + \alpha_2 (-2)^1 = 2\alpha_1 - 2\alpha_2 = 4\]
+Solving this system of equations gives us $\alpha_1 = 1$ and $\alpha_2 = -1$.\\
+So $a_n = 2^n - (-2)^n$.\qed
+\item $a_n = 4a_{n-1} - 4a_{n-2}$ for $n \geq 2$, $a_0=6, a_1 = 8$\\\\
+Finding the roots of the characteristic polynomial of the sequence:
+\[p(\lambda) = \lambda^2 -4\lambda + 4 = (\lambda-2)^2=0\]
+\[\text{So } a_n = \alpha_1 (2)^n + \alpha_2n(2)^n\]
+Now to solve for the alpha's, we plug in the initial conditions.
+\[a_0 = \alpha_1 (2)^0 + \alpha_2(0)(2)^0 = \alpha_1 = 6\]
+\[a_1 = \alpha_1 (2)^1 + \alpha_2(1)(2)^1 = 2\alpha_1 + 2\alpha_2 = 8\]
+Solving this system of equations gives us $\alpha_1 = 6$ and $\alpha_2 = -2$.\\
+So $a_n = 6(2)^n-n(2)^{n+1}$.\qed
+
+\end{enumerate}
+
+\medskip 
+
+\item Let $b_n$ be the number of bit strings of length $n$ without 2 consecutive 0s. In class, we saw that $\{b_n\}$ satisfies the relation $b_n = b_{n-1} + b_{n-2}$ for $n \geq 2$. Find a solution of this recurrence relation using the initial conditions $b_0 = 1, b_1 = 2$.\\\\
+\[p(\lambda) = \lambda^2 -\lambda -1 = 0 \implies \lambda_{1,2} = \frac{1+\sqrt{5}}{2},\frac{1-\sqrt{5}}{2}\]
+\[b_n=\alpha_1(\frac{1+\sqrt{5}}{2})^n+\alpha_2(\frac{1-\sqrt{5}}{2})^n\]
+\[b_0=\alpha_1(\frac{1+\sqrt{5}}{2})^0+\alpha_2(\frac{1-\sqrt{5}}{2})^0=\alpha_1+\alpha_2 =1\]
+\[b_1=\alpha_1(\frac{1+\sqrt{5}}{2})^1+\alpha_2(\frac{1-\sqrt{5}}{2})^1=2\]
+Solving this system of equations gives us $\alpha_1 = \frac{5+3\sqrt{5}}{10}$ and $\alpha_2 = \frac{5-3\sqrt{5}}{10}$.\\
+So \[b_n=(\frac{5+3\sqrt{5}}{10})(\frac{1+\sqrt{5}}{2})^n+(\frac{5-3\sqrt{5}}{10})(\frac{1-\sqrt{5}}{2})^n\]\qed
+
+
+
+\medskip
+\item Find the solution to the recurrence relation $a_n = 2a_{n-1} + a_{n-2} -2a_{n-3}$ for $n \geq 3$ with initial conditions $a_0 = 3, a_1=6, a_2 = 0$.
+\[p(\lambda) = \lambda^3 -2\lambda^2-\lambda+2 = (\lambda-1)(\lambda^2-\lambda+2) = (\lambda-1)(\lambda+1)(\lambda-2) = 0 \implies \lambda_{1,2,3} = -1,1,2\]
+\[a_n=\alpha_1(-1)^n+\alpha_2(1)^n+\alpha_3(2)^n\]
+\[a_0=\alpha_1(-1)^0+\alpha_2(1)^0+\alpha_3(2)^0 = \alpha_1+\alpha_2+\alpha_3 = 3\]
+\[a_1=\alpha_1(-1)^1+\alpha_2(1)^1+\alpha_3(2)^1 = -\alpha_1+\alpha_2+2\alpha_3 = 6\]
+\[a_2=\alpha_1(-1)^2+\alpha_2(1)^2+\alpha_3(2)^2 = \alpha_1+\alpha_2+4\alpha_3 = 0\]
+Solving this system of equations gives us $\alpha_1 = -2$, $\alpha_2 = 6$, and $\alpha_3 = -1$.\\
+So $a_n = 2(-1)^{n+1}-2^n+6$. \qed
+ 
+
+\medskip 
+
+\item Find the solution to the recurrence relation $a_n = 2a_{n-1} -2a_{n-2}$ for $n \geq 2$ with initial conditions $a_0=1$ and $a_1 = 2$. Use your solution to calculate the value of $a_{20}$.\\\\
+$p(\lambda) = \lambda^2 - 2\lambda + 2 = 0$. Using the quadratic formula gives us $\lambda_{1,2} = 1+i,1-i$. 
+\[a_n = \alpha_1(1+i)^n+\alpha_2(1-i)^n\]
+\[a_0 = \alpha_1(1+i)^0+\alpha_2(1-i)^0 = \alpha_1+\alpha_2 = 1\]
+\[a_1 = \alpha_1(1+i)^1+\alpha_2(1-i)^1 = \alpha_1+\alpha_2 +i\alpha_1-i\alpha_2 = 2\]
+Solving this system of equations gives us $\alpha_1 = \frac{1}{2}-\frac{1}{2}i$ and $\alpha_2 = \frac{1}{2}+\frac{1}{2}i$.\\
+So $a_n = (\frac{1}{2}-\frac{1}{2}i)(1+i)^n + (\frac{1}{2}+\frac{1}{2}i)(1-i)^n$.\\
+$a_{20} = (\frac{1}{2}-\frac{1}{2}i)(1+i)^{20} + (\frac{1}{2}+\frac{1}{2}i)(1-i)^{20} = -1024$ \qed
+\medskip
+
+
+\item A model for the number of lobsters caught per year is
+based on the assumption that the number of lobsters
+caught in a year is the average of the number caught in
+the two previous years.
+\begin{enumerate}
+\item Find a recurrence relation for $\{L_n\}$, where $L_n$ is the number of lobsters caught in year $n$, under the assumption
+for this model.\\\\
+$L_n = (L_{n-1} + L_{n-2})/2 = L_{n-1}/2 + L_{n-2}/2$.\\
+\item Find $L_n$ if $4,000$ lobsters were caught in year 1 and
+$10,000$ were caught in year 2.\\\\
+$p(\lambda) = \lambda^2 - \frac{1}{2}\lambda - \frac{1}{2} = (\lambda-1)(\lambda+\frac{1}{2}) \implies \lambda_{1,2} = 1,-\frac{1}{2}$\\
+So $L_n=\alpha_1(1)^n+\alpha_2(-\frac{1}{2})^n$. Solving for $\alpha_{1,2}$ :\\
+\[L_1 = \alpha_1 (1)^1 + \alpha_2 (-\frac{1}{2})^1 = \alpha_1 - \alpha_2/2 = 4000\]
+\[L_2 = \alpha_1 (1)^2 + \alpha_2 (-\frac{1}{2})^2 = \alpha_1 + \alpha_2/4 = 10000\]
+Solving this system of equations gives us $\alpha_1 = 8,000$ and $\alpha_2 = 8,000$.\\
+So $L_n = 8000(1)^n + 8000(-\frac{1}{2})^n = 8000(1+(-\frac{1}{2})^n)$.\qed
+\item What is the long-term behavior of $L_n$? That is, what is $\lim_{n \to \infty} L_n$?\\\\
+By inspection of $L_n$, we see that as $n$ approaches infinity, $L_n$ approaches 8000.
+\end{enumerate}
+
+\medskip
+
+\item Let $a_n$ be the number of ways a $2 \times n$ rectangular chessboard can be tiled using $1 \times 2$ and $2 \times 2$ pieces. 
+\begin{enumerate}
+\item Determine $a_1$ and $a_2$.\\\\
+$a_1 = 1$ and $a_2 = 3$.
+\item Find a recurrence relation for $\{a_n\}$.\\\\
+Imagining the situation for $a_n$, we consider the possible ways to fill the last column with tiles. The first way is just with one $1\times2$ piece. This leaves a $2\times n-1$ board left, so we have a term of $a_{n-1}$. The second way is to cover the last two columns with a $2 \times 2$ piece, leaving the rest of the $2 \times n-2$ board untouched. This gives us a $a_{n-2}$ term. Then finally we could cover each squared with its own $2 \times 1$ piece, leaving again the board $2 \times n-2$ untouched, giving a $a_{n-2}$ term.\\
+$\therefore a_n = a_{n-1} + 2a_{n-2}$.
+\item Find a solution of the recurrence relation in part (b) using the initial conditions in part (a).\\\\
+\[p(\lambda) = \lambda^2 - \lambda - 2 = (\lambda-2)(\lambda+1) = 0 \implies \lambda_{1,2} = 2,-1\]
+\[a_n = \alpha_1(2)^n + \alpha_2(-1)^n \]
+\[a_1 = \alpha_1(2)^1 + \alpha_2(-1)^1 = 2\alpha_1 - \alpha_2 = 1\]
+\[a_2 = \alpha_1(2)^2 + \alpha_2(-1)^2 = 4\alpha_1 + \alpha_2 = 3\]
+Solving this system of equations gives us $\alpha_1 = 2/3$ and $\alpha_2 = 1/3$.\\
+\[a_n = \frac{2}{3}(2)^n + \frac{1}{3}(-1)^n\]\qed
+\end{enumerate}
+
+\medskip
+
+\end{enumerate}
+\end{document}

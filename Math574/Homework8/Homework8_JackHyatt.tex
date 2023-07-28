@@ -1,0 +1,145 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{bm}
+
+\usepackage{tikz}
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
+
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 8 (Due Oct 17, 2022)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 574 - Discrete Mathamatics - Fall 2022} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+
+{\bf Chapter 6 questions}
+
+\begin{enumerate}
+
+
+\item How many solutions $(x,y,z)$ of $x + y + z = 50$ are there with
+\begin{enumerate}
+\item $x,y,z$ all non-negative integers?\\\\
+This is just distributing 50 indistinguishable objects to 3 distinguishable boxes. $\binom{52}{2}$
+\item $x,y,z$ all positive integers?\\\\
+Set $x,y,z$ to 1 initially, leaving 47 numbers left to distribute. $\binom{49}{2}$
+\item $x,y,z$ all non-negative integers and $x \geq 10$?\\\\
+Give $x$ 10 first, then distribute 40 numbers to 3 boxes. $\binom{42}{2}$
+
+\end{enumerate}
+
+\item Find the coefficient of $x^3y^4$ in $(x+5y^2)^5$.\\\\
+\[(x+5y^2)^5 = \sum_{k=0}^{5}\binom{5}{k}x^k(5y^2)^{5-k}\]
+So the coeff of $x^3y^4$ is $\binom{5}{3}5^{5-3}=\binom{5}{3}25$.
+
+\item Give a double-counting proof of the following: for all positive integers $n,a,b$ with $a+b \leq n$, ${n \choose a+b} {a+b \choose a} = {n \choose a} {n-a \choose b}$.\\\\
+LHS: The number of ways to chose a club of $a+b$ people from a group of $n$. Then choosing a committee of $a$ people from that club.\\
+RHS: Choose a leading committee of $a$ people from $n$, then choose the remaining $b$ people to be in the club that is lead by that committee.\\
+Both sides are making a club of $a+b$ people with $a$ people leading it out of a group of $n$ people.
+
+\item Prove that for all non-negative integers $n,k$ with $k \leq n+1$, $\sum_{m=k}^{n} { m \choose k} = {n+1 \choose k+1}$.\\\\
+LHS: Counts the ways to choose a subset of size k+1 from $\{1,\ldots,n+1\}$.
+RHS: Let $A\subset\{1,\ldots,n+1\}$ where $|A|=k+1$. Assume the largest element of $A$ is $m+1$. Then there are k remaining elements and must be in the set $\{1,\ldots,m\}$. So $\binom{m}{k}$ counts the number of subsets of $\{1,\ldots,n+1\}$ of size k+1 where the largest element is m+1.\\
+Since every subset will satisfy that the largest element is m+1 for some $k\leq m\leq n$, the sum counts all subsets.\qed
+
+\item You select a set of $7$ integers from $\{1, 2, 3, 4,5,6,7,8,9,10,11,12\}$. Prove that there must be a pair of selected integers with sum equal to 13.\\\\
+There are 6 ways to add to 13 with two natural numbers. $\{1,12\},\{2,11\},\{3,10\},\{4,9\},\{5,8\},\{6,7\}$. By pigeon hole theorem, choosing 7 distinct numbers means we must chose at least 2 from one of these groups. \qed
+\end{enumerate}
+
+{\bf Chapter 7 questions}
+\begin{enumerate}
+
+\item What is the probability that a randomly selected function from $\{1, \ldots, n\}$ to $\{1, \ldots, n\}$ is one-to-one?\\\\
+The probability is injective functions over total functions, which is $\frac{n!}{n^n}$.
+
+\item Suppose we flip $n$ biased coins such that the probability of each heads is $1/4$. A {\bf run} is a maximal sequence of consecutive heads or tails (runs can have length 1). For instance, the outcome $TTTTHTHH$ has 4 runs: $TTTT, H, T, HH$. What is the expected number of runs achieved after $n$ flips?\\\\
+\begin{equation}
+	\text{Let } X_i=
+	\begin{cases}
+		1 & \text{if flip i is the start of a run} \\
+		0 & \text{otherwise }
+	\end{cases}
+\end{equation}
+This means that $X_i$ is 1 in these 2 cases. 1) i is 1, 2) flip i-1 is the opposite of flip i. So for $i=1, p(X_1=1) = 1$ and for $i>1, p(X_i=1)=(\frac{1}{4})(\frac{3}{4})+(\frac{1}{4})(\frac{3}{4})=\frac{3}{8}$.\\
+So $E(X_1) = 1$ and for $i>1$ $E(X_i)=\frac{3}{8}$. So for n flips, we have $E(X_1+\ldots+X_n) = E(X_1)+\ldots+E(X_n)=1+(n-1)\frac{3}{8}$.
+
+
+\item Suppose 10 fair dice are rolled. Compute the expected value and the variance of the sum of the results.\\\\
+Since the rolling of dice is independent, we can use $V(X_1+\ldots+X_n)=V(X_1)+\ldots+V(X_n)$. It is known that expected value of a dice role is 3.5, so using Linearity of Expectation, we get our expected value is 35. We also know that the variance of a dice role is $\frac{35}{12}$, so our variance becomes $\frac{175}{6}$.
+
+\item A standard deck of 52 cards is shuffled. We draw cards {\em with replacement} until we encounter an ace. That is, every time we draw a card that is not an ace, we put the card back in the deck and reshuffle it. Let $X$ be the number of cards we drew.
+\begin{enumerate}
+\item Determine $E(X)$.\\\\
+X clearly has geometric distribution, with the probability, $p$, being $\frac{1}{13}$. Thus, $E(X)=\frac{1}{p}=13$.
+\item Determine $V(X)$.\\\\
+Variance for geometric distribution is $\frac{1-p}{p^2}$, so $V(X)=156$.
+\item Use Chebyshev's inequality to give an upperbound on the probability that we draw at least 49 cards.\\\\
+$p(|X-E(X)|\geq 49-E(X))\leq \frac{V(X)}{(49-E(X))^2} \implies p(|X-13|\geq 36)\leq \frac{156}{36^2} \approx 0.12$
+\end{enumerate}
+
+\end{enumerate}
+
+{\bf Chapter 8 questions}
+\begin{enumerate}
+\item Let $a_n$ be the number of ways to tile a $1 \times n$ row using red, blue, and green tiles such that a blue tile never comes directly after a green tile. Give a recurrence relation for $a_n$ and determine the initial conditions.\\\\
+This can be told in a ternary string scenario. Let's have it be that we cant have a 2 directly follow a 1. Looking at a length $n$ case, we could have the last digit be a 2, so then second to last digit must be a 0. This gives us an $a_{n-2}$ term. We could also have the last digit be a 0 or 1. If this is the case, then there is no restriction on the previous number. That'll give us a term of $2a_{n-1}$. So we have $a_n=2a_{n-1}+a_{n-2}$.\\
+$a_0=1$ and $a_1=3$.
+
+
+\item Solve the recurrence relation $a_{n} = 25a_{n-2}$ with initial conditions $a_0 = 2, a_1 = 4$. \\\\
+\[p(\lambda) = \lambda^2-25 = (\lambda-5)(\lambda+5) \implies \lambda_{1,2}=-5,5\]
+\[\text{So } a_n=\alpha_1(-5)^n + \alpha_25^n\]
+\[a_0=\alpha_1(-5)^0+\alpha_25^0=\alpha_1+\alpha_2=2\]
+\[a_1=\alpha_1(-5)^1+\alpha_25^1=-5\alpha_1+5\alpha_2=4\]
+This gives us that $\alpha_{1,2}=\frac{3}{5},\frac{7}{5}$. So $a_n=\frac{3}{5}(-5)^n+\frac{7}{5}5^n$.
+
+\item Solve the recurrence relation $a_n = 6a_{n-1} -11a_{n-2} + 6 a_{n-3}$ with initial conditions $a_0 = 0, a_1 = 0, a_2 = 1$. You may use the fact that the roots of the polynomial $\lambda^3 - 6 \lambda^2 + 11\lambda - 6$ are $1,2,$ and $3$.\\\\
+We have that $\lambda{1,2,3}=1,2,3$
+\[a_n=\alpha_11^n+\alpha_22^n+\alpha_33^n\]
+\[a_0=\alpha_11^0+\alpha_22^0+\alpha_33^0=\alpha_1+\alpha_2+\alpha_3=0\]
+\[a_1=\alpha_11^1+\alpha_22^1+\alpha_33^1=\alpha_1+2\alpha_2+3\alpha_3=0\]
+\[a_2=\alpha_11^2+\alpha_22^2+\alpha_33^2=\alpha_1+4\alpha_2+9\alpha_3=1\]
+Solving this gives us $\alpha_{1,2,3}=\frac{1}{2},-1,\frac{1}{2}$. So
+\[a_n=\frac{1}{2}-2^n+\frac{1}{2}3^n\]
+
+\item Find the solution of the reccurence relation $a_n = 2a_{n-1} + 3^n$ with the initial condition $a_0 = 5$.\\\\
+The homogeneous part of the relation is $a_n^{(h)}=\alpha2^n$.\\
+The particular part will be of the form $a_n^{(p)}=c3^n$.\\
+To solve for $c$, we plug $a_n^{(p)}$ in the recurrence relation.
+\[c3^n=2(c3^{n-1})+3^n \implies 3c=2c +3 \implies c=3\]
+So $a_n=\alpha2^n+3^{n+1}$.
+\[a_0=\alpha2^0+3^1=\alpha+3=5\implies\alpha=2\]
+\[a_n=2^{n+1}+3^{n+1}\]
+\end{enumerate}
+\end{document}

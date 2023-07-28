@@ -1,0 +1,63 @@
+
+
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{MnSymbol}
+\usepackage{graphicx}
+\usepackage{bm}
+\usepackage[normalem,normalbf]{ulem}
+\usepackage{algorithm} 
+\usepackage{algpseudocode} 
+\usepackage{multirow}
+\usepackage{rotating}
+\usepackage{therefore}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.multipart}
+\usetikzlibrary{shapes.symbols}
+
+\usetikzlibrary{graphs,graphdrawing,graphs.standard,quotes}
+\usegdlibrary{circular,force,layered,routing}
+\tikzset{
+	graphs/simpleer/.style={
+		nodes={draw,circle, blue, left color=blue!20, text=black, inner sep=1pt},
+		node distance=2.5cm, nodes={minimum size=2em}
+	},
+	every loop/.style={},
+}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+		\node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+
+\newcommand{\m}{\medskip\\}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\bbs}{\textbackslash\textbackslash\space}
+\newcommand{\bs}{\textbackslash\space}
+\newcommand{\la}{\enskip\land\enskip}
+\newcommand{\lo}{\enskip\lor\enskip}
+\newcommand{\comp}[1]{#1^\mathsf{c}}
+\newcommand{\micdrop}{\qed}
+\newcommand{\contra}{\begin{tikzpicture}
+		\node[starburst, draw, minimum width=3cm, minimum height=2cm,line width=1.5pt,red,fill=yellow,scale=.5]
+		{BOOM, A CONTRADICTION!!!};
+\end{tikzpicture}}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+\DeclareMathOperator{\lcm}{lcm}
+
+\newtheorem{theorem}{Theorem}
+
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\setlength\parindent{24pt}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{#1}}
+\makeatother
