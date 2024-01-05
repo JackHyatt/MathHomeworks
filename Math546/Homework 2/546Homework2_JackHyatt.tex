@@ -1,0 +1,117 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 2 (Due Sept 13, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 546 - Algebraic Structures I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	Check if the four requirements for a Group holds for each of the following.
+	\begin{enumerate}
+		\item $G = \{x\in\R : x>1\}$; operation defined by $a \star b = ab - a - b + 2$\m
+		(Associativity)\\
+		\[a \star (b \star c) = a \star (bc-b-c+2) = a(bc-b-c+2)-a-(bc-b-c+2)+2\]
+		\[=abc-ab-ac+2a-a-bc+b+c-2+2 = abc-ac-bc+2c -ab+a+b-2-c+2\]
+		\[= (ab-a-b+2)c - (ab-a-b+2) -c+2 = (ab-a-b+2) \star c =(a \star b) \star c\]
+		Set is associative over the operation.\m
+		(Identity)\\
+		$e = 2$ works.\\
+		\[a \star 2 = a\cdot2 -a -2 +2 = a\]
+		Operation is symmetric, so commutativity is obvious and let's us not check $e \star a$.\\
+		Set contains an identity element.\m
+		(Inverse)\\
+		\[e = 2 = a \star a^{-1} = aa^{-1}-a-a^{-1}+2 \implies 2 = aa^{-1}-a-a^{-1}+2\]
+		\[\implies a^{-1} = \frac{a}{a-1}\]
+		Since $a>1$, $a^{-1}\in G$.\\
+		Operation is symmetric, so commutativity is obvious and let's us not check $a^{-1} \star a$.\\
+		So there is an inverse for every element.\m
+		(Closure)\\ 
+		\[a \star b = ab-a-b+2 = a(b-1) -1(b-1) +1 = (b-1)(a-1)+1 > ((1)-1)((1)-1) +1 = 1\]
+		\[\text{So } a \star b > 1\]
+		G is closed under the operation.\bigskip
+		
+		\item $G = \{x\in\Z : x \geq 8\}$; operation defined by $a \star b = \max(a,b)$\m
+		(Associativity)\\
+		$a \star (b \star c) = \max(a,\max(b,c))$\\
+		$(a \star b) \star c = \max(\max(a,b),c)$\\
+		Both return the max of all three numbers, so they are the same. Thus, set is associative over the operation.\m
+		(Identity)\\
+		$e = 8$ works.\\
+		\[a \star 8 = \max(a,8) = a \text{\qquad since $a\geq8$}\]
+		Operation is symmetric, so commutativity is obvious and let's us not check $e \star a$.\\
+		Set contains an identity element.\m
+		(Inverse)\\
+		$e = 8 = a \star a^{-1} = \max(a,a^{-1})$\\
+		There is no way to guarantee $\max(a,a^{-1}) = 8$, since if $a \geq 9$, then $\max(a,a^{-1}) \geq 9$.\\
+		Set over the operation fails the inverse requirement.\m
+		(Closure)\\
+		$a \star b$ will either equal $a$ or $b$, and both of them are in $G$. So $a \star b$ will also be in $G$.
+		G is closed under the operation.\bigskip
+
+		\item $G = \{x\in\R : x\geq 0\}$; operation defined by $a \star b = |a-b|$\m
+		(Associativity)\\
+		$1 \star (2 \star 3) = |1-|2-3|| = 0$\\
+		$(1 \star 2) \star 3 = ||1-2|-3| = 2$\\
+		$G$ is not associative under the operation.\m
+		(Identity)\\
+		$e = 0$ works.\\
+		$a \star 0 = |a-0| = |a| = a$ since a is nonnegative.\\
+		$0 \star a = |0-a| = |a| = a$ since a is nonnegative.\m
+		(Inverse)\\
+		$e = 0 = a \star a^{-1} = |a-a^{-1}| \implies a^{-1} = a$.\\
+		$e = 0 = a^{-1} \star a = |a^{-1}-a| \implies a^{-1} = a$. $a^{-1}$ is in $G$ since it equals $a$ and $a$ is in $G$.\\
+		There is an inverse for every element.\m
+		(Closure)\\
+		$|a-b|$ will always be nonnegative by the definition of absolute value, so it is in the set.\\
+		G is closed under the operation.\bigskip
+		
+		\item $G = \{a + b\sqrt{2} : a,b\in\Q, \text{$a$ and $b$ are both not 0}\}$; operation is normal multiplication.\m
+		(Associativity)\\
+		Multiplication is known to be associative.\m
+		(Identity)\\
+		$e = 1 + 0\sqrt{2}$ works.\\
+		$(a+b\sqrt{2})(1+0\sqrt{2}) = a+b\sqrt{2}$.\\
+		Multiplication is known to be communicative and let's us not check $e \star a$.\\
+		There is an identity element.\m
+		(Inverses)\\
+		$e = 1 = (a+b\sqrt{2})((a+b\sqrt{2}))^{-1} \implies (a+b\sqrt{2})^{-1} = \frac{1}{a+b\sqrt{2}} = \frac{a-b\sqrt{2}}{a^2-2b^2} = \frac{a}{a^2-2b^2} -\frac{b}{a^2-2b^2}\sqrt{2}$.\\
+		The denominator cannot equal $0$ when $a$ and $b$ are rationals, so no values are excluded from having inverses.\\
+		Multiplication is known to be communicative and let's us not check $(a+b\sqrt{2})^{-1}(a+b\sqrt{2})$.\\
+		The set under the operation does have inverses for every element.\m
+		(Closure)\\
+		\[(a_1+b_1\sqrt{2})(a_2+b_2\sqrt{2}) = a_1a_2+a_1b_2\sqrt{2} +a_2b_1\sqrt{2} + 2b_1b_2\]\[ = (a_1a_2+2b_1b_2) + (a_1b_2+a_2b_1)\sqrt{2}\in G\]
+		Set is closed under the operation.\bigskip
+		
+		\item $G =$ set of all affine function $f_{m,b} : \R\rightarrow\R$, $f_{m,b} = mx+b$, where $m,b\in\R$ and $m\neq0$; operation is normal composition of functions.\m
+		(Associativity)\\
+		Composition of functions is known to be associative.\m
+		(Identity)\\
+		$e = f_{1,0}$ works.\\
+		$f_{m,b} \circ f_{1,0} = m(x)+b = mx+b$\\
+		$f_{1,0} \circ f_{m,b} = (mx+b) = mx+b$\m
+		(Inverse)\\
+		$e = f_{1,0} = x = f_{m,b} \circ f_{m,b}^{-1} \implies x=m(f_{m,b}^{-1})+b \implies f_{m,b}^{-1} =\frac{x}{m}-\frac{b}{m} \in G$\\
+		$f_{m,b}^{-1} \circ f_{m,b} =\frac{mx+b}{m}-\frac{b}{m} = x +\frac{b}{m} - \frac{b}{m} = x = e$\\
+		 The set under the operation does have inverses for every element.\m
+		(Closure)\\
+		$f_{m_1,b_1} \circ f_{m_2,b_2} = m_1(m_2x+b_2)+b_1 = (m_1m_2)x+(m_1b_2+b_1) \in G$, since $m_1m_2\neq0$.\\
+		Set is closed under the operation.
+	\end{enumerate}
+\end{document}

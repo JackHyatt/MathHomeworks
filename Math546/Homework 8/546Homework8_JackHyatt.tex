@@ -1,0 +1,118 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+\newcommand{\hexccwgraphphase}[1]{
+	\begin{center}
+		\tikz \graph [nodes={draw, circle}, counterclockwise] {
+			subgraph C_n [n=6, phase=#1, radius=1cm];
+		};
+	\end{center}
+}
+\newcommand{\hexcwgraphphase}[1]{
+	\begin{center}
+		\tikz \graph [nodes={draw, circle}, clockwise] {
+			subgraph C_n [n=6, phase=#1, radius=1cm];
+		};
+	\end{center}
+}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 8 (Due Nov 10, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 546 - Algebraic Structures I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item
+		\begin{enumerate}
+			\item List all the elements of $A_4$ that have order equal to 2.\m
+			The decomposition types of $S_4$ are $\{(1),(2),(3),(4),(2,2)\}$. So then the only decomposition types of $A_4$ are $1$, $3$ and $2;2$ since the others are odd.\\
+			The elements corresponding to decomposition types of $1$ and $3$ have order $1$ and $3$ respectively since they are just single cycles.\\
+			So then the only possible elements of $A_4$ with order 2 can be ones corresponding to $2;2$, so two disjoint transpositions. This leaves us with:\\
+			(1 2)(3 4), (1 3)(2 4), (1 4)(2 3).\\
+			\item Does $A_4$ have any cyclic subgroup of order 4?\m
+			No, as the only elements in $S_4$ that has order 4 are the cycles of length 4, but those are odd permutations, so they aren't in $A_4$.\\
+			\item Does $A_4$ have any non-cyclic subgroup of order 4? Justify\m
+			Yes, the group \{(1), (1 2)(3 4), (1 3)(2 4), (1 4)(2 3)\} is non cyclic and of order 4. It is clear that it is closed, and since they all have order 2, inverses also exist.
+		\end{enumerate}
+		
+		\item
+		\begin{enumerate}
+			\item List all the possible decomposition types of elements in $A_8$.\m
+			We can refer back to hw 6 to find all the possible decomposition types of $S_8$. From that list, we want to take the decomps that have an even amount of even numbers in them to get decomps that will be in $A_8$. This gives us:\\
+			\{(1), (2,2), (2,2,2,2), (3), (3,2,2), (3,3), (4,2), (4,4), (5), (5,3), (6,2), (7)\}\\
+			\item List all the possible orders of elements of $A_8$. For each possible order, give an example of an element that has that order.\m
+			From (a), we find the lcm of the decomps to get the order:\\
+			\begin{flalign*}
+				&1-e & 2-(1\ 2)(3\ 4) && 3-(1\ 2\ 3)\\
+				&4-(1\ 2\ 3\ 4)(5\ 6\ 7\ 8) &5-(1\ 2\ 3\ 4\ 5)\\
+				&6-(1\ 2\ 3)(4\ 5)(6\ 7) & 7-(1\ 2\ 3\ 4\ 5\ 6\ 7)\\
+				&15-(1\ 2\ 3\ 4\ 5)(6\ 7\ 8)
+			\end{flalign*}
+		\end{enumerate}
+		
+		\item
+		\begin{enumerate}
+			\item Let $H$ be a subgroup of $S_n$. If $H \nsubseteq A_n$, prove that \[|H \cap A_n| = \frac{H}{2}\]
+			\begin{proof}
+				Let $O_n$ be the set of odd permutations of $H$. Denote $H \cap A_n$ as $E_n$ for easy of use. Want to show that $|O_n| = |E_n|$.\\
+				Let $f : O_n \rightarrow E_n$ be defined as $f(\sigma) = \sigma$(1 2). This takes any odd permutation and adds another transposition to it, which makes it even.\\
+				Showing that $f$ is bijective proves $|O_n| = |E_n|$, which will be done by showing $f$ is invertible by finding its inverse.\\
+				Since transpositions are their own inverses, $f$ is its own inverse (just with different domains and codomains).\\
+				So let $f^{-1} : E_n \rightarrow O_n$, $f^{-1}(\sigma) = \sigma$(1 2).\\
+				$f(f^{-1}(\sigma)) = \sigma$(1 2)(1 2)$ = \sigma$.\\
+				$f^{-1}(f(\sigma)) = \sigma$(1 2)(1 2)$ = \sigma$.\\
+				So $f$ is invertible, which makes it bijective, which means $|O_n| = |H \cap A_n|$. Since $H = O_n \cupdot (H \cap A_n)$, that means $|H| = |O_n|+|H \cap A_n| \implies |H \cap A_n|=\frac{H}{2}$
+			\end{proof}
+			\item Using the result in part a., prove that if $H$ is a subgroup of $S_n$ and $|H|$ is an odd number, then $H \subseteq A_n$.
+			\begin{proof}
+				BWOC, assume $|H|$ is an odd numbers and $H \nsubseteq A_n$. Then by part (a), we know $|H \cap A_n| = \frac{H}{2}$.\\
+				But since $|H|$ is odd, then $\frac{H}{2}$ is not any integer, which is a contradiction.\\
+				So then $H \subseteq A_n$.
+			\end{proof}
+		\end{enumerate}
+	
+		\item Prove that \[A_4 = \{\sigma \in S_4 : \exists\tau\in S_4 \text{ s.t. }\sigma = \tau^2\}\]
+		\begin{proof}
+			$A_4$ = \{$e$, (1 2)(3 4), (1 3)(2 4), (1 4)(2 3), (1 2 3), (1 2 4), (1 3 2), (1 3 4),\\
+			(1 4 2), (1 4 3), (2 3 4), (2 4 3)\}\\
+			For any cycle of length 3, (a b c), we can rewrite it as (a c b)(a c b) = (a c b$)^2$. So then the cycles of length 3 in $A_4$ are in $\{\sigma \in S_4 : \exists\tau\in S_4 \text{ s.t. }\sigma = \tau^2\}$\\
+			For any pair of disjoint transpositions,(a b)(c d), we can rewrite it as (a c b d$)^2$. So then all the pairs of transpositions in $A_4$ is also in the set.\\
+			Obviously $e$ is in the set too. So $A_4 \subseteq \{\sigma \in S_4 : \exists\tau\in S_4 \text{ s.t. }\sigma = \tau^2\}$.\\
+			Let $\sigma \in \{\sigma \in S_4 : \exists\tau\in S_4 \text{ s.t. }\sigma = \tau^2\}$. Then $\sigma$ is even since no matter what parity $\tau$ has, $\tau^2$ will be even. So $\sigma \in A_4$.\\
+			So $\{\sigma \in S_4 : \exists\tau\in S_4 \text{ s.t. }\sigma = \tau^2\} \subseteq A_4$\\
+			So $A = \{\sigma \in S_4 : \exists\tau\in S_4 \text{ s.t. }\sigma = \tau^2\}$
+.		\end{proof}
+		
+		\item Let $a =$ (1 2)(3 4) and $b =$ (1 2 3). If $H$ is a subgroup of $A_4$ with $a,b \in H$, prove that $H = A_4$.
+		\begin{proof}
+			
+			Just need to show that every element of $A_4$ can be made from compositions of $a$ and $b$.\\
+			$e = a^2$\\
+			(1 2)(3 4) = $a$\\
+			(1 2 3) = $b$\\
+			(1 2 4) = (1 2 3)(1 2)(3 4)(1 2 3) = $bab$\\
+			(1 3 2) = (1 2 3)(1 2 3) = $b^2$\\
+			(1 4 2) = (1 2)(3 4)(1 2 3)(1 2)(3 4) = $aba$\\
+			(2 4 3) = (1 2)(3 4)(1 2 3) = $ab$\\
+			By Lagrange, we know the order of $H$ must be 1, 2, 3, 4, 6, or 12. Since we found 7 elements, that means it can't be 6 or lower, so it must be 12. So then $H = A_4$.
+		\end{proof}
+		
+	\end{enumerate}
+\end{document}

@@ -1,0 +1,104 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+\newcommand{\hexccwgraphphase}[1]{
+	\begin{center}
+		\tikz \graph [nodes={draw, circle}, counterclockwise] {
+			subgraph C_n [n=6, phase=#1, radius=1cm];
+		};
+	\end{center}
+}
+\newcommand{\hexcwgraphphase}[1]{
+	\begin{center}
+		\tikz \graph [nodes={draw, circle}, clockwise] {
+			subgraph C_n [n=6, phase=#1, radius=1cm];
+		};
+	\end{center}
+}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 7 (Due Nov 3, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 546 - Algebraic Structures I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item In $D_4$ with $t$ representing a reflection along a diagonal, which one of the elements $e, r, r^2, r^3, t, rt, r^2t, r^3t$ is equal to the reflection about the other diagonal? Justify.\m
+		WLOG, we can assign $t$ to be (2 4). Then we want to get (1 3).\\
+		Since $r =$ (1 2 3 4), then $r^2 =$ (1 3)(2 4). So we want to undo that (2 4) in $r^2$. Luckily, cycles of length 2 are their own inverses, and $t =$ (2 4). So then $r^2t =$ (1 3). We found our other reflection.
+		
+		\item Prove that $Z(D_4) = \{e, r^2\}$.
+		\begin{proof}
+			Note: $r^2 =$ (1 3)(2 4)
+			Obviously $e \in Z(D_4)$.\\
+			Consider $r$ and $t$. $rt =$ (1 2 3 4)(2 4) = (1 2)(3 4). $tr =$ (2 4)(1 2 3 4) = (1 4)(2 3). So $rt \neq tr$, meaning $r,t \nin Z(D_4)$.\\
+			Consider $r^3$ and $rt$. $r^3rt = t =$ (2 4). $rtr^3 = tr^2 = r^2t$ = (1 3). So $r^3rt \neq rtr^3$, meaning $r^3t,rt \nin Z(D_4)$.\\
+			Consider $r^2t$ and $r^3t$. $r^2tr^3t = rtr^2t = trt = r^3$. $r^3tr^2t = r^2trt = r$. Since $r \neq r^3$, $r^2tr^3t \neq r^3tr^2t$, meaning $r^2t,r^3t \nin Z(D_4)$.\\
+			Now to show $r^2 \in Z(D_4)$.\\
+			Obviously $r^2$ commutes with other powers of $r$.\\
+			$r^2(t) = r^6t = r^3tr = (t)r^2$\\
+			$r^2(rt) = r^3t = tr = r^4tr =(rt)r^2$\\
+			$r^2(r^2t) = r^4t = t = tr^4 = r^3tr^3 = r^6tr^2 = (r^2t)r^2$\\
+			$r^2(r^3t) = r^2tr = r^6tr = (r^3t)r^2$.\\
+			So $r^2$ commutes with every element, meaning $r^2 \in Z(D_4)$.			
+		\end{proof}
+		
+		\item Find all the subgroups of $D_4$. For each subgroup, list the elements of the subgroup and explain why it is a subgroup. Also explain why there are no other subgroups. You may use some of the results of the calculations you have done for problem 1. without reproving them.\m
+		We know that $|D_4| = 8$, so any subgroup must be of size $1,2,4,8$.\\
+		Obviously, $\{e\}$ and $D_4$ are subgroups.\\
+		For subgroups of size 2, the element other than $e$ must have order 2. The only elements with that property are $r^2,t,rt,r^2t,r^3t$. So the subgroups with $e$ and any one of those elements are valid.\\
+		For subgroups of size 4, since $e$ must be in it, then the other 3 must be closed and have order 2 or 4.\\
+		If $r$ is in the group, then $r^2$ and $r^3$ must also be in the group. So $\{e,r,r^2,r^3\}$ works, and no other subgroup of order 4 can contain $r$.\\
+		$\{r^2,t,r^2t\}$ works, along with $\{r^2,rt,r^3t\}$, which is all the work with $r^2$.\\
+		So then $t$ can't be with $rt$ since it would have $r$ with closure, and $t$ can't be with $r^3t$ since that would put $r^3$ in the subgroup along with $r^2$, which is more than 4.\\
+		So the last trio to check is $rt,r^2t,r^3t$, which is not closed since $rtr^2t$ creates $r^3$.\\
+		So the only subgroups are:\\
+		$e$, $D_4$, $\{e,r^2\}$, $\{e,t\}$, $\{e,rt\}$, $\{e,r^2t\}$, $\{e,r^3t\}$, 
+		$\{e,r,r^2,r^3\}$, $\{e,r^2,t,r^2t\}$, $\{e,r^2,rt,r^3t\}$.
+		
+		\item Let $D_6$ be the group of symmetries (rotations and reflections) of a regular hexagon. Using the numbers $1,\ldots,6$ to label the vertices of the hexagon, write each element of $D_6$ as a permutation, explaining which elements are rotations and by what angle, and which elements are reflections and about what axis of symmetry.\m
+		\hexccwgraphphase{0}
+		Let the base rotation of $\pi/3$ counterclockwise be $r =$ (1 6 5 4 3 2).\\
+		\hexccwgraphphase{60}
+		Then $r^2$ is a ccw rotation of $2\pi/3$ as (1 5 3)(2 6 4).\\
+		\hexccwgraphphase{120}
+		Then $r^3$ is a ccw rotation of $\pi$ as (1 4)(2 5)(3 6).\\
+		\hexccwgraphphase{180}
+		Then $r^4$ is a ccw rotation of $4\pi/3$ as (1 3 5)(2 4 6).\\
+		\hexccwgraphphase{240}
+		Then $r^5$ is a ccw rotation of $5\pi/3$ as (1 2 3 4 5 6).\\
+		\hexccwgraphphase{300}
+		Let the base reflection along the diagonal 1-4 be $t =$ (2 6)(3 5).
+		\hexcwgraphphase{0}
+		Reflection along 2-5 = (1 3)(4 6):\hexcwgraphphase{120}
+		Reflection along 3-6 = (1 4)(2 5):\hexcwgraphphase{240}
+		Reflection along slope of 1 = (1 2)(3 6)(4 5):\hexcwgraphphase{60}
+		Reflection along slope of -1 = (1 6)(2 5)(3 4):\hexcwgraphphase{-60}
+		Reflection along vertical slope = (1 4)(2 3)(5 6):\hexcwgraphphase{180}
+		
+		\item Let $r$ denote the rotation of the regular hexagon by an angle of $\pi/3$, and let $t$ denote the reflection about one of the diagonals. Prove that each of the elements of $D_6$ that you found in problem 4 can be obtained as $r^it^j$ with $i \in \{0, 1, 2, 3, 4, 5\}$ and $j \in \{0, 1\}$.\m
+		Let $r =$ (1 6 5 4 3 2) and $t =$ (2 6)(3 5).\\
+		The elements of only rotations found in problem 4 can obviously be made out of $r^i$, as well as $e$ and $t$ being made out of desired powers.\\
+		$rt =$ (1 6 5 4 3 2)(2 6)(3 5) = (1 6)(2 5)(3 4) = reflection along slope of -1\\
+		$r^2t =$ (1 5 3)(2 6 4)(2 6)(3 5) = (1 4)(2 5) = reflection along 3-6\\
+		$r^3t =$ (1 4)(2 5)(3 6)(2 6)(3 5) = (1 4)(2 3)(5 6) = reflection along vertical slope.\\
+		$r^4t =$ (1 3 5)(2 4 6)(2 6)(3 5) = (1 3)(4 6) = reflection along slope of 2-5\\
+		$r^5t =$ (1 2 3 4 5 6)(2 6)(3 5) = (1 2)(3 6)(4 5) = reflection along slope of 1.
+	\end{enumerate}
+\end{document}

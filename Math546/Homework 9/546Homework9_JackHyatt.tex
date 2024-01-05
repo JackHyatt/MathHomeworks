@@ -1,0 +1,122 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+\newcommand{\hexccwgraphphase}[1]{
+	\begin{center}
+		\tikz \graph [nodes={draw, circle}, counterclockwise] {
+			subgraph C_n [n=6, phase=#1, radius=1cm];
+		};
+	\end{center}
+}
+\newcommand{\hexcwgraphphase}[1]{
+	\begin{center}
+		\tikz \graph [nodes={draw, circle}, clockwise] {
+			subgraph C_n [n=6, phase=#1, radius=1cm];
+		};
+	\end{center}
+}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 9 (Due Nov 17, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 546 - Algebraic Structures I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $G_1 = \{f_{m,b}:\R\rightarrow\R\ :\ f_{m,b}(x) = mx+b,\ m\neq0\}$ be the group of affine functions, with composition of functions as operation, and let
+		\[G_2 = \{\begin{bmatrix}
+			m & b\\
+			0 & 1
+		\end{bmatrix} : m,b\in\R,\ m\neq0\}\]
+		with multiplication of matrices as operation. Prove that $G_1 \cong G_2$.
+		\begin{proof}
+			Let $\phi:G_1\rightarrow G_2$ defined by $\phi(f_{m,b}) = \begin{bmatrix} m & b\\0 & 1\end{bmatrix}$.\\
+			Clearly $\phi$ is well defined.\\
+			Showing that $\phi$ preserves linearity.\\
+			\[\phi(f_{m_1,b_1} \circ f_{m_2,b_2}) = \phi(m_1(m_2x+b_2)+(b_1)) = \phi(m_1m_2x+(m_1b_2+b_1))\]
+			\[ = \begin{bmatrix}
+				m_1m_2 & m_1b_2 + b_1 \\ 0 & 1
+			\end{bmatrix}=\begin{bmatrix}m_1&b_1\\0&1\end{bmatrix} \cdot \begin{bmatrix}m_2&b_2\\0&1\end{bmatrix} = \phi(f_{m_1,b_1}) \cdot \phi(f_{m_2,b_2})\]
+			Now to show that $\phi$ is a bijection, by showing it has an inverse.\\
+			Let $\phi^{-1}(\begin{bmatrix}m&b\\0&1\end{bmatrix}) = mx+b$.\\
+			Clearly $\phi^{-1}$ is well defined.\\
+			Clearly composing $\phi$ into $\phi^{-1}$ or visa versa will result in the original input, meaning that $\phi$ and $\phi^{-1}$ are inverses, proving $\phi$ is a bijection.\\
+			So then $\phi$ is an isomorphism between $G_1$ and $G_2$, meaning $G_1\cong G_2$.
+		\end{proof}
+		
+		\item Let $C = \{-1, 1\}$ with multiplication as operation. Let $G_1=\R^*$, and let $G_2 = C \times \R^+$. Prove that $G_1 \cong G_2$.
+		\begin{proof}
+			Let $\phi:\R^*\rightarrow C\times\R^+$ be defined by $\phi(x) = (\frac{x}{|x|},|x|)$.\\
+			Since $\frac{x}{|x|}$ results in the sign of $x$ and $|x|\in\R^+$, $\phi$ is well defined.\\
+			Showing $\phi$ preserves linearity.\\
+			\[\phi(x \cdot y) = \left(\frac{xy}{|xy|},|xy|\right) = \left(\frac{x}{|x|}\cdot\frac{y}{|y|},|x|\cdot|y|\right) = \left(\frac{x}{|x|},|x|\right) \cdot \left(\frac{y}{|y|},|y|\right) = \phi(x)\cdot\phi(y)\]
+			Now to show $\phi$ is bijective by finding an inverse.\\
+			Let $\phi^{-1}:C\times\R^+\rightarrow\R^*$ defined by $\phi^{-1}((c,x)) = cx$.\\
+			Clearly $\phi^{-1}$ is well defined.\\
+			Now to show $\phi^{-1}$ is indeed the inverse of $\phi$.\\
+			$$\phi(\phi^{-1}((c,x))) = \phi(cx) = (\frac{cx}{|cx|},|cx|) = (\frac{cx}{x},|x|) = (c,x)$$.\\
+			$$\phi^{-1}(\phi(x)) = \phi^{-1}((\frac{x}{|x|},|x|)) = (\frac{x}{|x|}\cdot|x|) = x$$.
+			So $\phi$ is an isomorphism between $G_1$ and $G_2$, meaning $G_1 \cong G_2$.
+		\end{proof}
+		
+		\item Let $G_1$ be $\R$ with operation $*$ defined by $a*b=a+b-1$. Prove that $G_1$ is isomorphic to $\R$.
+		\begin{proof}
+			Let $\phi:G_1\rightarrow\R$ be defined by $\phi(x)=x-1$.\\
+			Clearly $\phi$ is well defined.\\
+			Showing $\phi$ preserves linearity.\\
+			\[\phi(x*y) = \phi(x+y-1) = x+y-2 = (x-1) + (y-1) = \phi(x) + \phi(y)\]
+			Now to show that $\phi$ is bijective by finding an inverse.\\
+			Let $\phi^{-1}:\R\rightarrow G_1$ be defined by $\phi^{-1}(x) = x+1$.\\
+			Clearly $\phi^{-1}$ is well defined.\\
+			It is trivial to show composing $\phi$ and $\phi^{-1}$ is $x$ and visa versa.\\
+			So $\phi$ is an isomorphism between $G_1$ and $\R$, meaning $G_1 \cong \R$.
+		\end{proof}
+		
+		\item Let $G = \R\backslash\{-1\}$, with operation $∗$ defined by $a∗b = a+b+ab$. Prove that $G$ is isomorphic to $\R^*$.
+		\begin{proof}
+			Let $\phi:G\rightarrow\R^*$ be defined by $\phi(x)=x+1$.\\
+			Clearly $\phi$ is well defined since $x+1$ cannot be 0 since $x$ cannot be -1.\\
+			Showing $\phi$ preserves linearity.\\
+			\[\phi(xy) = \phi(x+y+xy) = x+y+xy+1 = x(y+1)+y+1 = (x+1)(y+1) = \phi(x)\cdot\phi(y)\]
+			Now to show that $\phi$ is bijective by finding an inverse.\\
+			Let $\phi^{-1}:\R^*\rightarrow G$ be defined by $\phi^{-1}(x) = x-1$.\\
+			Since $x\neq0$, then $x-1\neq-1$, meaning $(x-1)\in G$. So $\phi^{-1}$ is well defined.\\
+			It is trivial to show composing $\phi$ and $\phi^{-1}$ is $x$ and visa versa.\\
+			So $\phi$ is an isomorphism between $G$ and $\R^*$, meaning $G \cong \R^*$.
+		\end{proof}
+		
+		\item Let $G = \{(a, b) \in \Z\times\Z : a \equiv b\pmod7\}$, with component-wise addition as operation. Prove that $G \cong \Z\times\Z$.
+		\begin{proof}
+			Let $\phi:G\rightarrow\Z\times\Z$ be defined by $\phi(a,b) = (a,\frac{a-b}{7})$.\\
+			$\phi$ is well defined since $(a,b)\in G \implies 7\divides (b-a)$.\\
+			Showing $\phi$ preserves linearity.\\
+			\[\phi((a_1,b_1)+(a_2,b_2)) = \phi(a_1+a_2,b_1+b_2) = \left((a_1+a_2),\frac{(a_1+a_2)-(b_1+b_2)}{7}\right)\]
+			\[= \left(a_1+a_2,\frac{a_1-b_1}{7}+\frac{a_2-b_2}{7}\right) = \left(a_1,\frac{a_1-b_1}{7}\right) + \left(a_2,\frac{a_2-b_2}{7}\right) = \phi(a_1,b_1)+\phi(a_2,b_2)\]
+			
+			Now to show that $\phi$ is bijective by finding an inverse.\\
+			Let $\phi^{-1}:\Z\times\Z\rightarrow G$ be defined by $\phi^{-1}(a,b) = (a,a-7b)$.\\
+			First, we need to show that $(a,a-7b)\in G$.\\
+			$(a-7b) - a = -7b$, so $7 \divides ((a-7b)-a)$, meaning $(a,a-7b)\in G$.\\
+			Now to show $\phi^{-1}$ is indeed the inverse of $\phi$.
+			$$\phi^{-1}(\phi(a,b)) = \phi^{-1}\left(a,\frac{a-b}{7}\right) = \left(a,a-7\left(\frac{a-b}{7}\right)\right) = (a,a-(a-b)) = (a,b)$$
+			$$\phi(\phi^{-1}(a,b)) = \phi(a,a-7b) = \left(a,\frac{a-(a-7b)}{7}\right) = \left(a,\frac{7b}{7}\right) = (a,b)$$
+			So $\phi$ is an isomorphism between $G$ and $\Z\times\Z$, meaning $G \cong \Z\times\Z$.
+		\end{proof}
+	\end{enumerate}
+\end{document}

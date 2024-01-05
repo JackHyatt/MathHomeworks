@@ -1,0 +1,122 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 3 (Due Sept 22, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 546 - Algebraic Structures I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Find the order of each of the following elements of $GL_2(\R)$.
+		\[A = \begin{bmatrix}
+			0 & 1 \\
+			-1 & 0
+		\end{bmatrix},\qquad B = \begin{bmatrix}
+		1 & 1\\
+		0 & 1
+	\end{bmatrix}\]
+	Note: $e = I_{2\times2}$.\\
+	\[A \neq I_{2\times2}\]
+	\[A^2 = \begin{bmatrix}
+		0\cdot1+1\cdot-1 & 0\cdot1+1\cdot0 \\
+		0\cdot-1-1\cdot0 & 1\cdot-1+0\cdot0
+	\end{bmatrix} = \begin{bmatrix}
+	-1 & 0 \\
+	0 & -1
+	\end{bmatrix} = -I_{2\times2} \neq I_{2\times2}\]
+	\[A^3 = A^2A = \begin{bmatrix}
+		-1\cdot0+1\cdot0 & 0\cdot0+1\cdot-1 \\
+		-1\cdot-1+0\cdot0 & -1\cdot0+0\cdot-1
+	\end{bmatrix} = \begin{bmatrix}
+		0 & -1 \\
+		1 & 0
+	\end{bmatrix} = -A \neq I_{2\times2}\]
+	\[A^4 = A^2A^2 = (-I_{2\times2})(-I_{2\times2}) = I_{2\times2}\]
+	We will prove $o(B) = \infty$ through induction by showing $B^k = \begin{bmatrix}
+		1 & k\\
+		0 & 1
+	\end{bmatrix}$
+	\[B = B^1 = \begin{bmatrix}
+		1 & \textbf{1}\\
+		0 & 1
+	\end{bmatrix}\]
+	Assume $B^k = \begin{bmatrix}
+		1 & k\\
+		0 & 1
+	\end{bmatrix}$ for $k \geq 1$.
+	\[B^{k+1} = B^kB = \begin{bmatrix}
+		1 & k\\
+		0 & 1
+	\end{bmatrix}\begin{bmatrix}
+		1 & 1\\
+		0 & 1
+	\end{bmatrix} = \begin{bmatrix}
+		1\cdot1+k\cdot0 & 1\cdot1+k\cdot1 \\
+		0\cdot1+1\cdot0 & 0\cdot(k+1)+1\cdot1
+	\end{bmatrix} = \begin{bmatrix}
+	1 & k+1 \\
+	0 & 1
+	\end{bmatrix}\]
+	By P.M.I., $B^k = \begin{bmatrix}
+		1 & k\\
+		0 & 1
+	\end{bmatrix} \neq I_{2\times2}$
+	
+	\item Let $n,k$ be integers, $n\leq2$. Prove that $o([k]_n) = n/\gcd(n,k)$.
+	\begin{proof}
+		Need to check $[k]_n \cdot n/\gcd(n,k) = 0$, and $\forall 0<\ell<\frac{n}{\gcd(n,k)}$,\medspace$ [\ell]_n \cdot \frac{n}{\gcd(n,k)} \neq 0$.\\
+		\[[k]_n\cdot\frac{n}{\gcd(n,k)} = \left[n\cdot\frac{k}{\gcd(n,k)}\right]_n = [0]_n\]
+		since $k/\gcd(n,k)$ is an integer.\\
+		BWOC, assume $\exists 0<\ell<\frac{n}{\gcd(n,k)}$ s.t. $o([k]_n) = \ell$. Then $\ell\cdot[k]_n = 0$. Then $\ell k = qn$ for some positive integer $q$.\\
+		Let $d=\gcd(n,k)$. Then $\exists k',n'\in\Z^+$ s.t. $k=dk'$ and $n=dn'$ and $k'$ is coprime to $n'$.\\
+		$\ell k = qn \implies \ell dk' = qdn' \implies \ell k' =qn'$. So $n'|\ell k'$, and since $\gcd(k',n')=1$, then $n'|\ell$.\\
+		So $\exists \alpha \in \Z^+$ s.t. $n'\alpha = \ell$. So $n'\cdot k $ is a multiple of $n$, and $n'<\ell$. But $\ell$ was the order of $k$, which is a contradiction.
+	\end{proof} 
+
+	\item Using the result from problem 2, list all the elements of $\Z_90$ that have order equal to 6.\m
+	From problem 2, $\forall k$, $0<k<90, o([k]_90) = 90/\gcd(90,k)$. So we want to find the values of $k$ when $90/\gcd(90,k) = 6$, and these values will be the comprehensive list of what we want because of the equality.\\
+	\[\frac{90}{\gcd(90,k)} = 6 \implies \gcd(90,k) = 15\]
+	Clearly $k\geq15$ since a divisor can't be bigger than the number. Since 15|90, we just need to find multiples of 15 that aren't multiples of 30, 45, or 90, since 30, 45, and 90 are bigger divisor of 90 than 15 is. So we are left with $k=15,75$.
+	
+	\item Let $(G,*)$ be a group with the property that $\forall a,b \in G$,\medspace$(a*b)^2 = a^2 * b^2$. Prove that G is abelian.
+	\begin{proof}
+		Assume the above. Then 
+		\[(a*b)^2 = a^2*b^2 \implies a*b*a*b = a*a*b*b\]
+		\[\implies a^{-1}*a*b*a*b*b^{-1} = a^{-1}*a*a*b*b*b^{-1} \implies e*b*a*e = e*a*b*e\]
+		\[\implies b*a = a*b\]
+		
+	\end{proof}
+	
+	\item Let $(G,*)$ be an abelian group, and let $a,b\in G$. Assume that $o(a) = 3$, $o(b) = 2$. Prove that $o(a*b) = 6$.
+	\begin{proof}
+		Assume the above.
+		Considering $a*b$, BWOC assume $a*b=e$. Then $b=a^{-1}$. But $b$ and $a$ have different orders, a contradiction. So $a*b \neq e$\\
+		\begin{align*}
+			(a*b)^2 &= a^2*b^2 = a^2*e = a^2 \neq e &&\text{since $o(a)=3$}\\
+			(a*b)^3 &= a^3*b^3 = e*b^2*b = e*b = b \neq e &&\text{since $o(b)=2$}\\
+			(a*b)^4 &= a^4*b^4 = a^3*a*b^2*b^2 = a \neq e &&\text{since $o(a)=3$}\\
+			(a*b)^5 &= a^5*b^5 = a^3*a^2*b^2*b^2*b = a^2*b \neq e
+		\end{align*}
+		since $a^2*b=e \implies b$ is the inverse of $a^2$, even though $a$ is since $o(a)=3$, and we know $a\neq b$ due to different orders.\\
+		\[(a*b)^6 = a^6*b^6 = a^3*a^3*b^2*b^2*b^2 = e\]
+	\end{proof}
+	\end{enumerate}
+\end{document}

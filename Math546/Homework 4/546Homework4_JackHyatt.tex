@@ -1,0 +1,182 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 4 (Due Oct 2, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 546 - Algebraic Structures I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $G$ be a group, and let $H$ and $K$ be subgroups of $G$. If $H \nsubseteq K$ and $K \nsubseteq H$, prove that $H \cup K$ cannot be a subgroup of $G$.
+		\begin{proof}
+			Assume $H \nsubseteq K$ and $K \nsubseteq H$. Then $\exists h \in H$ and $\exists k \in K$ s.t. $h \nin K$ and $k \nin H$.\\
+			BWOC, let $H \cup K$ be a subgroup of $G$. Clearly, $h,k,h^{-1},k^{-1}\in H \cup K$. So then $h*k \in H \cup K$, meaning $h*k \in H$ or $h*k \in K$.\\
+			\textbf{Case 1}: $h*k \in H$\\
+			Since $h^{-1} \in H$, then $h^{-1}(h*k)$ should be in $H$ as well. But $h^{-1}(h*k) = k \nin H$, a contradiction.\\
+			\textbf{Case 2}: $h*k \in K$\\
+			Since $K^{-1} \in K$, then $(h*k)*k^{-1}$ should be in $K$ as well. But $(h*k)*k^{-1} = h \nin K$, a contradiction.\\
+			So $H \cup K$ cannot be a subgroup of $G$.
+		\end{proof}
+		
+		\item Let $G$ be an abelian group, and let $H$ and $K$ be subgroups of $G$. Consider the set HK defined below:
+		\[HK = \{h*k : h \in H, k \in K\}\]
+		Prove that $HK$ is a subgroup of $G$.
+		\begin{proof}
+			Clearly since $G$ is closed under $*$, any element in $HK$ will also be in $G$, and there will be elements in $HK$ as long as $H$ and $K$ are not empty. So $HK \neq \emptyset$ and $HK \subseteq G$. Now proving $x,y \in HK \implies x*y^{-1} \in HK$ will prove $HK$ is a subgroup of $G$.\\
+			Let $x,y \in HK$. Then $x = h_1 * k_1$ and $y = h_2 * k_2$ for some $h_1,h_2 \in H$ and $k_1,k_2 \in K$.\\
+			Consider $x * y^{-1}$.
+			\[x * y^{-1} = (h_1*k_1) * (h_2*k_2)^{-1} = h_1*k_1 * k_2^{-1}*h_2^{-1} = (h_1*h_2^{-1}) * (k_1*k_2^{-1})\]
+			Since $H$ and $K$ are subgroups, then $(h_1*h_2^{-1}) \in H$ and $(k_1*k_2^{-1}) \in K$.\\
+			So $(h_1*h_2^{-1}) * (k_1*k_2^{-1}) \in HK$.
+		\end{proof}
+		
+		\item Let $G$ be an abelian group. Consider the sets defined below:
+		\[H = \{a \in G : a^3 = e\}, \qquad K = \{a^3 : a \in G\}\]
+		\begin{enumerate}
+			\item Prove that $H$ and $K$ are subgroups of $G$.
+			\begin{proof}
+				First we need to show $H$ and $K$ are not empty and are subsets of $G$. Clearly $H$ and $K$ are not empty since the identity elements will be in them, and we are taking elements from $G$ and apply some power to them, so every element in $H$ and $K$ is also in $G$.\\
+				Now proving $x,y \in H \implies x*y^{-1} \in H$ will prove $H$ is a subgroup of $G$, and similarly for $K$.\\
+				Let $x,y \in H$. Then $x,y \in G$.\\
+				Consider $x * y^{-1}$. Need to see if $(x * y^{-1})^3 = e$
+				\[(x * y^{-1})^3 = x^3 * (y^3)^{-1} = e * e^{-1} = e\]
+				So $x * y^{-1} \in H$\\
+				Let $x^3,y^3 \in K$. Then $x,y \in G$.\\
+				Consider $x^3 * (y^3)^{-1}$. Need to see if $x^3 * (y^3)^{-1} = a^3$ for some $a \in G$, meaning $x^3 * (y^3)^{-1} \in K$.
+				\[x^3 * (y^3)^{-1} = (x*y^{-1})^3\]
+				and since $x*y^{-1} \in G$, that means $x^3 * (y^3)^{-1} \in K$.
+			\end{proof}
+
+			\item If $G = \Z_{24}$, list all the elements of $H$ and list all the elements of $K$.\m
+			$K$ will be the numbers $0$ to $23$ multiplied by $3$, but still $\mod24$. So we are left with multiples of 3, making $K = \{[0],[3],[6],[9],[12],[15],[18],[21]\}$.\\
+			For $H$, we want numbers from $0$ to $23$ that equal a multiple of $24$ when multiplied by $3$. So we get multiples of $8$, making $H = \{[0],[8],[16]\}$.
+		\end{enumerate}
+		
+		\item Let $G$ be a group, and let $a \in G$ be a fixed element. Consider the set defined below:
+		\[C(a) = \{x \in G : a * x = x * a\}\]
+		\begin{enumerate}
+			\item Prove that $C(a)$ is a subgroup of $G$.
+			\begin{proof}
+				Clearly all elements of $C(a)$ are in $G$, so $C(a)$ is a subset of $G$. Clearly the identity element is in $C(a)$, so it is not an empty set either. Now proving $x,y \in C(a) \implies x*y^{-1} \in C(a)$ will prove $C(a)$ is a subgroup of $G$.\\
+				Let $x,y \in C(a)$. Then $x,y \in G$. Also, $a*x = x*a$ and $a*y = y*a$. Important to know that $a*y = y*a \implies a = y*a*y^{-1} \implies y^{-1}*a = a*y^{-1}$.\\
+				Consider $x * y^{-1}$. Need to see if $a*(x * y^{-1}) = (x * y^{-1}) * a$.
+				\[a*(x * y^{-1}) = a * x * y^{-1} = x * a * y^{-1} = (x*y^{-1})*a\]
+				So $x * y^{-1} \in C(a)$. So $C(a)$ is a subgroup of $G$.
+			\end{proof}
+			\item Find $C(A)$ if $G = \text{GL}_2(\R)$, the group of $2\times2$ invertible matrices with multiplication of matrices as operation, and
+			\[A = \begin{bmatrix}
+				1 & -1 \\
+				1 & 0
+			\end{bmatrix}\] Prove your answer.
+			\begin{proof}
+				Let $X \in G$,
+				\[X = \begin{bmatrix}
+					a & b \\
+					c & d
+				\end{bmatrix}\] where $ad-bc \neq 0$. For $X$ to be in $C(A)$, then $AX = XA$ needs to be true.
+				\[AX = \begin{bmatrix}
+					1 & -1 \\
+					1 & 0
+				\end{bmatrix}\begin{bmatrix}
+					a & b \\
+					c & d
+				\end{bmatrix} = \begin{bmatrix}
+					a-c & b-d \\
+					a & b
+				\end{bmatrix}\]
+				\[XA = \begin{bmatrix}
+					a & b \\
+					c & d
+				\end{bmatrix}\begin{bmatrix}
+					1 & -1 \\
+					1 & 0
+				\end{bmatrix} = \begin{bmatrix}
+					a+b & -a \\
+					c+d & -c
+				\end{bmatrix}\]
+				So the following system of equations must be true:
+				\begin{align*}
+					(1)&&ad &\neq bc & (2)&&(a-c)b &\neq (b-d)a & (3)&&-c(a+b) &\neq -a(c+d)
+				\end{align*}
+				\begin{align*}
+					(4)&&a-c &= a+b & (5)&&b-d &= -a & (6)&&a  &= c+d & (7)&&b  &= -c 
+				\end{align*}
+				Using (6) and (7). We see that $X = \begin{bmatrix}
+					c+d & -c\\
+					c & d
+				\end{bmatrix}$, which is the final answer I will leave it as.
+			\end{proof}
+		\end{enumerate}	
+	
+		\item Let $G$ be a group. Consider the set defined below: 
+		\[Z(G) = \{x \in G : x*a = a * x \forall a \in G\}\]
+		\begin{enumerate}
+			\item Explain the relationship between the set $Z(G)$ and the sets $C(a)$ defined in problem 4.\m
+			The elements in $C(a)$ are commutative with at least $a \in G$, while the elements in $Z(G)$ are commutative with every element in $G$.\\
+			So that means $Z(G) = \bigcap_{a \in G} C(a)$.
+			\item Prove that $Z(G)$ is a subgroup of $G$.
+			\begin{proof}
+				$Z(G)$ is clearly a subset, since it is only of elements from $G$, and it isn't empty as the identity element is in it.\\
+				Let $x,y \in Z(G)$. So $x,y \in G$ and $x,y$ commute with all the elements in $G$. By same logic as 4(a), $y^{-1}$ commutes with all elements in $G$.\\
+				Consider $x*y^{-1}$. Need to check if $(x*y^{-1})*a = a*(x*y^{-1})$ for all $a$ in $G$.\\
+				\[(x*y^{-1})*a = x*y^{-1}*a = x*a*y^{-1} = a*(x*y^{-1})\]
+				So $x*y^{-1} \in Z(G)$, which means $Z(G)$ is a subgroup of $G$.
+			\end{proof}
+			\item What is a necessary and sufficient condition for $Z(G)$ to be equal to $G$? Explain.\m
+			A condition that is necessary and sufficient is for the operation to always be commutative (like addition). This is because that means every element commutes with every other element, making every element in $G$ be in $Z(G)$. So it is sufficient. But assuming that $Z(G)$ equals $G$, that means every element commutes with every other element, making the operation commutative.\\
+			In other words, $G$ is abelian group is a necessary and sufficient condition.
+		\end{enumerate}
+	
+		\item Let $G = \text{GL}_2(\R)$, the group of $2\times2$ invertible matrices with multiplication of matrices as operation. Find and prove $Z(G)$ (same definition as in problem 5).
+		\begin{proof}
+			Let $X \in Z(G)$, then from $4b$, we know it must have the form $X = \begin{bmatrix}
+				a+b & -a\\
+				a & b
+			\end{bmatrix}$. Let $B = \begin{bmatrix}
+				0 & 1\\
+				1 & 0
+			\end{bmatrix}$. $B$ is invertible, so $XB = BX$.
+			\[XB = \begin{bmatrix}
+				a+b & -a\\
+				a & b
+			\end{bmatrix}\begin{bmatrix}
+				0 & 1\\
+				1 & 0
+			\end{bmatrix} = \begin{bmatrix}
+				-a & a+b\\
+				b & a
+			\end{bmatrix} \qquad BX = \begin{bmatrix}
+				0 & 1\\
+				1 & 0
+			\end{bmatrix}\begin{bmatrix}
+				a+b & -a\\
+				a & b
+			\end{bmatrix} = \begin{bmatrix}
+				a & b\\
+				a+b & -a
+			\end{bmatrix}\]
+			From $XB = BX$, we see that $a=-a$, meaning $a=0$. So that means that $X$ must a scalar matrix, that is $X = \lambda I_{2\times2}$ for some $\lambda \in \R$ and $I_{2\times2}$ being the identity matrix. Now we need to check that $\lambda I$ is commutative for all elements in $G$.\\
+			Let $A \in G$.
+			\[A(\lambda I) = A \lambda I = \lambda A I = \lambda I A = (\lambda I) A\]
+			So $Z(G) = \{\lambda I : \lambda \in \R^*\}$.
+		\end{proof}
+	\end{enumerate}
+\end{document}

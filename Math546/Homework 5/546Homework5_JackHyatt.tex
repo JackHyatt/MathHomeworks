@@ -1,0 +1,94 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 5 (Due Oct 11, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 546 - Algebraic Structures I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	Note: All numbers are modular with the modulus being relevant to the problem, it is just not denoted because that would look ugly.\\
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item List all the elements of the group $\Z^*_{15}$. Decide whether it is a cyclic group or not. If it is cyclic, find a generator.\m
+		The elements will be the numbers less than 15 that are coprime to 15. $$\Z^*_{15} = \{1,2,4,7,8,11,13,14\}$$
+		If we find an element with order 8, that will be a generator.\\
+		$o(1) = 1$\\
+		$2\cdot2\cdot2\cdot2 = 4\cdot2\cdot2 = 8\cdot2 = 2$, $o(2) = 4$.\\
+		$4\cdot4 = 1$, $o(4) = 2$.\\
+		$7\cdot7\cdot7\cdot7 = 4\cdot7\cdot7 = 13\cdot7 = 1$, $o(7) = 4$.\\
+		$8\cdot8\cdot8\cdot8 = 4\cdot8\cdot8 = 2\cdot8 = 1$, $o(7) = 4$.\\
+		$11\cdot11 = 1$, $o(11) = 1$.\\
+		$13\cdot13\cdot13\cdot13 = 4\cdot13\cdot13 = 7\cdot13 = 1$, $o(13) = 4$.\\
+		$14\cdot14 = 1$, $o(14) = 1$.\\
+		So the group is not cyclic.
+		\item Let $G$ be a group with $|G| = 8$. Assume that $a, b$ are distinct elements of $G$ and $ab \neq ba$. Also assume that $H$ is a subgroup of $G$, and $a, b \in H$. Prove that $H = G$.
+		\begin{proof}
+			By Lagrange's theorem, we know that $|H|$ is either 1,2,4,8.\\
+			The order can't be 1 because $a,b$ are distinct.\\
+			The order can't be 2 because $a$ or $b$ aren't the identity due to their non-commutative nature, making $H$ not have an identity.\\
+			The order can't be 4 because every operation table for a group of order 4 is symmetric, meaning it is commutative. But $a$ and $b$ aren't commutative.\\
+			So the order must be 8, and since $H$ is a subgroup, that means $H$ contains all the elements in $G$.
+		\end{proof}
+		
+		\item Let $G$ be a group with $|G| = 6$. Assume that the elements of $G = \{e, a, b, a^2, ab, a^2b\}$, where $e$ is the identity and all 6 elements listed are assumed to be distinct. Further assume that $a^3 = e$, $b^2 = e$, and $ba = a^2b$.\\
+		Find all the subgroups of G. For each subgroup, describe it by listing each elements. Explain why all the subgroups you are listing are indeed subgroups. Also explain why there are no other subgroups.
+		
+		
+		Every subgroup must have order 1, 2, 3, or 6.\\
+		Obvious subgroups: $\{e\}, G$.\\
+		Cyclic Subgroups: $\langle a \rangle = \langle a^2 \rangle = \{a,a^2,e\}$, $\langle b \rangle = \{b,e\}$, $\langle ab \rangle = \{ab,e\}$, $\langle a^2b \rangle = \{a^2b,e\}$.\\
+		Since the order of an element must divide the order of the subgroup, $(a)$ and $(a^2)$ cannot be in subgroups of size 2. So we have fully covered the subgroups of size 2. For subgroups of size 3, the only elements that have an order that divide 3 are $(a,a^2,e)$, which is already covered in our cyclic groups. So we have found all the subgroups.\qed
+		
+		\item Let $G = \Z_2 \times \Z_2 \times \Z_2.$\\
+		\begin{enumerate}
+			\item What are the possible orders of the subgroups of $G$?\m
+			Since $G$ has order 8, subgroups can then have order 1,2,4,8.
+			\item Give 4 different examples of subgroups of $G$ of order 2.\m
+			To do this, we want both elements to have order 1 or 2.\\
+			$\{(0,0,0),(1,1,1)\},\{(0,0,0),(0,1,1)\},\{(0,0,0),(1,0,1)\},\{(0,0,0),(1,1,0)\}$
+			\item Give 4 different examples of subgroups of $G$ of order 4.\m
+			To do this, we want 3 elements with order 2 that is closed under addition.\\
+			$\{(0,0,0),(1,0,1),(0,1,0),(1,1,1)\}$\\
+			$\{(0,0,0),(1,0,0),(0,1,0),(1,1,0)\}$\\
+			$\{(0,0,0),(1,0,0),(0,0,1),(1,0,1)\}$\\
+			$\{(0,0,0),(0,0,1),(0,1,0),(0,1,1)\}$
+		\end{enumerate}
+	
+		\item Let $G = \Z_{240}$, $a = [9]_{240}$, $b = [25]_{240}$. Assume that $H$ is a subgroup of $G$ and $a,b \in H$. Prove that $H = G$.
+		\begin{proof}
+			$o(9) = \frac{240}{gcd(240,9)} = 80$. $o(25) = \frac{240}{gcd(240,25)} = 48$. Since the order of an element makes a cyclic subgroup of the same order, 80 divides $|H|$ and 48 divides $|H|$. The factors of 240 that are greater than or equal to 80 are 80, 120, and 240. 48 doesn't divide 80 or 120, but does divide 240. So since $o(a)\divides|H|$ and $o(b)\divides|H|$ and 240 is the only number to match that criteria, $|H| = 240$, meaning $H = G$.
+		\end{proof}
+		
+		\item \hphantom{}
+		\begin{enumerate}
+			\item For $G = \Z_{15}$, give an example of two subgroups $H$ and $K$ that are both not equal to $\{[0]_{15}\}$, but $H \cap K = \{[0]_{15}\}$.\m
+			If we take two cyclic subgroups of numbers that are coprime to each other, but not coprime to 15, then we get no elements in common.\\
+			$H = \langle 3 \rangle = \{0,3,6,9,12\}$\\
+			$K = \langle 5 \rangle = \{0,5,10\}$\\
+			Clearly $H \cap K = \{0\}$
+			\item For $G = \Z$, prove that if $H$ and $K$ are subgroups that are both not equal to $\{0\}$, then $H \cap K \neq \{0\}$.
+			\begin{proof}
+				Assume $H$ and $K$ are subgroups of $\Z$ both not equal to $\{0\}$. Then $H = d_1\cdot\Z$ and $K = d_2\cdot\Z$ for some nonzero integers $d_1,d_2$.\\
+				Then every multiple of $d_1$ is in $H$ and every multiple of $d_2$ is in $H$. So then $d_1 \cdot d_2$ is in $H$ and $K$.\\
+				So $d_1 \cdot d_2 \in H \cap K$. So $H \cap K \neq \{0\}$.
+				
+			\end{proof}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}
