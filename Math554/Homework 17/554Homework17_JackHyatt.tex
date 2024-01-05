@@ -1,0 +1,78 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 17 (Due Dec 6, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $f:A \rightarrow B$ be a bijection between sets. Prove there is a function $g:B \rightarrow A$ s.t. $\forall a \in A$ and $\forall b \in B$, $f(g(b))=b$ and $g(f(a))=a$, and $g$ is unique.
+		\begin{proof}
+			Since $f$ is surjective and injective, $\forall b \in B,\ \exists! a \in A$ s.t. $f(a) = b$. Then we can define $g:B \rightarrow A$ with $g(b) = a$ without any ambiguity.\\
+			So then $f(g(b)) = f(a) = b$ and $g(f(a)) = g(b) = a$.\\
+			Now to show $g$ is unique. Assume $g$ and $h$ are both inverses of $f$. Let $I_A:A \rightarrow A$ and $I_B:B \rightarrow B$ be the identity functions for their respective sets.\\
+			Then $f \circ g = I_B = f \circ h$ and $g \circ f = I_A = h \circ f$, meaning \[f \circ g = f \circ h \implies g \circ (f \circ g) = g \circ (f \circ h)\]
+			\[\implies (g \circ f) \circ g = (g \circ f) \circ h \implies I_A \circ g = I_A \circ h \]
+			\[\implies g = h\]
+			So the inverse is unique.
+		\end{proof}
+		
+		\item Prove that if $f:A \rightarrow B$ is a bijection, then the inverse $f^{-1}:B \rightarrow A$ is also a bijection and $(f^{-1})^{-1} = f$.
+		\begin{proof}
+			First to prove is $(f^{-1})^{-1} = f$.\\
+			Since $f$ is bijective, then $f^{-1}$ exists and is unique.\\
+			So $\forall a \in A,\ f^{-1}(f(a)) = a$ and $\forall b \in B,\ f(f^{-1}(b)) = b$.\\
+			So then $f$ satisfies the definition of inverse for $f^{-1}$. So $(f^{-1})^{-1} = f$.\\
+			To prove $f^{-1}$ is injective, let $x,y \in B$ and assume $f^{-1}(x) =f^{-1}(y)$.\\
+			\[f^{-1}(x) =f^{-1}(y) \implies f(f^{-1}(x)) = f(f^{-1}(y)) \implies x=y\]
+			To prove $f^{-1}$ is surjective, let $a \in A$. We can choose some $b \in B$ s.t. $f(a) = b$.\\
+			So $f^{-1}(b) = f^{-1}(f(a)) = a$. So every element in the codomain has a matching input.\\
+			So $f^{-1}$ is bijective.
+		\end{proof}
+		
+		\item Let $f:E \rightarrow E'$ be a continuous bijection between metric spaces with $E$ compact. Prove the inverse $f^{-1}:E' \rightarrow E$ is continuous.
+		\begin{proof}
+			Assume $f$ is a continuous bijection and $E$ is compact.\\
+			The continuous image of a compact set is compact, and since $f$ is surjective, that means $E'$ is compact as well.\\
+			Showing $f^{-1}$ is continuous is equivalent to showing the preimage of closed sets of $f^{_1}$ is closed.\\
+			Let $K \subseteq E$. The preimage of $K$ is $(f^{-1})^{-1}(K)$.\\
+			That is just $f(K)$, and we know that a continuous image of a closed set is closed. So then $f(K)$ is closed, meaning $f^{-1}$ is continuous.
+		\end{proof}
+		
+		\item Let $f:[a,b] \rightarrow [\alpha,\beta]$ be an increasing continuous function with $f(a)=\alpha$ and $f(b)=\beta$. Prove that $f$ is bijective and that the inverse, $f^{-1}$, is continuous.
+		\begin{proof}
+			Since $f$ is continuous, $f$ is surjective by Intermediate Value Theorem. Now to show $f$ is injective.\\
+			Let $x,y \in [a,b]$ and assume $x \neq y$. WLOG, assume $x<y$.\\
+			Since $f$ is an increasing function, $f(x)<f(y)$. So then $f(x) \neq f(y)$. So $f$ is injective.\\
+			So $f$ is bijective. Since $f$ is a bijective continuous function, problem 3 tells us that the inverse is continuous.
+		\end{proof}
+		
+		\item Let $K$ be a closed bounded subset of $\R^2$. Show that there exists $x_*,y_*,z_* \in K$ so that the triangle $\triangle x_*y_*z_*$ has maximum area of triangles with vertices in $K$. That is $A(x,y,z) \leq A(x_*,y_*,z_*)$ for all $x,y,z \in K$.
+		\begin{proof}
+			The set of possible triangles in $K$ is a subset of $K \times K \times K$, which is a compact subset of $\R^6$. So a triangle in $K$ can be represented as a point in $\R^6$.\\
+			The area function of triangles, $A(x,y,z)$, is a continuous function from $\R^6$ (really $\R^2\times\R^2\times\R^2$ but they are isomorphic) to $\R$.\\
+			Those facts together means that the image of $A[K \times K \times K]$ is compact, meaning it is closed and bounded.\\
+			Since it is closed and bounded, that means it contains a maximum element.\\
+			So there exists a triangle in $K$ such that it has a maximum area.
+		\end{proof}
+	\end{enumerate}
+\end{document}

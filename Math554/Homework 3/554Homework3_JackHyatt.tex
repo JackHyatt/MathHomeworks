@@ -1,0 +1,90 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 3 (Due Sept 11, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item[2.29] Let $\delta > 0$. Assume that $|y-c| < \delta$. Show that \[|(-5y+42)-(-5c+42)| < 5\delta\]
+		\begin{proof}
+			$|(-5y+42)-(-5c+42)| = |5y-5c| = 5|y-c| < 5\delta$
+		\end{proof}
+		\item[2.30] Show that if $|y-c| < \delta \leq 2$, then
+		\[|y^4-c^4| \leq 4(2+|c|)^3\delta\]
+		\begin{proof}
+			Note: $|y| = |y-c+c| \leq |y-c| + |c| < \delta + |c|$.\\
+			\[|y^4-c^4| = |(y-c)(y^3+y^2c+yc^2+c^3)| = |(y-c)||(y^3+y^2c+yc^2+c^3)|\]
+			\[\leq \delta |(\delta+c)^3 + (\delta+c)^2c + (\delta+c)c^2 + c^3| = \delta|\delta^3 + 4\delta^2c + 6\delta c^2 + 4c^3|\]
+			\[\leq \delta|2^3 + 4\cdot2^2c + 6\cdot2c^2 + 4c^3| = \delta|8 + 16c + 12c^2 + 4c^3|\]
+			\[\leq 4\delta(2 + 4|c| + 3|c|^2 + |c|^3)\leq 4\delta(8+12|c|+6|c|^2+|c|^3) = 4(2+|c|)^3\delta\]
+		\end{proof}
+		\item[2.31] Assume $|a-x| < \delta, |y-b|<\delta, and \delta \leq 1$. Show that
+		\[|xy-ab| < (1+|a|+|b|)\delta\]
+		\begin{proof}
+			Note: $|x| = |x-a+a| \leq |x-a| + |a| = |a-x| + |a| < \delta + |a|$\\
+			$|y| = |y-b+b| \leq |y-b| + |b| < \delta + |b|$\\
+			$|xy-ab| \leq |x||y| - |a||b| < |\delta + |a||\cdot|\delta + |b||-|a||b| \leq (|\delta| + |a|)(|\delta| + |b|)-|a||b|$\\
+			$= |\delta|^2 + |\delta||b| + |\delta||a| + |a||b| - |a||b| = (\delta + |b| + |a|)\delta \leq (1 + |b| + |a|)\delta$
+		\end{proof}
+		\item[2.32] Assume $|x-a| < \delta \leq |a|/2$. Show
+		\[\frac{|a|}{2} < |x| < \frac{3|a|}{2}\]
+		and
+		\[|\frac{1}{x^2} - \frac{1}{a^2}| < \frac{10\delta}{|a|^3}\]
+		\begin{proof}
+			Let $|x-a| < \delta \leq |a|/2$. First, let's show $\frac{|a|}{2} < |x|$.\\
+			\[|x| = |a+(x-a)| \geq |a|-|x-a| > |a|-|a|/2 = |a|/2\]
+			Now, let's show $|x| < 3|a|/2$.
+			\[|x| = |x-a+a| \leq |x-a|+|a| < |a|/2 + |a| = 3|a|/2\]
+			Now to show $|\frac{1}{x^2} - \frac{1}{a^2}| < \frac{10\delta}{|a|^3}$
+			\[|\frac{1}{x^2} - \frac{1}{a^2}| = |\frac{a^2-x^2}{x^2a^2}| = |\frac{1}{x^2a^2}|\cdot|a+x|\cdot|a-x| < \frac{\delta}{|x|^2|a|^2}\cdot|a+x|\]
+			\[\leq \frac{\delta}{(\frac{|a|}{2})^2|a|^2} \cdot (|a|+\frac{3|a|}{2}) = \frac{10\delta}{|a|^3}\]
+		\end{proof}
+		\item[2.33] Prove for $a,b\in\F$
+		\[\max(a,b) = \frac{a+b+|a-b|}{2}\]
+		\[\min(a,b) = \frac{a+b-|a-b|}{2}\]
+		\begin{proof}
+			($\max$)\\
+			\textbf{Case 1}: $a \geq b$.\\
+			\[\frac{a+b+|a-b|}{2} = \frac{a+b+(a-b)}{2} = \frac{2a}{2} = a = \max(a,b)\]
+			\textbf{Case 2}: $a < b$.\\
+			\[\frac{a+b+|a-b|}{2} = \frac{a+b+|b-a|}{2} = \frac{a+b+(b-a)}{2} = \frac{2b}{2} = b = \max(a,b)\]
+			($\min$)\\
+			\textbf{Case 1}: $a \leq b$.\\
+			\[\frac{a+b-|a-b|}{2} = \frac{a+b-|b-a|}{2} = \frac{a+b-(b-a)}{2} = \frac{2a}{2} = a = \min(a,b)\]
+			\textbf{Case 2}: $a > b$.\\
+			\[\frac{a+b-|a-b|}{2} = \frac{a+b-(a-b)}{2} = \frac{2b}{2} = b = \min(a,b)\]
+		\end{proof}
+		\item[2.34] Solve the following inequalities
+		\begin{enumerate}
+			\item[(a)] $5x-9 < 7x+21$\m
+			$5x-9 < 7x+21 \implies -15<x$
+			\item[(b)] $x^2-10x+9 < 16$\m
+			$x^2-10x+9 < 16 \implies x^2-10x+25 < 32 \implies (x-5)^2 < 32 \implies |x-5|^2 < 32$\\ 
+			$\implies -\sqrt{32} < x-5 < \sqrt{32} \implies 5-\sqrt{32} < x < 5 + \sqrt{32}$
+			\item[(c)] $\frac{x+2}{x-2} \leq 5$\m
+			Note: $x\neq2$\\
+			$\frac{x+2}{x-2} \leq 5 \implies \frac{x+2-5(x-2)}{x-2} \leq 0 \implies \frac{4(-x+3)}{x-2} \leq 0 \implies \frac{x-3}{x-2} \geq 0 \implies x<2 \text{ or } x\geq3$
+		\end{enumerate}
+	
+	\end{enumerate}
+\end{document}

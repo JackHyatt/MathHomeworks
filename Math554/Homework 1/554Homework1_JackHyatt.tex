@@ -1,0 +1,128 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 1 (Due March 22, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{itemize}
+		\item [1.1] Let $a,r,n \in \R$, $r \neq 1$, and $n \geq 2$. Prove that $$a+ar+ar^2+\ldots+ar^n = \frac{a-ar^{n+1}}{1-r}$$
+		\begin{proof}
+			Let $S = a+ar+ar^2+\ldots+ar^n$. Then $rS = ar+ar^2+\ldots+ar^{n+1}$. So $S-rS = a-ar^{n+1} \implies S = \frac{a-ar^{n+1}}{1-r}$. 
+		\end{proof}
+		
+		\item [1.2] What happens to geometric sum in 1.1 when $r = 1$?\m
+		If $r = 1$, then every term would become just $a$, and there are $n+1$ terms. So we will be left with $a(n+1)$.
+		
+		\item [1.3]
+			\begin{itemize}
+				\item [a)] Find the sum of $S = \frac{1}{2} + \frac{1}{4} + \ldots + \frac{1}{2^n}$.
+				\[S = \sum_{i=0}^{n-1}\frac{1}{2}\left(\frac{1}{2}\right)^i = \frac{\frac{1}{2}-\frac{1}{2}\cdot\left(\frac{1}{2}\right)^n}{1-\frac{1}{2}} = 1-\left(\frac{1}{2}\right)^n = \frac{2^n-1}{2^n}\]
+				
+				\item [b)] Find the sum of $S = P_0(1+r) + P_0(1+r)^2 + \ldots + P_0(1+r)^n$.
+				\[S = \sum_{i=0}^{n-1} P_0(1+r)\cdot(1+r)^i = \frac{P_0(1+r) - P_0(1+r)(1+r)^n}{1-(1+r)} = P_0\left(1+\frac{1}{r}\right)((1+r)^{n}-1)\]
+			\end{itemize}
+		
+		\item [1.4] Multiply out $(x-y)(x^{n-1} + x^{n-2}y +x^{n-3}y^2 + \ldots + xy^{n-2} + y^{n-1})$ to see that you get $x^n-y^n$.
+		\[(x-y)(x^{n-1} + x^{n-2}y +x^{n-3}y^2 + \ldots + xy^{n-2} + y^{n-1})\] \[= (x^{n} + x^{n-1}y +x^{n-2}y^2 + \ldots + x^2y^{n-2} + xy^{n-1}) - (x^{n-1}y + x^{n-2}y^2 +x^{n-3}y^3 + \ldots + xy^{n-1} + y^{n}) = x^n-y^n \]
+		
+		\item [1.5] Prove $x^n-y^n = (x-y)(\sum_{k=0}^{n-1}x^{n-1-k}y^k)$ with geometric sums.
+		\begin{proof}
+			\[(x-y)(\sum_{k=0}^{n-1}x^{n-1-k}y^k) = (x-y)(\sum_{k=0}^{n-1}x^{n-1}(\frac{y}{x})^k) = (x-y)\frac{x^{n-1}-x^{n-1}(\frac{y}{x})^{n}}{1-\frac{y}{x}}\]
+			\[= (x-y)\frac{x^{n-1}-\frac{y^n}{x}}{1-\frac{y}{x}}\cdot\frac{x}{x} = (x-y)\frac{x^n-y^n}{x-y} = x^n-y^n\]
+		\end{proof}
+		
+		\item [1.6] Let $c_0,c_1,c_2,c_3\in\R$, and $f(x)=c_3x^3+c_2x^2+c_1x+c_0$. Simplify $\frac{f(x)-f(a)}{x-a}$.
+		\[\frac{c_3x^3+c_2x^2+c_1x+c_0 - (c_3a^3+c_2a^2+c_1a+c_0)}{x-a} = \frac{c_3x^3+c_2x^2+c_1x - c_3a^3-c_2a^2-c_1a}{x-a}\]
+		\[ = c_3\frac{x^3-a^3}{x-a} + c_2\frac{x^2-a^2}{x-a} + c_1\frac{x-a}{x-a} = c_3\frac{(x-a)(x^2+xa+a^2)}{x-a} + c_2\frac{(x-a)(x+a)}{x-a} + c_1\] \[= c_3(x^2+xa+a^2) + c_2(x+a) + c_1\]
+		and so the limit as $x$ approaches $a$ is $c_3(3a^2)+c_2(2a)+c_1$.
+		
+		\item [1.7] Use summation notation to derive a formula for the sum
+		of the series $$\sum_{k=0}^{n-1}(a+kd)$$
+		\begin{proof}
+			Let $S = \sum_{k=0}^{n-1}(a+kd) = \sum_{k=0}^{n-1}(a+(n-1-k)d)$. Then $2S = \sum_{k=0}^{n-1}(a+kd) + \sum_{k=0}^{n-1}(a+(n-1-k)d) = \sum_{k=0}^{n-1} (2a+(n-1)d) = (2a+(n-1)d)n \implies S = \frac{(2a+(n-1)d)n}{2}$
+		\end{proof}
+	
+		\item [1.9] Show $\binom{n}{k} \coloneq \frac{n!}{k!(n-k)!} \implies \binom{n}{k} = \binom{n}{n-k}$.
+		\begin{proof}
+			Let $\binom{n}{k} \coloneq \frac{n!}{k!(n-k)!}$. Set $k=n-k$. We now have $\frac{n!}{k!(n-k)!} \implies \frac{n!}{(n-k)!(n-(n-k))!} \implies \frac{n!}{(n-k)!(k)! = \binom{n}{n-k}}$
+		\end{proof}
+		\item [1.10] Prove 
+			\begin{align*}
+				\binom{n}{0} &= 1\\
+				\binom{n}{1} &= n\\
+				\binom{n}{2} &= \frac{n(n-1)}{2}\\
+				\binom{n}{3} &= \frac{n(n-1)(n-2)}{6}\\
+			\end{align*}
+			\begin{proof}
+				\begin{align*}
+					\binom{n}{0} &= \frac{n!}{0!n!} = \frac{n!}{n!} = 1\\
+					\binom{n}{1} &= \frac{n!}{1!(n-1)!} = \frac{n!}{(n-1)!} = n\\
+					\binom{n}{2} &= \frac{n!}{2!(n-2)!} = \frac{\frac{n(n-1)\ldots(2)(1)}{(n-2)(n-3)\ldots(2)(1)}}{2} = \frac{n(n-1)}{2}\\
+					\binom{n}{3} &= \frac{n!}{3!(n-3)!} = \frac{\frac{n(n-1)\ldots(2)(1)}{(n-3)(n-4)\ldots(2)(1)}}{3!} = \frac{n(n-1)(n-2)}{6}
+				\end{align*}
+			\end{proof}
+		\item [1.11] Prove $$\binom{n}{k} = \frac{n(n-1)\ldots(n-k+1)}{k!} = \frac{n^{\underline{k}}}{k!}$$
+		\begin{proof}
+			$\binom{n}{k} = \frac{n!}{k!(n-k)!} = \frac{(n-k+1)!}{k!} = \frac{n^{\underline{k}}}{k!}$. Like I don't know what else you want from me, it's that straight forward.
+		\end{proof}
+	
+		\item [1.12] Prove that for $k,n\in \Z, 1\leq k \leq n$ $$\binom{n}{k-1} + \binom{n}{k} = \binom{n+1}{k}$$
+		\begin{proof}
+			\[\binom{n}{k-1} + \binom{n}{k} = \frac{n!}{(k-1)!(n-k+1)!} + \frac{n!}{k!(n-k)!} = \frac{n!k + n!(n-k+1)}{(k)!(n-k+1)!}\] 
+			\[= \frac{n!(k+n-k+1)}{k!(n-k+1)!} = \frac{(n+1)!}{k!(n+1-k)!} = \binom{n+1}{k}\]
+		\end{proof}
+		
+		\item [1.13] Let $k, n$ be nonnegative integers with $0 \leq k \leq n$. Prove $\binom{n}{k} \in \Z$.
+		
+		\begin{proof}
+			Let us induct on $n$.\\
+			\textbf{Base case: $n=1$}, $\binom{1}{0} = \binom{1}{1} = 0$.\\
+			\textbf{Induction Step:} Assume $\forall k,n\in\Z, 0\leq k \leq n, n\geq 1, \binom{n}{k}\in\Z$.\\
+			Consider $n+1$. $\binom{n+1}{k}\in\Z$ when $k=0$ or $k=n+1$ as those values will make the expression equal to $1$. Now assume $1\leq k \leq n$.\\
+			By Pascal's Identity, $\binom{n+1}{k} = \binom{n}{k-1} + \binom{n}{k}$. By the induction hypothesis, we know both $\binom{n}{k-1}$ and $\binom{n}{k}$ are integers, which means $\binom{n+1}{k}$ is also an integer.
+			So $\binom{n+1}{k}\in\Z$ for all values $0\leq k \leq n+1$.
+		\end{proof}
+		
+		\item [1.17]  Use induction and the Pascal Identity to prove the Binomial Theorem, $(x+y)^n = \sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k}$.
+		\begin{proof}
+			Let us induct on $n$.\\
+			\textbf{Base case: $n=1$}, $(x+y)^1 = \binom{1}{0}x + \binom{1}{1}y = \sum_{k=0}^{1}\binom{1}{k}x^ky^{n-k}$.\\
+			\textbf{Induction Step:} Assume $n\geq1, (x+y)^n = \sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k}$.\\
+			Consider $n+1$.
+			\[(x+y)^{n+1} = (x+y)(x+y)^n = (x+y)\sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k} = x\left(\sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k}\right) + y\left(\sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k}\right)\]
+			\[= \left(\sum_{k=0}^{n}\binom{n}{k}x^{k+1}y^{n-k}\right) + \left(\sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k+1}\right) = \left(\sum_{k=1}^{n+1}\binom{n}{k-1}x^{k}y^{n-k+1}\right) + \left(\sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k+1}\right)\]
+			\[= \left(\sum_{k=1}^{n+1}\binom{n}{k-1}x^{k}y^{n-k+1}\right) + \binom{n}{-1}x^{0}y^{n+1} + \left(\sum_{k=0}^{n}\binom{n}{k}x^ky^{n-k+1}\right) + \binom{n}{n+1}x^{n+1}y^{0}\]
+			\[= \sum_{k=0}^{n+1}\binom{n}{k-1}x^ky^{n+1-k} + \sum_{k=0}^{n+1}\binom{n}{k}x^ky^{n+1-k}
+			= \sum_{k=0}^{n+1}\binom{n+1}{k}x^ky^{n+1-k}\]
+		\end{proof}
+		
+		\item [\bfseries{1.}] Show that $x^3 = x^{\underline{3}} +3x^{\underline{2}} + x^{\underline{1}}$ and use it to find a formula for $\sum_{k=1}^{n} k^3$.\m
+		\[x^{\underline{3}} +3x^{\underline{2}} + x^{\underline{1}} = (x)(x-1)(x-2) + 3(x)(x-1) + x = (x^3-3x^2+2x) + (3x^2-3x) + x  = x^3\]
+		This makes computing $\sum_{k=1}^{n} k^3$ easy with $\frac{1}{p+1}x^{\underline{p+1}}$ being the anti difference of $x^{\underline{p}}$, along with the fundamental theorem of summations.
+		\[\sum_{k=1}^{n} k^3 = \sum_{k=1}^{n} (k^{\underline{3}} +3k^{\underline{2}} + k^{\underline{1}}) = \frac{(n+1)^{\underline{4}}}{4} + (n+1)^{\underline{3}} + \frac{(n+1)^{\underline{2}}}{2} - \frac{(1)^{\underline{4}}}{4} - (1)^{\underline{3}} - \frac{(1)^{\underline{2}}}{2}\]
+		\[= \frac{(n+1)(n)(n-1)(n-2)}{4} + (n+1)(n)(n-1) + \frac{(n+1)(n)}{2}\]
+		\[= (n+1)(n)\left(\frac{(n-1)(n-2)}{4} + (n-1) + \frac{1}{2}\right) = (n+1)(n)\left(\frac{n^2-3n+2 + (4n-4) + 2}{4} \right)\]
+		\[= \left(\frac{n(n+1)}{2}\right)^2\]
+		
+	\end{itemize}
+\end{document}

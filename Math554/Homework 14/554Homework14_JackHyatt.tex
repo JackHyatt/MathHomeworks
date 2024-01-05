@@ -1,0 +1,136 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 14 (Due Nov 17, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Give an $\epsilon,\delta$ proof that $f(x)=x^3 - x$ is continuous at all points $a$.
+		\begin{proof}
+			Let $a \in \R$ and $\epsilon>0$. Choose $\delta = \min\{1,\epsilon/(3|a|^2+3|a|+2)\}$.\\
+			Assume $|x-a| < \delta$.
+			Note: $|x| = |a+x-a| \leq |a| + |x-a| < |a| + \delta \leq |a|+1$
+			\[|f(x) - f(a)| = |x^3-x -a^3 +a| = |(x-a)(x^2+xa+a^2)-(x-a)|\]
+			\[= |x-a||x^2+xa+a^2-1| \leq |x-a|(|x|^2 + |x||a|+|a|^2+|1|)\]
+			\[\leq |x-a| (3|a|^2+3|a|+2) < \delta(3|a|^2+3|a|+2) = \epsilon\]
+			So $|x-a| < \delta \implies |f(x)-f(a)| < \epsilon$.
+		\end{proof}
+		
+		\item Give an $\epsilon,\delta$ proof that $f(x)=\sqrt{|x|}$ is continuous at $x=0$.
+		\begin{proof}
+			Let $\epsilon>0$. Choose $\delta = \epsilon^2$.\\
+			Assume $|x-0| < \delta$.\\
+			\[|f(x)-f(0)| = |\sqrt{|x|}| = \sqrt{|x|} < \sqrt{\delta} = \epsilon\]
+			So $|x-0| < \delta \implies |f(x)-f(0)| < \epsilon$.
+		\end{proof}
+		
+		\item Give an $\epsilon,\delta$ proof that $f(x)=\frac{x}{1+x}$ is continuous at all points $a\neq-1$.
+		\begin{proof}
+			Let $a \in \R$ and $\epsilon>0$. Choose $\delta = \min\{|1+a|/2,\epsilon(1+a)^2/2\}$.\\
+			Assume $|x-a| < \delta$.\\
+			Note: $|1+x| = |1+a+x-a| \geq |1+a| - |x-a| > |1+a| - \delta = |1+a|/2$\\
+			So $1/|1+x| < 2/|1+a|$.
+			\[|f(x)-f(a)| = \left|\frac{x}{1+x}-\frac{a}{1+a}\right| = \left|\frac{x-a}{(1+x)(1+a)}\right| = |x-a|\left|\frac{1}{(1+x)}\right|\left|\frac{1}{(1+a)}\right|\]
+			\[\leq |x-a|\frac{2}{|1+a|}\cdot\frac{1}{|1+a|} = |x-a|\frac{2}{(1+a)^2} < \delta \frac{2}{(1+a)^2} \leq \epsilon\]
+			So $|x-a| < \delta \implies |f(x)-f(a)| < \epsilon$.
+		\end{proof}
+		
+		\item Let $g:\R \rightarrow \R$ given be 
+		\begin{equation}
+			g(x)=
+			\begin{cases}
+				1, & \text{if x is rational};\\
+				0, & \text{if x is irrational}
+			\end{cases}
+		\end{equation}
+		Show that $g$ is not continuous at any point.
+		\begin{proof}
+			Let $a$ be rational. Then $g(a) = 1$.\\
+			Since there is an irrational number between any two real numbers, for each $n\in\N$, there exists an irrational number $x_n$ s.t. $a<x_n<a+1/n$.\\
+			So $\lim_{n\rightarrow\infty} x_n = a$. Since each $x_n$ is irrational, $g(x_n)=0$, which means, $\lim_{n\rightarrow\infty} g(x_n) = \lim_{n\rightarrow\infty} 0 = 0 \neq 1 = g(a)$.\\
+			So $g$ cannot be continuous at rational points by problem 7.\\
+			Let $a$ be irrational. Then $g(a) = 0$.\\
+			Since there is a rational number between any two real numbers, for each $n\in\N$, there exists an rational number $x_n$ s.t. $a<x_n<a+1/n$.\\
+			So $\lim_{n\rightarrow\infty} x_n = a$. Since each $x_n$ is rational, $g(x_n)=1$, which means, $\lim_{n\rightarrow\infty} g(x_n) = \lim_{n\rightarrow\infty} 1 = 1 \neq 0 = g(a)$.\\
+			So $g$ cannot be continuous at irrational points by problem 7.\\
+			So $g$ cannot be continuous at any real point.
+		\end{proof}
+		
+		\item Define the functions $f,g:\R^2 \rightarrow \R$ by $f(x,y) = x$ and $g(x,y) = y$. Show that $f$ and $g$ are continuous.
+		\begin{proof}
+			Since $f$ and $g$ are so gosh darn symmetric, showing $f$ is enough as showing $g$ would be a waste of everyone's time.\\
+			We have shown in class that $f(\vec{x}) = \vec{a}\cdot(\vec{x}) + b$ is continuous on all points in $\R^n$.\\
+			Let $\vec{a}=(1,0)$ and $b = 0$. Then we can write $f(x,y) = (x,y) \cdot \vec{a} + b$.\\
+			So then our function $f$ is also continuous.
+		\end{proof}
+		
+		\item
+		\begin{enumerate}
+			\item Show that the function
+			\begin{equation}
+				f(x)=
+				\begin{cases}
+					0, & x \leq 0\\
+					x\cos(1/x), & x > 0
+				\end{cases}
+			\end{equation}
+			is continuous at 0.
+			\begin{proof}
+				Let $\epsilon > 0$. Choose $\delta = \epsilon$.\\
+				Assume $|x - 0| < \delta$.\\
+				\textbf{Case 1:} $x \leq 0$.\\
+				\[|f(x)-f(0)| = |0 - 0| = 0 < \epsilon\]
+				\textbf{Case 2:} $x > 0$.\\
+				\[|f(x)-f(0)| = |x\cos(1/x)| = |x||\cos(1/x)| \leq |x| < \delta = \epsilon\]
+				So $|x-0| < \delta \implies |f(x)-f(0)| < \epsilon$.
+			\end{proof}
+			
+			\item Show that the function
+			\begin{equation}
+				g(x)=
+				\begin{cases}
+					0, & x \leq 0\\
+					\cos(1/x), & x > 0
+				\end{cases}
+			\end{equation}
+			is not continuous at $x=0$.
+			\begin{proof}
+				For $n\in\N$, let $x_n = 1/2\pi n$.\\
+				So $\lim_{n\rightarrow\infty} x_n = 0$.\\
+				$g(x_n) = \cos(2\pi n) = 1$.\\
+				So $\lim_{n\rightarrow\infty} g(x_n) = \lim_{n\rightarrow\infty} 1 \neq 0 = g(0)$.\\
+				So then $g$ cannot be continuous by problem 7.
+			\end{proof}
+		\end{enumerate}
+		
+		\item Let $(E,d)$ and $(E',d')$ be metric spaces and assume that $f$ is continuous at the point $p_0 \in E$. Let $\langle p_n \rangle_{n=1}^\infty$ be a sequence in $E$ with $\lim_{n\rightarrow\infty} p_n = p_0$. Prove that
+		\[\lim_{n\rightarrow\infty} f(p_n) = f(p_0)\]
+		\begin{proof}
+			Let $\epsilon > 0$. Since $f$ is continuous at $p_0$, $\exists \delta>0$ s.t.
+			\[d(p,p_0) < \delta \implies d'(f(p),f(p_0)) < \epsilon.\]
+			Since $\lim_{n\rightarrow\infty} p_n = p_0$, $\exists N$ s.t. 
+			\[n \geq N \implies d(p_n, p_0) < \delta\]
+			So then $n \geq N$ also implies $d(f(p_n),f(p_0)) < \epsilon$, which means $\lim_{n\rightarrow\infty} f(p_n) = f(p_0)$.
+		\end{proof}
+	\end{enumerate}
+\end{document}

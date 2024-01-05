@@ -1,0 +1,124 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 4 (Due Sept 18, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item[2.36] Prove that in the real numbers, every nonempty set that is bounded below has a greatest lower bound.
+		\begin{proof}
+			Let $S$ be a nonempty subset of $\R$ that is bounded below. Let $b$ be a lower bound. Let $-S$ be \[-S \coloneq \{-s : s \in S\}\]
+			So then $\forall s \in \S, b \leq s$. Then $-b \geq -s$. So $-b$ is an upper bound for $-S$, which means $c=\sup(-S)$ exists by least upper bound property. So $c \geq s \forall s \in S$.\\
+			$c \geq s \implies -c \leq -s$, and every $-s$ comprises up $S$. If $-c$ was not the infimum of $S$, then $-(-c)$ would be a better supremum of $-S$, which is a contradiction.
+		\end{proof}
+		\item[2.37] Prove for any real number $x$, there is a natural $n$ with $x<n$.
+		\begin{proof}
+			BWOC, assume $\exists x \in \R$ s.t. $\forall n \in \N$, $n \leq x$. Then $\N$ is bounded above, so $b=\sup(\N)$ exists.\\
+			So $n \leq b$. Since $n \in \N \implies n+1 \in \N$. So $\forall n \in \N, n+1 \leq b \implies n \leq b-1$.\\
+			So $b-1$ is an upper bound for $\N$. But $b-1 < b = \sup(\N)$. \contra
+		\end{proof}
+		\item[2.38] Let $a>1$ be a real number. Prove that for any real number $x$, there is a natural number $n$ such that $a^n>x$.
+		\begin{proof}
+			Let $N = \{a^n : n \in \N\}$. BWOC, assume $\exists x \in \R$ s.t. $\forall n \in \N$, $a^n \leq x$. Then $N$ is bounded above, so $b=\sup(N)$ exists.\\
+			So $a^n \leq b$. Since $a^n \in N \implies a^{n+1} \in N$. So $\forall a^n \in N, a^{n+1} \leq b \implies {a^n} \leq b/a$.\\
+			So $b/a$ is an upper bound for $N$. But $b/a < b = \sup(N)$. \contra
+		\end{proof}
+		\item[2.39] Prove $a>0 \implies \exists n\in\N s.t. 1/n < a$ with the method specified in the notes.
+		\begin{proof}
+			Let $S =\{1/n : n \in \N\}$. This is bounded below by 0. Showing $\inf(S) = 0$ proves Archimedes axiom.\\
+			BWOC, assume $c \coloneq \inf(S) > 0$. Then $\forall n \in \N$ we have $c \leq 1/n$. But if $n \in \N$, then so is $2n$ and therefore $c \leq 1/(2n)$ which implies $2c \leq 1/n$. So $2c$ is also a lower bound for $S$ and $c<2c$. So $c$ is not the infimum. \contra
+		\end{proof}
+		\item[2.40] Let $a$ be a real number with $0<a<1$. Prove for any positive real number $x$, there is a natural number $n$ such that $a^n<x$.
+		\begin{proof}
+			Let $N = \{a^n : n \in \N\}$. BWOC, assume $\exists x \in \R$ s.t. $\forall n \in \N$, $a^n > x$. Then $N$ is bounded below, so $b=\inf(N)$ exists.\\
+			So $a^n > b$. Since $a^n \in N \implies a^{n+1} \in N$. So $\forall a^n \in N, a^{n+1} > b \implies {a^n} > b/a$.\\
+			So $b/a$ is a lower bound for $N$. But $b/a > b = \inf(N)$. \contra
+		\end{proof}
+		\item[2.41] For any real number $x$, there is a unique integer $n$ such that \[n \leq x < n+1\]
+		\begin{proof}
+			Want $m_0 \in \Z$ s.t. $m_0 < x$ 
+			\textbf{Case 1}: $x>0$.\\
+			Let $m_0 = 0$.
+			\textbf{Case 2}: $x\leq0$.\\
+			So $-x \leq 0$, and by Archimedes Big Axiom, $\exists m_1\in\N s.t. -x<m_1$. So let $m_0 = -m_1$.
+			Now let \[S \coloneq \{k\in\Z : m_0 \leq k \leq x\}\]
+			Clearly $m_0 \in S$. By Archimedes Big Axiom again, $\exists m_1\in\N s.t. -x<m_1$. So $S \subseteq \{m_0,m_0+1,\ldots,m_1-1,m_1\}$. This set is finite, with $m_1-m_0+1$ elements. So $n = \max(S) \in S$ exists.\\
+			Since $n \in S$, then $n \leq x$. Since $n = \max(S), n+1 \nin (S)$, which means $x < n+1$. So $n \leq x < n+1$.\\
+			Now showing uniqueness.\\
+			Let $m,n$ be integers that both satisfy the desired inequality. Then $m,n \in (x-1,x]$. Since $x_1,x_2 \in (a,b) \implies |x_2-x_1| < |b-a|$, we have $|m-n| < 1$. But since $m,n \in \Z$, $m$ must equal $n$.
+			
+		\end{proof}
+		\item[2.42] Between any two real numbers, there is a rational number.
+		\begin{proof}
+			Let $a,b \in \R$ and WLOG assume $a<b$. So $(b-a)>0$. So by Archimedes axiom, $\exists N \in \N, \frac{1}{N} < (b-a) \implies Na+ 1 < Nb$.\\
+			Let $n = \lfloor Na \rfloor$. Then \[n \leq Na < n+1 \leq Na+1 <Nb\]
+			So \[Na < n+1 < Nb \implies a < \frac{n+1}{N} < b \]
+			And $(n+1)/N$ is a rational number.
+		\end{proof}
+		\item[2.43] Prove between any two rational numbers, there is a irrational number.
+		\begin{proof}
+			Let $a,b$ be distinct rational numbers. WLOG, let $a<b$. Consider the irrational number $a + (b-a)/\sqrt{2}$.\\
+			Since $b>a$, then 
+			\[(b-a)/\sqrt{2} > 0 \implies a + (b-a)/\sqrt{2} > a\]
+			\[b = a + (b-a) > a + (b-a)/\sqrt{2} \implies a + (b-a)/\sqrt{2} < b\]
+			So $a < a + (b-a)/\sqrt{2} < b$.
+		\end{proof}
+		\item[2.44] Let $y_0,y_1 \in \R$ and assume that there is a number $M > 0$ such that $\forall \epsilon > 0, |y_1-y_0| \leq M\epsilon$. Prove $y_0=y_1$.
+		\begin{proof}
+			BWOC, assume $y_0 \neq y_1$. Let $\epsilon = |y_1 - y_0|/2M$. Then \[|y_1 - y_0| \leq M\epsilon \implies |y_1 - y_0| \leq M\frac{|y_1 - y_0|}{2M} \implies |y_1 - y_0| \leq \frac{|y_1 - y_0|}{2}\]
+			which only is true iff $|y_1 - y_0| = 0$, but we assumed $y_0 \neq y_1$. \contra
+		\end{proof}
+		\item[2.45] Prove if $f:[a,b] \rightarrow \R$ is \emph{Lipschitz}, with \emph{Lipschitz constant} $M$, then for any $x,x_0 \in [a,b]$, the inequalities 
+		\[-M[x-x_0] \leq f(x)-f(x_0) \leq M|x-x_0|\] and
+		\[f(x_0)-M[x-x_0] \leq f(x) \leq f(x_0) + M|x-x_0|\] hold.
+		\begin{proof}
+			Assume $f:[a,b] \rightarrow \R$ is \emph{Lipschitz}, with \emph{Lipschitz constant} $M$. Then 
+			\[\forall x_1,x_2 \in [a,b] \qquad |f(x_2)-f(x_1)| \leq M|x_2-x_1|\]
+			Since $|x| \leq a$ iff $-a \leq x \leq a$,
+			\[|f(x_2)-f(x_1) \leq M|x_2-x_1| \implies -M|x_2-x_1| \leq f(x_2)-f(x_1) \leq M|x_2-x_1|\]
+			Adding $f(x_1)$ to every side, we get 
+			\[f(x_1) - M|x_2-x_1| \leq f(x_2) \leq f(x_1) + M|x_2-x_1|\]
+		\end{proof}
+		\item[Problem 1] Let $A$ and $B$ be nonempty subsets of $\R$ that are each bounded above.\\
+		Let \[S = A+B = \{a+b : a \in A \text{ and } b \in B\}\]
+		\begin{enumerate}
+			\item show that $S$ is bounded above.
+			\item Prove \[\sup(S) = \sup(A) + \sup(B)\]
+			\begin{proof}
+				Since $A$ and $B$ are both bounded above, they both have a supremum $s_a,s_b$ respectively. So $\forall a \in A, a \leq s_a$ and $\forall b \in B, b \leq s_b$. Then $a+b \leq s_a+s_b$. So then $S$ is bounded above.\m
+				Let $\epsilon > 0$. Let $a \in A$ s.t. $a>s_a-\epsilon/2$ and $b \in B$ s.t. $b>s_b-\epsilon/2$. We know that $a$ and $b$ exist since $A$ and $B$ are nonempty, and $s_a,s_b$ are the best supremums for $A$ and $B$.\\
+				So then $a+b > s_a + s_b - \epsilon$, which makes anything smaller than $s_a + s_b$ not an upper bound for $S$.
+			\end{proof}
+		\end{enumerate}
+		\item[Problem 2] Let $S \subseteq \R$ be a subset that satisfies the two conditions
+		\begin{enumerate}
+			\item $S$ is bounded above.
+			\item If $s_1,s_2 \in S$ with $s_1 \neq s_2$, then \[|s_1 -s_2| \geq 1\]
+			Show $\sup(S) \in S$ and therefore $S$ has a maximum.
+			\begin{proof}
+				Since $S$ is bounded above, $s = \sup(S)$ exists. BWOC, let $s \nin S$. Then for $0 < \epsilon < 1, s - \epsilon \in S$ as that would be a better $\sup(S)$ otherwise. However, there can only be one $\epsilon$ that satisfies that, since a second $\epsilon$ would mean the (b) condition is violated. So $s-\epsilon \geq s_1, \forall s_1 \in S$, but then $s-\epsilon$ is a better supremum than $s$. \contra\\
+				So $s \in S$, which is a maximum element.
+			\end{proof}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

@@ -1,0 +1,110 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 8 (Due Oct 13, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item[3.35] Prove a set is closed iff it contains all its adherent points.
+		\begin{proof}
+			Let $S$ be a set in the metric space $E$.\\
+			($\implies$)\\
+			Assume $S$ is closed and $p$ is an adherent point of $S$. BWOC, assume that $p \nin S$. Then $p \in S^c$. Since $S$ is closed, $S^c$ is open. So then there is a ball for $r>0$, that $B(p,r)\subseteq S^c$. So we have an open ball about $p$ that doesn't contain any points in $S$, which makes $p$ not an adherent point. \contra\\
+			($\impliedby$)\\
+			Showing the contrapositive. Assume $S$ is not closed. Then $S^c$ is not open. So then $\exists p\in S^c$ s.t. $\forall r>0$, $B(p,r) \nsubseteq S^c$. So then $\exists s \in B(p,r)$ s.t. $s \in S$. This makes $p \nin S$ an adherent point of $S$. 
+		\end{proof}
+		
+		\item[3.36] Let $S$ be a set in a metric space and $p$ and adherent point of $S$. Prove there is a sequence of points $\langle p_n \rangle^\infty_{n=1}$ from $S$ that converges to $p$.
+		\begin{proof}
+			Let $p$ be an adherent point of $S$. Then $\forall r>0$, $B(p,r)$ contains a point of $S$. For every positive integer $n$ let $p_n \in S$ be a point of $S$ that is in the ball $B(p,1/n)$.\\
+			Let $\epsilon>0$, $N>1/\epsilon$. Assume $n>N$.\\
+			Then since $p_n$ is in the open ball of radius $1/n$ centered at $p$,\\ $d(p_n,p) < 1/n < 1/N =\epsilon$.\\
+			So $d(p_n,p) < \epsilon$, meaning $p_n$ converges to $p$. 
+		\end{proof}
+		
+		\item[3.37] Let $S$ be a set in a metric space and $p$ a point that is a limit of a sequence of points from $S$. Prove $p$ is an adherent point of $S$.
+		\begin{proof}
+			Let $S$ be a set in the metric space $E$ and let $\langle p_n \rangle^\infty_{n=1}$ be a sequence of points from $S$ that converges to $p \in E$. Let $r>0$. Since $p_n$ converges to $p$, $\exists N$ s.t. $n>N \implies d(p_n,p) < r$.\\
+			So $p_n \in B(p,r)$. Since $p_n \in S$, $B(p,r)$ contains a point in $S$. So $p$ is an adherent point.
+		\end{proof}
+		
+		\item[3.38] Let $S$ be a subset of the metric space $E$. Prove the following are equivalent:
+		\begin{enumerate}
+			\item $S$ is closed.
+			\item $S$ contains the limits of its sequences in the sense that if $\langle p_n \rangle^\infty_{n=1}$ is a sequence if points from $S$ that converges, say $x = \lim\limits_{n\rightarrow\infty}$, then $x \in S$.
+		\end{enumerate}
+		\begin{proof}
+			($a \implies b$)\\
+			Assume $S$ is closed and that $\langle p_n \rangle^\infty_{n=1}$ is a sequence of points from $S$ that converge to the point $p$. Then from problem 3.37, we know that $p$ is an adherent point of $S$. Since $S$ is closed, we know from 3.35 that all its adherent points are in $S$. So $p \in S$.\\
+			($b \implies a$)\\
+			Assume that $S$ contains the limits of its sequences. Let $p$ be an adherent point of $S$. So then by 3.36, there is a sequence of points $\langle p_n \rangle^\infty_{n=1}$ in $S$ that converge to $p$. So then by the assumption, $p \in S$. So $S$ contains all its adherent points. From 3.35, $S$ is then closed. 
+		\end{proof}
+	
+		\item[3.39] Let $F$ be a closed subset of $\R$ and $f$ a polynomial. Show that 
+		\[S \coloneq f^{-1}[F] = \{x : f(x) \in F\}\]
+		is a closed subset of $\R$.
+		\begin{proof}
+			Let $\langle p_n \rangle^\infty_{n=1}$ be a sequence of points from $S$ that converge to $p$. So then $f(p_n) \in F$. We also have $\lim_{n\rightarrow\infty} f(p_n) = f(p)$. Since $F$ is a closed, it contains the limit of its sequences. So from 3.38, $f(p) \in F$. Then $p \in f^{-1}[F] = S$. So $S$ contains the limit of its sequences, meaning it's closed by 3.38.
+		\end{proof}
+		
+		\item[3.40] Prove every convergent sequence is a Cauchy sequence.
+		\begin{proof}
+			Let $\langle p_n \rangle^\infty_{n=1}$ be a sequence in a metric space that converges to $p$. Let $N$ be so that 
+			\[n > N \implies d(p_n,p) < \frac{\epsilon}{2}\]
+			Similarly, that applies if we replace $n$ with $m$.\\
+			So then we have $d(p_n,p) < \epsilon/2$ and $d(p_m,p) < \epsilon/2$. Adding together, we get $d(p_n,p) + d(p_m,p) < \epsilon$.\\
+			By triangle inequality, we get $d(p_n,p_m) \leq d(p_n,p) + d(p_m,p)$. So then $d(p_n,p_m) < \epsilon$.\\
+			By definition of Cauchy, our sequence is Cauchy.
+		\end{proof}
+		
+		\item[3.41] Let $E = (0,1)$ be the open unit interval with metric $d(x,y) = |x-y|$. Then show that the sequence $\langle 1/n \rangle^\infty_{n=1}$ is a Cauchy sequence that is not convergent to any point of $E$.
+		\begin{proof}
+			First let's show it's Cauchy. Let $N = 2/(\epsilon)$.\\
+			Let $m,n>N$. Then $0<p_n < \epsilon/2$ and $0<p_m<\epsilon/2$.\\
+			$|p_n - p_m| \leq |p_n|+|p_m| <\epsilon/2 + \epsilon/2 = \epsilon$.\\
+			So the sequence is Cauchy.\\
+			Now to show it is not convergent in $E$. BWOC, assume the sequence converges to a point in $E$, we'll call $p$.\\
+			Then for some $N$, $n>N \implies |1/n-p| < p/2$.\\
+			$p-1/n \leq |p-1/n| < p/2$,
+			so then $p-1/n < p/2 \implies -1/n < -p/2 \implies 1/n > p/2$.\\
+			Since $p$ cannot be 0 due to the metric space, this means there is a real number smaller than $1/n$ for all $n$. This violates Archimedes Small Axiom, \contra.
+		\end{proof}
+		
+		\item[3.42] Let $\langle p_n \rangle^\infty_{n=1}$ be a Cauchy sequence in the metric space $E$, such that some subsequence of $\langle p_{n_k} \rangle^\infty_{k=1}$ converges. Prove the original sequence $\langle p_n \rangle^\infty_{n=1}$ converges.
+		\begin{proof}
+			Assume $\langle p_n \rangle^\infty_{n=1}$ is Cauchy. Assume $\langle p_{n_k} \rangle^\infty_{k=1}$ converges to $p$. Also assume $\epsilon>0$\\
+			Then $\exists N_0$ s.t. $k>N_0 \implies d(p_{n_k},p) <\epsilon/2$, since $n_k \geq k$ by Lemma 3.46 in the notes.\\
+			We also have $\exists N > N_0$ s.t. $n,m>N \implies d(p_m,p_n)<\epsilon/2$.\\
+			Choose $n_k \geq m$. Then we also have $d(p_n,p) \leq d(p_n,p_{n_k}) + d(p_{n_k},p) < \epsilon/2 + \epsilon/2 = \epsilon$.\\
+			So $p_n$ converges to $p$.
+		\end{proof}
+		
+		\item[3.43] Let $\langle p_n \rangle^\infty_{n=1}$ be a convergent sequence in the metric space $E$. Let $\langle p_{n_k} \rangle^\infty_{k=1}$ be a subsequence of this sequence. Prove $\langle p_{n_k} \rangle^\infty_{k=1}$ is also convergent and has the same limit as the original sequence.
+		\begin{proof}
+			Let $\langle p_n \rangle^\infty_{n=1}$ be a sequence in the metric space, $E$, that converges to $p$, and $\langle p_{n_k} \rangle^\infty_{k=1}$ be a subsequence. Let $\epsilon >0$\\
+			Then $\exists N$ s.t. $n>N \implies d(p_n,p) < \epsilon$.\\
+			So assume that $k>N$. Since $p_{n_k}$ is in the original sequence and $n_k\geq k$, we have $d(p_{n_k},p) < \epsilon$.\\
+			So $\forall\epsilon>0$, $k>N \implies d(p_{n_k},p) < \epsilon$. This means $\langle p_{n_k} \rangle^\infty_{k=1}$ converges to $p$.
+		\end{proof}
+	\end{enumerate}
+\end{document}

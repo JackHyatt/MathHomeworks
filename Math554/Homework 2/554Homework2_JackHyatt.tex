@@ -1,0 +1,135 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 2 (Due Sept 8, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item[2.10] Prove if $a,b\in\F$, then exactly one of the following holds:\begin{align*}a<b,&&a=b,&&a>b 
+		\end{align*}
+		\begin{proof}
+			Assume $a,b\in\F$. Since $\F$ is an ordered field, $b-a\in\F$.
+			\\\textbf{Case 1}: $(b-a)\in\F_+$. Then by definition of $<$, $a<b$.
+			\\\textbf{Case 2}: $b-a=0$. Then by definition of $=$, $a=b$.
+			\\\textbf{Case 3}: $(b-a)\in\F_-$. Then by definition of $>$, $a>b$.
+		\end{proof}
+		\item[2.11] Prove if $a<b$ and $b<c$, then $a<c$.
+		\begin{proof}
+			Assume $a<b$ and $b<c$. Then $(b-a)\in\F_+$ and $(c-b)\in\F_+$.
+			$((c-b)+(b-a))\in\F_+$ since $\F$ is an ordered field. $((c-b)+(b-a)) = (c-b+b-a) = (c-a) \in \F_+ \implies a<c$.
+		\end{proof} 
+		\item[2.12] Prove if $a<b$ and $c<d$, then $a+c<b+d$.
+		\begin{proof}
+			Assume $a<b$ and $c<d$. Then $(b-a)\in\F_+$ and $(d-c)\in\F_+$.
+			$((d-c)+(b-a))\in\F_+$ since $\F$ is an ordered field. $((d-c)+(b-a)) = (d-c+b-a) = (d+b)-(c+a) \in \F_+ \implies a+c<b+d$.
+		\end{proof} 
+		\item[2.13] Prove if $a<b$ and $c>0$, then $ac<bc$.
+		\begin{proof}
+			Assume $a<b$ and $c>0$. Then $(b-a)\in\F_+$ and $c\in\F_+$.
+			$(c(b-a))\in\F_+$ since $\F$ is an ordered field. $(c(b-a)) = (cb-ca) \in \F_+ \implies ac<bc$.
+		\end{proof}
+		\item[2.14] Prove if $a<b$ and $c<0$, then $ac>bc$.
+		\begin{proof}
+			Assume $a<b$ and $c<0$. Then $(b-a)\in\F_+$ and $-c\in\F_+$.
+			$(-c(b-a))\in\F_+$ since $\F$ is an ordered field. $(-c(b-a)) = (-cb+ca) = (ac-bc) \in \F_+ \implies ac>bc$.
+		\end{proof}
+		\item[2.15] Prove if $a<b$ and $c<d$, then $a+c>b+d$.
+		\begin{proof}
+			See 2.12
+		\end{proof}
+		\item[2.16] Prove if $0<a<b$ and $0<c\leq d$, then $ac<bd$.
+		\begin{proof}
+			Assume $0<a<b$ and $0<c\leq d$. Then $a,b,c,d\in\F_+$ and $(b-a),(d-c)\in\F_+$.
+			\\\textbf{Case 1}: $c=d$. See 2.13
+			\\\textbf{Case 2}: $c<d$.
+			 Since $\F$ is an ordered field and $b,c,(d-c),(b-a)\in\F_+$, $(b(d-c)+c(b-a)))\in\F_+$. $(b(d-c)+c(b-a))) = (bd-bc+bc-ac) = (bd-ac) \in \F_+ \implies ac<bd$.
+		\end{proof}
+		\item[2.17] Prove if $a_1,a_2,\ldots,a_n>0$, then $\prod_{i=1}^{n}a_i > 0$ and $\sum_{i=1}^{n}a_i > 0$.
+		\begin{proof}
+			Let us induct on $n$.
+			\\\textbf{Base Case}: $n=1$\qquad Obvious\\
+			$n=2$\qquad $a_1,a_2\in\F_+ \implies (a_1+a_2),(a_1a_2)\in\F_+$ since $\F$ is an ordered field.
+			\\\textbf{Induction Step}: Assume $a_1,a_2,\ldots,a_n>0 \implies \prod_{i=1}^{n}a_i > 0$ and $\sum_{i=1}^{n}a_i > 0$.\\
+			Consider $n+1$. Assume $\forall i\in [n+1], a_i>0$. Consider $\prod_{i=1}^{n+1}a_i$ and $\sum_{i=1}^{n+1}a_i$. Since $\F$ is an ordered field, $\prod_{i=1}^{n+1}a_i = (\prod_{i=1}^{n}a_i) \cdot a_{n+1}$ and $(\sum_{i=1}^{n}a_i) + a_{n+1}$. By the Induction Hypothesis, $\prod_{i=1}^{n}a_i \in \F_+$ and $\sum_{i=1}^{n}a_i \in \F_+$. Since $a_{n+1}\in\F_+$ and $\F$ is an ordered field, $((\prod_{i=1}^{n}a_i) \cdot a_{n+1})\in\F_+$ and $((\sum_{i=1}^{n}a_i) + a_{n+1})\in\F_+$.
+		\end{proof}
+		\item[2.18] Prove if $a \neq 0 \implies a^2 > 0$.
+		\begin{proof}
+			\textbf{Case 1}: $a>0$. Since $\F$ is an ordered field, $a\in\F_+ \implies a\cdot a\in\F_+ \implies a^2>0$.
+			\textbf{Case 2}: $a<0$. Since $\F$ is an ordered field, $a\in\F_- \implies -a\in\F_+ \implies \\ (-a)(-a)\in\F_+ \implies (-a)^2\in\F_+ \implies a^2>0$.
+		\end{proof}
+		\item[2.19] Prove if $a_1,\ldots,a_n \in \F$, then \[\sum_{i=1}^{n}a_i^2 \geq 0\]
+		with equality iff $\forall i \in [n], a_i=0$.
+		\begin{proof}
+			Let us induct on $n$.
+			\\\textbf{Base Case}: $n=1$\qquad Obvious\\
+			$n=2$\qquad Let $a_1,a_2\in\F$.\\
+			\textbf{Case 1}: Let $a_1 = a_2 = 0$. Since $x\cdot0 = 0\quad\forall x\in\F$, $0^2 = 0$. So $a_1^2 + a_2^2 = 0^2 + 0^2 = 0+0=0$.
+			\\\textbf{Case 2}: WLOG, let $a_1 \neq 0$ and $a_2=0$. By the same logic in case 1, just remove the zero term, and we are left with $a_1^2$, which is greater than 0 by 2.18.
+			\\\textbf{Case 3}: Let both of $a_1,a_2$ be nonzero. By 2.18, $a_1^2>0$ and $a_2^2>0$. So $a_1^2,a_2^2\in\F_+ \implies a_1^2+a_2^2 \in \F_+$.
+			\\\textbf{Induction Step}: Assume if $a_1,\ldots,a_n \in \F$, then \[\sum_{i=1}^{n}a_i^2 \geq 0\]
+			with equality iff $\forall i \in [n], a_i=0$.\\
+			Let $a_{n+1} \in \F$. Consider $\sum_{i=1}^{n+1}a_i^2$.
+			\[\sum_{i=1}^{n+1}a_i^2 = (\sum_{i=1}^{n}a_i^2) + a_{n+1}^2\]
+			We know $\sum_{i=1}^{n}a_i^2 \in\F_+$ by the Induction Hypothesis, and $a_{n+1}^2\in\F_+$ by 2.18. So by closure, $\sum_{i=1}^{n+1}a_i^2 \in\F_+$.
+		\end{proof}
+		\item[2.20] Prove if $a>0$ then $1/a > 0$, and if $a<0$ then $1/a<0$.
+		\begin{proof}
+			BWOC, assume $a>0$ and $1/a \leq 0$. $1 = a(1/a) =$ (positive)(nonpositve) $=$ (nonpositive). \contra\\
+			BWOC, assume $a<0$ and $1/a \geq 0$. $1 = a(1/a) =$ (negative)(nonnegatvie) $=$ (nonpositive). \contra
+		\end{proof}
+		\item[2.21] Prove if $0 < a < b$, then $1/b < 1/a$.
+		\begin{proof}
+			Assume $0<a<b$. Then $a,b,(b-a)\in\F_+$. By 2.18,\enspace$ab\in\F_+$. By 2.20,\enspace$\frac{1}{ab}\in\F_+$. By 2.18, \enspace$\frac{b-a}{ba} \in\F_+$. So $\frac{b-a}{ba} = \frac{1}{a} - \frac{1}{b} \in\F_+ \implies 1/b < 1/a$
+		\end{proof}
+		\item[2.22] Prove for $a\in\F$, $|a|\geq 0$ with equality iff $a=0$.
+		\begin{proof}
+			\textbf{Case 1}: $a>0$. Then $|a| = a > 0 $ by definition of absolute value.\\
+			\textbf{Case 2}: $a<0$. Then $|a| = -a > 0 $ by definition of absolute value.\\
+			\textbf{Case 3}: $a=0$. Then $|a| = 0$ by definition of absolute value.
+		\end{proof}
+		\item[2.23] Prove for $a\in\F$, $a\leq|a|$.
+		\begin{proof}
+			\textbf{Case 1}: $a>0$. Then $|a| = a \leq a $ by definition of absolute value.\\
+			\textbf{Case 2}: $a<0$. Then $|a| = -a > a $ by definition of absolute value.\\
+			\textbf{Case 3}: $a=0$. Then $|a| = 0 \leq a$ by definition of absolute value.
+		\end{proof}
+		\item[2.24] Prove for $a\in\F$, $a^2 = |a|^2$.
+		\begin{proof}
+			\textbf{Case 1}: $a>0$. Then $|a| = a \implies |a|\cdot|a| = a\cdot|a| = a^2 $ by definition of absolute value.\\
+			\textbf{Case 2}: $a<0$. Then $|a| = -a \implies |a|\cdot|a| = -a\cdot|a| = a^2 $ by definition of absolute value.\\
+			\textbf{Case 3}: $a=0$. Then $|a| = 0 \implies |a|^2 = 0 = a^2$ by definition of absolute value.
+		\end{proof}
+		\item[2.25] Prove for $a,b\in\F$, the following are equivalent:
+		\[|a|=|b|,\qquad a = \pm b,\qquad a^2=b^2\]
+		\begin{proof}
+			$(|a|=|b| \implies a=\pm b)$\\
+			\textbf{Case 1}: $a \geq 0$. Then $|a| = a = |b| = \pm b$.\\
+			\textbf{Case 2}: $a < 0$. Then $|a| = -a = |b| = \pm b \implies a = -(\pm b) \implies a = \pm b$.\\
+			$(a\pm b \implies a^2 = b^2)$\\
+			\textbf{Case 1}: $a = b$. Then $a\cdot a = b\cdot a = b\cdot b$.\\
+			\textbf{Case 2}: $a = -b$. Then $a\cdot a = -b\cdot a = (-b)\cdot (-b) = b^2$.\\
+			$(a^2 = b^2 \implies |a| = |b|)$\\
+			$a^2 = b^2 \implies |a|^2 = |b|^2$ by 2.24, $\implies |a|=|b|$.
+		\end{proof}
+	\end{enumerate}
+\end{document}

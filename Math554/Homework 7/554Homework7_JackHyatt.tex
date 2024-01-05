@@ -1,0 +1,170 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 7 (Due Oct 9, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $(E,d)$ be a metric space and $A \subseteq E$. Let $\overline{A}$ be the set of all points $p \in E$ so that for all $r > 0$ we have $B(p,r) \cap A \neq \emptyset$. Show that $\overline{A}$ is closed.
+		\begin{proof}
+			Showing that $(\overline{A})^c$ is open is equivalent to showing that $\overline{A}$ is closed.\\
+			Let $p \in (\overline{A})^c$. Then $\exists r>0$ s.t. $B(p,r) \cap A = \emptyset$. So there are no elements in the ball that are in $A$, meaning $B(p,r) \subseteq A^c$.\\
+			Let $q \in B(p,r)$. So $d(p,q)<r$. Consider the ball $B(q,r-d(p,q))$.\\
+			Let $x \in B(q,r-d(p,q))$. So $d(x,q) < r-d(p,q)$.\\
+			$d(x,q) < r-d(p,q) \implies r > d(x,q) + d(p,q) \geq d(x,p)$.\\
+			So $d(x,p)<r$, which puts $x$ in the first ball $B(p,r)$.\\
+			So $B(q,r-d(p,q)) \subseteq B(p,r)$.\\
+			So then $\forall q \in B(p,r)$, $B(q,r-d(p,q)) \cap A = \emptyset$.\\
+			So $B(p,r) \subseteq (\overline{A})^c$. So  $(\overline{A})^c$ is open.
+		\end{proof}
+		
+		\item Let $(E,d)$ be a metric space. Let $S \subseteq E$ with the property that if $s_1,s_2 \in S$ with $s_1 \neq s2$, then $d(s_1,s_2) \geq 1$. Prove $S$ is closed.
+		\begin{proof}
+			Let $a,b \in B(p,1/2)$ for some $p \in E$. Then $d(a,p)<1/2$ and similar for $b$. So then $d(a,p) + d(b,p)<1 \implies d(a,b) < 1$ by triangle inequality. So then two or more points from $S$ cannot be in an open ball of radius 1/2.\\
+			Let $p \in S^c$. Want to find an $r$ so that $B(p,r) \cap S = \emptyset$, which makes $B(p,r) \subseteq S^c$, making $S$ is closed. Consider the ball $B(p,1/2)$.\\
+			\textbf{Case 1}: $B(p,1/2) \cap S = \emptyset$. This makes $S$ closed.\\
+			\textbf{Case 2}: $B(p,1/2) \cap S \neq \emptyset$. So then there can only be one element in $S$ that is also in the ball, we'll call $s$. Now consider the ball $B(p,d(p,s))$. $p$ cannot be $s$ since $p\nin S$, and $s$ won't be in the ball since it's an open ball. So then $B(p,d(p,s)) \cap S = \emptyset$. We found our radius $r$.
+		\end{proof}
+		
+		\item In the plane $\R^2$, prove the half plane $H = \{(x,y) : y > 0\}$ is open.
+		\begin{proof}
+			Let $p \in H$. Define $p = (x_1,y_1)$. Want to find $r>0$ so that $B(p,r) \subseteq H$. Let $r = y_1$.\\
+			Let $q \in B(p,r)$ and define $q = (x_2,y_2)$.\\
+			Then $$d(q,p) = \sqrt{(x_1-x_2)^2 + (y_1-y_2)^2} < y_1 \implies (x_1-x_2)^2 + (y_1-y_2)^2 < y_1^2$$
+			If $y_2$ was negative, $(y_1-y_2)^2 > y_1^2$. But that can't be since $(x_1-x_2)^2$ is non-negative and $(x_1-x_2)^2 + (y_1-y_2)^2 < y_1^2$. So $y_2$ can't be negative.\\
+			If $y_2$ was 0, $(x_1-x_2)^2 + (y_1-y_2)^2 < y_1^2 \implies (x_1-x_2)^2 + y_1^2 < y_1^2$. But that can't be since $(x_1-x_2)^2$ is non-negative. So $y_2$ can't be 0.\\
+			So $y_2>0$, putting $q \in H$. This means $B(p,r) \subseteq H$, making $H$ open.
+		\end{proof}
+		
+		\item Let $(E,d)$ be a metric space and $p,q \in E$ with $p \neq q$. Prove that $U \coloneq \{x \in E : d(p,x) < d(q,x)\}$ is open.
+		\begin{proof}
+			Let $x \in U$. Let $r = \frac{d(q,x)-d(p,x)}{2}$. Consider $y \in B(x,r)$.\\
+			$$d(y,p) \leq d(y,x) + d(x,p) < \frac{d(q,x)-d(p,x)}{2} + d(x,p) = \frac{d(q,x)+d(p,x)}{2} $$
+			$$= d(q,x) - \frac{d(q,x)-d(p,x)}{2} < d(q,x) - d(x,y) \leq d(q,y)$$
+			Then $d(p,y) < d(q,y)$. Then $y \in U$. So $B(x,r) \subseteq U$, which means $U$ is open.
+		\end{proof}
+		
+		\item In $\R$ for the following sets say if they are open, closed, or neither. Prove your answer is correct.
+		\begin{enumerate}
+			\item The set $\Q$, of rational numbers.
+			\begin{proof}
+				Since it is known that there is an irrational number between any two rational number, any ball around a rational number will not be a subset of the rationals. This means the rationals are not open.\\
+				Similar can be said about two irrationals and a rational. So the irrationals are not open, meaning the rationals are not closed.\\ 
+				So the set is neither.
+			\end{proof}
+			\item The set $\{1/n : n = 1,2,3 \ldots\}$.
+			\begin{proof}
+				This set not open since 1 and there is always an irrational between 1 and any other element in the set.\\
+				The complement has 0 in it. This makes it not open since by Archimedes Small Axiom, there will always be a $1/n$ that is smaller than $r$ for any ball with a radius. This means the original set is not closed.\\
+				So the set is neither.
+			\end{proof}
+			\item The set $\{0\} \cup \{1/n : n = 1,2,3 \ldots\}$.
+			\begin{proof}
+				For the same reasoning as the previous two, this set is not open.\\
+				Looking at the complement, we can put a ball between any two $1/n$ and $1/(n+1)$ by making the radius the distance between the origin of the ball and the closer of the two numbers. What we need to be wary of is 0, like in the previous problem. Since there is no ``smallest" element in the original set, there is no need to worry about the the ball being purely between 0 and only one other element. The point originating any ball can only ever be between $1/n$ and $1/(n+1)$. So the complement is open, making the original set closed.
+			\end{proof}
+		\end{enumerate}
+		
+		\item Let $(E,d)$ be a metric space. Then a subset, $S \subseteq E$ is bounded iff there is a ball $B(a,r)$ with $S \subseteq B(a,r)$. Let $<p_n>_{n=1}^\infty$ be a convergent sequence. That is there is $p \in E$ so that $\lim_{n\rightarrow\infty} p_n = p$. Prove the set $\{p_n : n =1,2,3\ldots\}$ is bounded.
+		\begin{proof}
+			Assume $<p_n>$ is a convergent sequence in $E$. Then $\lim_{n\rightarrow\infty} p_n = p$ for some $p \in E$. So the definition of a limit applies.\\
+			Let $\epsilon = 1$ and take some $x \in E$. Then $\exists N$ s.t. $n > N \implies d(p_n,p) < 1$. So if $n > N$, we get
+			\[d(p_n,x) \leq d(p,x) + d(p,p_n) < d(p,x) + 1\]
+			So $d(p,x) + 1$ bounds all $p_n$ for when $n>N$.\\
+			Let $M = \max\{d(p,x) + 1,d(p_1,x),d(p_2,x),\ldots,d(p_N,x)\}$.\\ Then $\forall n\in\N$, $p_n \in \overline{B}(x,M)$, bounding the sequence.
+		\end{proof}
+		
+		\item[3.18] Let $\lim_{n\rightarrow\infty} p_n = p$ in the metric space $E$. Let $a_n = p_{2n}$. Prove that $\lim_{n\rightarrow\infty} a_n = p$.
+		\begin{proof}
+			Assume $\lim_{n\rightarrow\infty} p_n = p$. Then $\forall \epsilon>0$ there is a $N>0$ s.t. $n>N \implies d(p_n,p)<\epsilon$.\\
+			Then since $d(p_n,p)< \epsilon$ when $n > N$, $d(p_{2n},p) < \epsilon$ since $2n \geq n$. So then replacing $p_{2n}$ with $a_n$ gives us $d(a_n,p) < \epsilon$ for any $n > N$, meaning $\lim_{n\rightarrow\infty} a_n = p$.
+		\end{proof}
+		
+		\item[3.19] Let $<x_n>_{n=1}^\infty$ and $<y_n>_{n=1}^\infty$ be sequences in $\R$ with 
+		\[\lim_{n\rightarrow\infty} x_n = x \qquad \text{and} \qquad \lim_{n\rightarrow\infty} y_n = y\]
+		Prove for any real numbers $a$ and $b$
+		\[\lim_{n\rightarrow\infty} (ax_n + by_n) = ax + by\]
+		\begin{proof}
+			Let $\epsilon>0$. Since the above sequences converge, $\exists N_1,N_2$ s.t. $\forall n > N$, where $N = \max\{N_1,N_2\}$,
+			\[|x_n-x| < \frac{\epsilon}{2|a|+1},\qquad |y_n-y| < \frac{\epsilon}{2|b|+1}\]
+			So since $n>N$,
+			\[|(ax_n + by_n) - (ax + by)| = |ax_n - ax + by_n - by|\leq|ax_n - ax| + |by_n - by|\]
+			\[= |a||x_n - x| + |b||y_n-y| < |a|\left(\frac{\epsilon}{2|a|+1}\right) + |b|\left(\frac{\epsilon}{2|b|+1}\right) < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon\]
+			So $|(ax_n + by_n) - (ax + by)|<\epsilon$, proving the limit.
+		\end{proof}
+		
+		\item[3.20] Let $<x_n>$ be a convergent sequence in $\R$. Prove $<x_n>$ is bounded.
+		\begin{proof}
+			Assume $<x_n>$ is a convergent sequence in $\R$. Then $\lim_{n\rightarrow\infty} x_n = x$ for some $x\in\R$. So the definition of a limit applies.\\
+			Let $\epsilon = 1$. Then $\exists N$ s.t. $n > N \implies |x - x_n| < 1$. So if $n > N$, we get
+			\[|x_n| = |x + (x_n - x)| \leq |x| + |x-x_n| < |x| + 1\]
+			So $|x|+1$ bounds all $x_n$ for when $n>N$.\\
+			Let $M = \max\{|x|+1,|x_1|,|x_2|,\ldots,|x_N|\}$. This then bounds for all $n$, meaning the sequence is bounded.
+		\end{proof}
+		
+		\item[3.21] In $\R$, let 
+		\[\lim_{n\rightarrow\infty} x_n = x \qquad \text{and} \qquad \lim_{n\rightarrow\infty} y_n = y\]
+		Prove $\lim_{n\rightarrow\infty} x_ny_n = xy$.
+		\begin{proof}
+			Assume those two limits are true. Then for some $n>N, |x_n-x|<\frac{\epsilon}{2|M|+1}$ and $|y_n-y|<\frac{\epsilon}{2|x|+1}$, where $M$ is a bound for $<y_n>$.
+			\[|x_ny_n - xy| = |x_ny_n - xy_n + xy_n-xy| = |(x_n-x)y_n + x(y_n-y)|\]
+			\[\leq |y_n|\cdot|x_n-x| + |x|\cdot|y_n-y| \leq |M|\cdot|x_n-x| + |x|\cdot|y_n-y|\] 
+			\[< \frac{|M|\epsilon}{2|M|+1} + \frac{|x|\epsilon}{2|x|+1} < \epsilon\]
+			So $|x_ny_n - xy| <\epsilon$.
+			So the desired limit is proven.
+		\end{proof}
+		
+		\item[3.23] Let $f : \R \rightarrow \R$ be the quadratic polynomial $f(x) = ax^2 +bx +c$ where $a,b,c$ are constants. Let $<p_n>$ be a convergent sequence, $\lim_{n\rightarrow\infty} p_n = p$. Prove 
+		\[\lim_{n\rightarrow\infty}f(p_n) = f(p)\]
+		\begin{proof}
+			$\lim_{n\rightarrow\infty} f(p_n) = \lim_{n\rightarrow\infty} a(p_n)^2 + b(p_n) + c = a(p)^2 + b(p) + c$. We know this from proposition 3.24 and 3.28 in the notes (which occur before this problem so it is fine to use them). So then $a(p)^2 + b(p) + c= f(p)$.
+		\end{proof}
+		
+		\item[3.24] Let $a \in \R$ with $a \neq 0$. Let $|x - a| < \frac{|a|}{2}$. Prove
+		\[\frac{|a|}{2} < |x| < \frac{3|a|}{2},\qquad \frac{1}{|x|} < \frac{2}{|a|},\qquad |\frac{1}{x}-\frac{1}{a}\leq \frac{2|x-a|}{|a|^2}\]
+		\begin{proof}
+			Assume $|x-a| < |a|/2$.\\
+			$|x| = |(x - a) + a | \leq |x-a| + |a| < |a|/2 + |a| = 3|a|/2$\\
+			$|x| = |(x-a) + a| = |a - (x - a)| \geq ||a| - |x-a|| > ||a|-|a|/2| = ||a|/2| = |a|/2$\\
+			So $\frac{|a|}{2} < |x| < \frac{3|a|}{2}$.\\
+			Since $\frac{|a|}{2} < |x|$, then $\frac{2}{|a|} > \frac{1}{|x|}$.\\
+			$|\frac{1}{x} - \frac{1}{a}| = |\frac{a-x}{ax}| = \frac{|x-a|}{|a|}\cdot\frac{1}{|x|} < \frac{2|x-a|}{|a|^2}$.
+		\end{proof}
+		
+		\item[3.25] Let $\lim_{n\rightarrow\infty} x_n = x$ and $x \neq 0$. Prove $\lim_{n\rightarrow\infty} 1/x_n = 1/x$.
+		\begin{proof}
+			Assume $\lim_{n\rightarrow\infty} x_n = x$ and $x \neq 0$. So then $\exists N_1$ s.t. $n>N_1 \implies |x_n - a| < |a|/2$.\\
+			Let $\epsilon >0$. Also, $\exists N_2$ s.t. $n>N_1 \implies |x_n - a| < \epsilon|a|^2/a$.\\
+			Let $N = \max(N_1,N_2)$. So the two inequalities still hold. By the last problem,\\
+			\[|x_n-a|<\frac{|a|}{2} \implies |\frac{1}{x_n}-\frac{1}{a}|\leq\frac{2|x-a|}{|a|^2} < \frac{2|\frac{\epsilon|a|^2}{2}|}{|a|^2} = \epsilon\]
+			So $|\frac{1}{x_n} - \frac{1}{a}| < \epsilon$, which proves the limit.
+		\end{proof}
+		
+		\item[3.26] Let $E$ be a metric space and $f : E \rightarrow \R$ be a Lipschitz map. Let $\lim_{n\rightarrow\infty} p_n = p$ where $p \in E$. Then $\lim_{n\rightarrow\infty} f(p_n) = f(p)$.
+		\begin{proof}
+			Assume $\epsilon>0$ and $\lim_{n\rightarrow\infty} p_n = p$. Then $\exists N$, s.t. $n>N \implies d(p_n,p) < \epsilon/(M+1)$. Assume $f$ has Lipschitz constant $M$.
+			\[|f(p_n) - f(p)| \leq Md(p_n,p) < M\epsilon/(M+1) < \epsilon\]
+			So $|f(p_n) - f(p)| < \epsilon$, proving the limit.
+		\end{proof}
+	\end{enumerate}
+\end{document}

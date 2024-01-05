@@ -1,0 +1,92 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 5 (Due Sept 22, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $f:[a,b] \rightarrow \R$ be a function such that 
+		\[f(a) \leq 0 \text{ and } f(b) \geq 0\]
+		and such that there is a $M > 0$ such that $\forall x_1,x_2 \in [a,b]$ the inequality
+		\[|f(x_2) - f(x_1)| \leq M|x_2 - x_2|\]
+		holds. Prove that $\exists \xi [a,b]$ with \[f(\xi) = 0\]
+		\begin{proof}
+			Let $S = \{x \in [a,b]: f(x) \leq 0\}$. Then we know $a \in S$ and $S$ is bounded above by $b$, so $\xi = \sup(S)$ exists.\\
+			Let $\epsilon > 0$. Assume $f(a) < 0$ and $f(b) > 0$ since if either one was $0$, then we are done.\\
+			Then $\exists x_1 \in S$ s.t. $\xi - \epsilon < x_1 \leq \xi$ since $\xi$ wouldn't be a supremum of $S$ otherwise. Also, $f(x_1) \leq 0$ since $x_1 \in S$.\\
+			\[f(\xi) = f(x_1) + (f(\xi) - f(x_1)) \leq 0 + |f(\xi) -f(x_1)|\]
+			\[\leq M|\xi - x_1| \leq M|\xi - (\xi-\epsilon)| = M |\epsilon| = M \epsilon\]
+			Note: $\exists x_2 \in [\xi , \xi + \epsilon]$ with $f(x_2) > 0$ since $x_2 > \xi \implies x_2 \nin S \implies f(x_2) >0$ and an $x_2 > \xi$ exists since $\epsilon>0$.\\
+			We have $f(x_2)>0$ and $|\xi - x_2| \leq \epsilon$, then
+			\[f(\xi) = f(x_2) + (f(\xi) - f(x_2)) \geq 0 + |f(\xi) - f(x_2)|) \geq -M|\xi - x_2| \geq -M\epsilon\]
+			So then $-M\epsilon \leq f(\xi) \leq M\epsilon \implies |f(\xi)| = |f(\xi) - 0 | \leq M\epsilon \forall\epsilon>0$.\\
+			So then $f(\xi) = 0$.
+			
+		\end{proof}
+		\item Prove on a bounded interval $[a,b]$ the function $f(x) = x^n$ is Lipschitz for any positive integer $n$.
+		\begin{proof}
+			Let $x \in [a,b]$, then $|x| \leq \max(|a|,|b|)$. Let $C = \max(|a|,|b|)$.
+			\[|f(x_2)-f(x_1)| = |x^n_2 - x^n_1| = |x_2-x_1|(x^{n-1}_2+x^{n-2}_2x_1+\ldots+x_2x^{n-2}_1 + x^{n-1}_1)\]
+			\[\leq |x_2-x_1|(|x_2|^{n-1}+|x_2|^{n-2}|x_1|+\ldots+|x_2||x_1|^{n-2} + |x_1|^{n-1}) \leq |x_2-x_1|(nC^{n-1})\]
+			\[= M|x_2-x_1|\]
+			where $M \coloneq nC^{n-1}$. Thus $f$ is Lipschitz on $[a,b]$.
+		\end{proof}
+		
+		\item Show that $f(x) = x^2$ is not Lipschitz on the interval $[0,\infty)$.
+		\begin{proof}
+			BWOC, assume $\exists M$ s.t.
+			\[|f(x_2) - f(x_1)| = |x_2^2 - x_1^2| \leq M|x_2-x_1| \implies\]
+			\[|x_2-x_1||x_2+x_1| \leq M|x_2-x_1|\]
+			Then $\forall x_1,x_2\in[0,\infty), x_1 \neq x_2$,
+			\[|x_2+x_1| \leq M\]
+			Let $x_2 = M, x_1 = M+1$. Then $|x_2 + x_1|\leq M \implies 2M+1 \leq M$ \contra.
+		\end{proof}
+		
+		\item Prove if $n$ is a positive integer, then $x^n-c$ has a positive solution for all $c>0$.
+		\begin{proof}
+			Let $p(x) = x^n-c$. Then $p(0) = -c<0$. Consider $p(c+1) = (c+1)^n-c = (c^n +nc^{n-1}+\ldots+nc+1) - c >0$ since $nc$ gets rid of the $-c$ since $n\geq1$.
+		\end{proof}
+		
+		\item Let $p(x) = x^3 + ax^2 + bx +c$. Prove that $p(x)$ has at least one real root.
+		\begin{proof}
+			\[p(x) = x^3(1+\frac{a}{x}+\frac{b}{x^2}+\frac{c}{x^3})\]
+			If $|x|\leq1$, then
+			\[\frac{1}{|x|^3} \geq \frac{1}{|x|^2} \geq \frac{1}{|x|}\]
+			If $|x| \geq 1$
+			\[|\frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3}| \leq \frac{|a|}{|x|} + \frac{|b|}{|x|^2} + \frac{|c|}{|x|^3} \leq \frac{|a|+|b|+|c|}{|x|}\]
+			Let $S = |a|+|b|+|c|$.\\
+			Looking at $|x| \geq \max(1,2S)$, when $\max(1,2S) = 1$ then $1\geq2S \implies S \leq 1/2$.
+			\[|\frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3}| \leq \frac{S}{|x|} \implies |\frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3}| \leq \frac{1}{2}\]
+			When $\max(1,2S) = 2S$
+			\[|\frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3}| \leq \frac{S}{|x|} \implies |\frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3}| \leq \frac{S}{2S} = \frac{1}{2}\]
+			So
+			\[|\frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3}| \leq  \frac{1}{2} \implies -\frac{1}{2} \leq \frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3} \leq  \frac{1}{2}\]
+			\[\implies \frac{1}{2} \leq 1 + \frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3} \leq  \frac{3}{2} \implies 1 + \frac{a}{x} + \frac{b}{x^2} + \frac{c}{x^3} > 0\]
+			Finally, consider $\beta=2S$ and $f(\beta)$.\\
+			Then $f(\beta) = (2S)^3(\text{positive number}) > 0$\\
+			Consider $\alpha = -2S$ and$f(\beta)$.\\
+			Then $f(\beta) = (-2S)^3(\text{positive number}) = -(2S)^3(\text{positive number})< 0$\\
+			By Intermediate value theorem, $\exists \xi$ s.t. $f(\xi) = 0$.
+		\end{proof}
+	\end{enumerate}
+\end{document}

@@ -1,0 +1,145 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 9 (Due Oct 18, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Prove if $(E,d)$ is a metric space and $F$ is a closed subset of $E$, then $(F,d)$ is also a complete metric space.
+		\begin{proof}
+			Let $\langle x_n \rangle^\infty_{n=1}$ be a Cauchy sequence in $F$, and consequently in $E$. Since $E$ is complete, we know $p_n$ converges to some $p \in E$. We also know that a subset is closed iff the subset contains the limits of its sequences. So then $p \in F$. This shows $F$ is complete.
+		\end{proof}
+		
+		\item Let $\langle p_n \rangle^\infty_{n=1}$ be a Cauchy sequence in $\R^3$ with its usual metric. Let $p_n = (x_n,y_n,z_n)$.
+		\begin{enumerate}
+			\item Show that each of the sequence $\langle x_n \rangle^\infty_{n=1}$, $\langle y_n \rangle^\infty_{n=1}$, $\langle z_n \rangle^\infty_{n=1}$ are also Cauchy sequences and explain why this implies the limits $x \coloneq \lim_{n\rightarrow\infty} x_n$, $y \coloneq \lim_{n\rightarrow\infty} y_n$, $z \coloneq \lim_{n\rightarrow\infty} z_n$ exist.
+			\begin{proof}
+				\[|x_m-x_n| = \sqrt{(x_m-x_n)^2} \leq \sqrt{(x_m-x_n)^2 + (y_m-y_n)^2 + (z_m-z_n)^2}\]\[ = d(p_m,p_n)\]
+				Similar calculations can be done for $y$ and $z$.\\
+				Since $\langle p_n \rangle^\infty_{n=1}$ is Cauchy, $\exists N>0$ s.t. $m,n>N \implies d(p_m,p_n)<\epsilon$. The above inequalities give us $m,n>N \implies |x_m-x_n| < \epsilon$ and similar ones for $y$ and $z$.\\
+				This means the $x$,$y$, and $z$ sequences are Cauchy. Since the individual sequences are in $\R$, which is complete, they will converge as they are Cauchy.\\
+			\end{proof}
+			
+			\item Let $p = (x,y,z)$ and show $\lim_{n\rightarrow\infty} p_n = p$.
+			\begin{proof}
+				Since the sequences in the part above converge, $\exists N_1>0$, $N_2>0$, and $N_3>0$ s.t.
+				\[n>N_1 \implies |x_n-x| < \frac{\epsilon}{\sqrt{3}}\]
+				\[n>N_2 \implies |y_n-y| < \frac{\epsilon}{\sqrt{3}}\]
+				\[n>N_3 \implies |z_n-z| < \frac{\epsilon}{\sqrt{3}}\]
+			Then if $N = \max\{N_1,N_2,N_3\}$ and $p=(x,y,z)$,
+			\[n>N \implies ||p_n-p|| = \sqrt{(x_n-x)^2+(y_n-y)^2+(z_n-z)^2}\]
+			\[< \sqrt{\left(\frac{\epsilon}{\sqrt{3}}\right)^2 + \left(\frac{\epsilon}{\sqrt{3}}\right)^2 + \left(\frac{\epsilon}{\sqrt{3}}\right)^2} = \epsilon\]
+			\end{proof}
+			
+			\item Conclude that $\R^3$ is a complete metric space.
+			\begin{proof}
+				The above parts show that an arbitrary Cauchy sequence $\langle p_n \rangle^\infty_{n=1}$ converges, which means that $\R^3$ is complete.
+			\end{proof}
+		\end{enumerate}
+	
+		\item Let $\langle p_n \rangle^\infty_{n=1}$ be a Cauchy sequence in the metric space $E$. Prove that the sequence is bounded. That is show there is a ball $B(p,r)$ with $p_n \in B(p,r)$ for all $n$.
+		\begin{proof}
+			\emph{For this problem, I'm too lazy to put a bar above the ball, but just know all the balls will be closed balls}
+			Since $p_n$ is a Cauchy sequence, $\exists N$ s.t.
+			\[m,n>N \implies d(p_m,p_n) < \epsilon\]
+			So for any $n>m>N$, $p_n \in B(p_m,\epsilon)$.\\
+			Let $r = \max\{d(p_m,p_1),d(p_m,p_2),\ldots,d(p_m,p_N),\epsilon\}$.\\
+			So then $p_n \in B(p_m,r)$ for all $n$.
+		\end{proof}
+		
+		\item Let $f: E \rightarrow E$ be a contraction and let $\lim_{n\rightarrow\infty} p_n = p$ in $E$. Show $\lim_{n\rightarrow\infty} f(p_n) = f(p)$.
+		\begin{proof}
+			Want to show $\forall\epsilon>0$, $\exists N$ s.t. $n>N \implies d(f(p_n),f(p))<\epsilon$.\\
+			Let $\epsilon > 0$. Since the limit exists in $E$, there is an $N_1$ s.t. $n>N_1 \implies d(p_n,p) < \epsilon$. Let $n>N_1$.\\
+			Since $f$ is a contraction, $d(f(p_n),f(p)) \leq \rho d(p_n,p) \leq \rho\epsilon < \epsilon$.\\
+			So $d(f(p_n),f(p)) < \epsilon$, which proves the limit.
+		\end{proof}
+		
+		\item Prove the Banach Fixed Point Theorem following the outline given.
+		\begin{proof}
+			Let $p_0 \in E$ and define a sequence $\langle p_n \rangle^\infty_{n=1}$ where $p_n = f(p_{n-1})$.\\
+			Consider $d(p_k,p_{k+1})$ for $k\geq1$.\\
+			$d(p_k,p_{k+1}) = d(f(p_{k-1}),f(p_k)) \leq \rho d(p_{k-1},p_k)$. Since we are big boys and girls, we can use our pattern recognition and see that induction will show $d(p_k,p_{k+1}) \leq p^kd(p_0,p_1)$.\\
+			Let $m<n$. The triangle implies 
+			\[d(p_m,p_n) \leq \sum_{k=m}^{n-1} d(p_k,p_{k+1}) \leq \sum_{k=m}^{n-1} \rho^kd(p_0,p_{1}) = d(p_0,p_1)\sum_{k=m}^{n-1} \rho^k\]
+			\[= d(p_0,p_1)\cdot\frac{\rho^m-\rho^n}{1-\rho}\]
+			So $d(p_m,p_n) \leq \frac{\rho^m-\rho^n}{1-\rho} d(p_0,p_1) \leq \frac{\rho^m}{1-\rho} d(p_0,p_1)$\\
+			Let $m,n \geq N$. Since $0\leq\rho<1$, $\rho^N \geq \rho^m$.\\
+			So $d(p_m,p_n) \leq \frac{\rho^m}{1-\rho} d(p_0,p_1) \implies  d(p_m,p_n) \leq \frac{\rho^N}{1-\rho} d(p_0,p_1)$\\
+			Let $\epsilon>0$. Since $\lim_{N\rightarrow\infty} \frac{\rho^N}{1-\rho}d(p_0,p_1) = 0$, $\exists N_1$ s.t. $$N>N_1 \implies \frac{\rho^N}{1-\rho}d(p_0,p_1) < \epsilon.$$ So $d(p_m,p_n) < \epsilon$, meaning the sequence $\langle p_n \rangle^\infty_{n=1}$ is Cauchy.\\
+			Since $E$ is complete, this means a Cauchy sequence, like $\langle p_n \rangle^\infty_{n=1}$, converges.\\
+			Define $p_* \coloneq \lim_{n\rightarrow\infty}p_n$. By problem 4, $\lim_{n\rightarrow\infty}f(p_n) = f(p_*)$. We can say $f(p_n) = p_{n+1}$, and set $n' = n+1$. As $n\rightarrow\infty$, $n'\rightarrow\infty$.\\
+			So then $\lim_{n\rightarrow\infty}f(p_n) = f(p_*) 
+			\implies \lim_{n'\rightarrow\infty}p_{n'} = f(p_*) \implies
+			p_* = f(p_*)$.\\
+			So $p_*$ is a fixed point of $f$.\\
+			To show that the fixed point is unique, assume that $p_{**}$ is a second fixed point of $f$. Then $d(p_*,p_{**}) = d(f(p_*),f(p_{**})) \leq \rho d(p_*,p_{**})$. This can be repeated an arbitrary amount of times, and by pattern recognition again (since we are big kids) we see that it will approach 0.\\
+			So the distance between $p_*$ and $p_{**}$ is 0, meaning they are the same. 
+		\end{proof}
+		
+		\item Let $a \geq 1$ and define $f: [0,\infty) \rightarrow [0,\infty)$ by
+		\[f(x) = \sqrt{a+x}\]
+		\begin{enumerate}
+			\item Show for $x,y \in [0,\infty)$ that 
+			\[|f(x) - f(y)| = \frac{|x-y|}{\sqrt{a+x}+\sqrt{a+y}} \leq \frac{|x-y|}{2\sqrt{a}} \leq \frac{1}{2}|x-y|\]
+			and therefore $f$ is a contraction. The space $[0,\infty)$ is a complete metric space as it is a closed subset of the complete space $\R$.
+			\begin{proof}
+				\[|f(x)-f(y)| = |\sqrt{a+x}-\sqrt{a+y}| = \left|\frac{(\sqrt{a+x}-\sqrt{a+y})((\sqrt{a+x}+\sqrt{a+y}))}{(\sqrt{a+x}+\sqrt{a+y})}\right|\]
+				\[=\frac{|x-y|}{\sqrt{a+x}+\sqrt{a+y}} \leq \frac{|x-y|}{\sqrt{a}+\sqrt{a}} = \frac{|x-y|}{2\sqrt{a}} \leq \frac{|x-y|}{2}\]
+			\end{proof}
+			
+			\item Define a sequence $x_0 = a$ and $x_{n+1} = f(x_n)$. Find the fixed point.
+			\begin{proof}
+				Want to find $\lim_{n\rightarrow\infty} x_n$, which can be thought of as finding $\sqrt{a+\sqrt{a+\sqrt{\ldots}}}$.\\
+				Since we know the limit exists by the Banach Fixed Point theorem, we can set the limit to $x$. Since $f(x) = x$ (shown in problem 5), we can do
+				\[x = \sqrt{a+x} \implies x^2 - x - a = 0 \implies x = \frac{1+\sqrt{1+4a}}{2}\]
+			\end{proof}
+		\end{enumerate}
+		
+		\item The Banach Fixed Point Theorem can be used to solve equations that at first glance are not fixed point problems. As an example let us compute numerically a root of the equation
+		\[x^3-5x-1=0\]
+		We can rewrite this as 
+		\[\frac{x^3-1}{5} = x\]
+		so we are looking for a fixed point of $f$ given by 
+		\[f(x) = \frac{x^3-1}{5} = \frac{x^3}{5} - \frac{1}{5}.\]
+		Let $E = [-1,1]$. This is a closed subspace of $\R$ and therefore is a complete metric space.
+		\begin{enumerate}
+			\item If $|x| \leq 1$ show
+			\[|f(x)| \leq \frac{2}{5}\]
+			and therefore $f$ maps $E$ into $E$.
+			\begin{proof}
+				Let $|x|\leq1$. Then $$|f(x)| = \left|\frac{x^3}{5} - \frac{1}{5}\right| \leq \left|\frac{x^3}{5}\right| + \left|\frac{1}{5}\right| = \frac{|x|^3}{5} + \frac{1}{5} \leq \frac{1}{5} + \frac{1}{5} = \frac{2}{5}$$
+			\end{proof}
+			
+			\item Show if $x,y \in E$ then 
+			\[|f(x)-f(y)| \leq \frac{3}{5}|x-y|\]
+			and therefore $f$ is a contraction on $E = [-1,1]$.
+			\begin{proof}
+				\[|f(x)-f(y)| = |\frac{x^3-y^3}{5}| = |x-y|\frac{|x^2+xy+y^2|}{5}\]
+				\[ \leq |x-y|\frac{|1^2+1\cdot1+1^2|}{5} = \frac{3}{5}|x-y|\]
+			\end{proof}
+			
+			\item This one does not seem like a problem to do, more like an example? So I shan't do it.
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

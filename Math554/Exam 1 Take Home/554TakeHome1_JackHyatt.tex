@@ -1,0 +1,64 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 5 (Due Sept 22, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Prove every open ball $B(a,r)$ is open.
+		\begin{proof}
+			Let $b \in B(a,r)$. Then $d(a,b) < r$. Let $\rho = r-d(a,b)$.\\
+			Let $b' \in B(b,\rho)$. Then $d(b,b') < \rho \implies d(b,b') + d(a,b) < r$. Since $d(a,b') \leq d(a,b) + d(b,b')$ by the triangle inequality, we get $d(a,b') < r$. So $b' \in B(a,r)$.\\
+			So $B(b,\rho) \subseteq B(a,b)$, which means $B(a,r)$ is open.
+		\end{proof}
+		
+		\item Prove for any $a \in E$ and $r > 0$ the set $U = \{x \in E : x \nin \bar{B}(a,r)\} = \{x \in E : d(x,a) > r\}$ is open.
+		\begin{proof}
+			Let $b \in U$. Then $d(a,b) > r > 0$. Let $\rho = d(a,b)-r$.\\
+			Let $b' \in B(b,\rho)$, so $d(b,b') < \rho$. By rearranging the triangle inequality, $d(a,b') \geq d(a,b) - d(b,b')$.\\
+			Then $d(b,b') < \rho \implies d(a,b)-d(b,b') > r$. Using the triangle inequality, we get $d(a,b') > r$. So $b' \in U$.\\
+			So $B(b,\rho) \subseteq U$, which means $U$ is open.
+		\end{proof}
+		
+		\item Let $\{U_\alpha : \alpha \in A\}$ be a possibly infinite collection of open subsets of $E$. Prove that the union 
+		\[U \coloneq \bigcup_{\alpha \in A} U_\alpha\] is open.
+		\begin{proof}
+			Let $a \in U$. Then $a \in U_\alpha$ for some $\alpha \in A$. Since $U_\alpha$ is open, then $\exists r$ s.t. $B(a,r) \subseteq U_\alpha$. Since $U$ is comprised of the unions of sets, $U_\alpha \subseteq U$. So $B(a,r) \subseteq U$. This means $U$ is open.
+		\end{proof}
+		
+		\item Let $U_1,\ldots, U_n \subseteq E$ be a finite collection of open subsets of $E$. Prove that the intersection 
+		\[U = U_1 \cap \ldots \cap U_n\] is open.
+		\begin{proof}
+			Let $a \in U$. Then $\forall j \in [n], a \in U_j$. So $\forall j \in [n], \exists r_j > 0$ s.t. $ B(a,r_j) \subseteq U_j$. Let $r$ be the $\min(r_1,\ldots,r_n)$. Then $B(a,r) \subseteq B(a,r_j)$ for every $j$. So $B(a,r) \subseteq U_j$ for every $j$, which means $B(a,r) \subseteq U$. So $U$ is open.
+		\end{proof}
+		
+		\item Let $U_n = (-1/n,1/n)$ in $\R$. Show \[U = \bigcap_{n=1}^{\infty}U_n = \{0\}\] and therefore the intersection is not open.
+		\begin{proof}
+			$U_n = (-1/n,1/n)$ is equivalent to $U_n = B(0,1/n)$.\\
+			BWOC, let $x \in U$ not be $0$. WLOG, let $x$ be positive.\\
+			So then $\forall n\in\N,\medspace x<1/n$. This violates Archimedes’ axiom (small version). So then $x$ cannot be positive (and not negative since same can be said for $-x$).\\
+			$x = 0$ does work since $1/n$ will always be a nonzero number.\\
+			So $U = \{0\}$. Since it is a singleton set, there is no way for it to be open, trust me.
+		\end{proof}
+	\end{enumerate}
+\end{document}

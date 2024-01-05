@@ -1,0 +1,85 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 15 (Due Nov 27, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $E$ and $E'$ be metric spaces and $f:E\rightarrow E'$ a function. Prove the following are equivalent.
+		\begin{enumerate}
+			\item $f$ is continuous.
+			\item for every $p_0 \in E$, the limit $\lim_{p\rightarrow p_0]} f(p) = f(p_0)$ holds.
+			\item  if $\langle p_n \rangle_{n=1}^\infty$ is a sequence in $E$ with $\lim_{n\rightarrow\infty} p_n = p_0$, then $\lim_{n\rightarrow\infty} f(p_n) = f(p_0)$.
+			\item If $V$ is an open subset of $E'$, then the preimage $f^{-1}[V]$ is an open subset of $E$.
+		\end{enumerate}
+		\begin{proof}
+			It has been proven before in class that $(a) \iff (b) \iff (c)$, so showing $(a) \iff (d)$ is sufficient.\\
+			$(a) \implies (d)$\\
+			Assume $f$ is continuous. Let $V\subseteq E'$ be an open set. Let $p_0 \in E$ with $f(p_0) \in V$.\\
+			Since $V$ is open, there is $\epsilon>0$ s.t. $B_{E'}(f(p_0),\epsilon)\subseteq V$.\\
+			Since $f$ is continuous, $\exists\delta>0$ s.t. $d(p_0,p)<\delta \implies d'(f(p_0),f(p)) < \epsilon$.\\
+			So $p \in B_E(p_0,\delta) \implies f(p) \in B_{E'}(f(p_0),\epsilon)\subseteq V$.\\
+			So $B_E(p_0,\delta) \subseteq f^{-1}[V]$. This means there is an open ball around every point in $f^{-1}[V]$, making it open.\\
+			$(d)\implies(a)$\\
+			Assume $(d)$ and let $\epsilon>0$. Let $p_0 \in E$ and let $V=B_{E'}(f(p_0),\epsilon)$.\\
+			By $(d)$, $f^{-1}[V]$ contains an open ball around $p_0$, we'll denote $B_E(p_0,\delta)\subseteq f^{-1}[V]$.\\
+			So then \[d(p,p_0) < \delta \implies p \in B_E(p_0,\delta) \implies p \in f^{-1}[V] \implies f(p) \in B_{E'}(f(p_0),\epsilon)\]
+			\[ \implies d(f(p),f(p_0)) < \epsilon\]
+			So $f$ is continuous.
+		\end{proof}
+	
+		\item Let $f : E \rightarrow E'$ be a continuous function between metric spaces and $\U$ an open cover of $E'$. Prove $\{f^{-1}[V] : V \in \U\}$ is an open cover of $E$.
+		\begin{proof}
+			Assume $f$ is continuous. Let $\U$ be an open cover of $E'$ and towards contradiction, assume $S = \{f^{-1}[V] : V \in \U\}$ is not an open cover of $E$.\\
+			By problem (1), we know that $S$ a collection of open sets. So then since it isn't an open cover of $E$, $\exists p \in E$ s.t. $\forall s\in S$, $p \nin s$.\\
+			So then $p \nin f^{-1}[V]$ for all $V\in\U$. This means $f(p)\nin V$ for all $V\in\U$.\\
+			But $\U$ is an open cover of $E'$ and $f(p)\in E'$. \contra
+		\end{proof}
+		
+		\item What is wrong with the following proof for $\lim_{x\rightarrow1}\frac{1}{x-1} = 0$.
+		\begin{proof}
+			Let $\epsilon>0$ and set $\delta = |x-1|^2\epsilon$. If $0<|x-1|<\delta$, then
+			\begin{align*}
+				|\frac{1}{x-1}-0| & = \frac{1}{|x-1|}\\
+				&=\frac{1}{|x-1|^2}|x-1|\\
+				&<\frac{1}{|x-1|^2}\delta\\
+				&=\frac{1}{|x-1|^2}|x-1|^2\epsilon\\
+				&=\epsilon
+			\end{align*}
+			So if $f(x) = 1/(x - 1)$ the inequality $0 < |x - 1| < \delta$ implies $|f(x) - 0| < \epsilon$ which verifies that the definition of $\lim_{x\rightarrow1}f(x) = 0$ holds.
+		\end{proof}
+		The issue is that we have the definition of $\delta$ depending on $x$. That is a problem since in the definition of limits at points, we define $\delta$ before any $x$.
+		
+		\item Show that \[\lim_{x\rightarrow1}\frac{1}{x-1}\] does not exist.
+		\begin{proof}
+			BWOC, assume the limit exists and is equal to $L$.\\
+			Since the limit exists, it should hold that $\exists\delta>0$ s.t.
+			\[|x-1|<\delta \implies \left|\frac{1}{x-1}-L\right|<1\]
+			Let $k = \max(1+L,1+1/\delta)$. Consider $x = 1+1/k$.\\
+			We have $|x-1| = |1+1/k-1| = 1/k < \delta$.\\
+			We also have $|\frac{1}{x-1}-L| = |\frac{1}{1+1/k-1}-L| = |k-L| \geq k-L \geq 1+L-L = 1 = \epsilon$.
+			So $|x-1|<\delta$ and $|f(x)-L|\geq\epsilon$, but we assumed the limit exists, \contra.
+		\end{proof}
+		
+	\end{enumerate}
+\end{document}

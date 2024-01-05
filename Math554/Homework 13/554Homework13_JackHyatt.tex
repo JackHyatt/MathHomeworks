@@ -1,0 +1,152 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 13 (Due Nov 10, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item
+		\begin{enumerate}
+			\item Show that the function \[f(x) = \frac{x}{1+x^2}\] is Lipschitz on the closed interval $[-b,b]$ for any $b>0$.
+			\begin{proof}
+				Let $x,y \in [-b,b]$.\\
+				Then 
+				\[|f(x) - f(y)| = \left|\frac{x}{1+x^2} - \frac{y}{1+y^2}\right| = \left|\frac{x+xy^2-y-yx^2}{(1+x^2)(1+y^2)}\right|\]
+				\[=|x-y|\left|\frac{1-xy}{x^2y^2+x^2+y^2+1}\right| \leq |x-y||1-xy| \leq |x-y||1+b^2|\]
+				Letting $1+b^2$ be the Lipschitz constant shows that $f(x)$ is Lipschitz on $[-b,b]$.
+			\end{proof}
+			\item Use this to give a detailed $N,\epsilon$ proof that if $\langle x_n \rangle_{n=1}^\infty$ us a sequence of real numbers with $\lim_{n\rightarrow\infty}x_n=L$ that
+			\[\lim_{n\rightarrow\infty}\frac{x_n}{x^2_n+1} = \frac{L}{L^2+1}\]
+			\begin{proof}
+				Assume $\lim_{n\rightarrow\infty} x_n = L$.\\
+				Then $\exists N$ s.t. $n>N \implies |x_n - L| < \frac{\epsilon}{b^2+1}$.\\
+				Let $f(x)$ be on the interval $[-L,L]$, $\epsilon>0$, and $n>N$.\\
+				Then 
+				\[|f(x) - f(L)| = \left|\frac{x_n}{x_n^2+1} - \frac{L}{L^2+1}\right| \leq (b^2+1)|x_n - L| < (b^2+1) \frac{\epsilon}{b^2+1}\]
+				So then 
+				\[\left|\frac{x_n}{x_n^2+1} - \frac{L}{b^2+1}\right| < \epsilon\]
+				which proves the limit.
+			\end{proof}
+		\end{enumerate}
+	
+		\item Let $(A,d_A)$ and $(B,d_B)$ be metric spaces. Let $E \coloneq A \times B$ and $d$ on $E$ by
+		\[d((a_1,b_1),(a_2,b_2)) = d_A(a_1,a_2)+d_B(b_1,b_2)\]
+		\begin{enumerate}
+			\item Prove this is a metric on $E = A \times B$
+			\begin{proof}
+				Clearly $d$ is symmetric.\\
+				Since $d_A$ and $d_B$ are nonnegative, $d=d_A+d_B \geq 0$.\\
+				$d((a_1,b_1),(a_2,b_2))=0 \iff d_A(a_1,a_2)+d_B(b_1,b_2)=0 \iff d_A(a_1,a_2)=0 \text{ and } d_B(b_1,b_2)=0 \iff a_1=a_2 \text{ and } b_1=b_2$.\\
+				Now to show triangle inequality:
+				\[d((a_1,b_1),(a_2,b_2)) = d_A(a_1,a_2)+d_B(b_1,b_2)\]\[\leq d_A(a_1,a')+d_A(a',a_2)+d_B(b_1,b')+d_B(b',b_2)\]
+				\[= d_A(a_1,a')+d_B(b_1,b')+d_A(a',a_2)+d_B(b',b_2)\]
+				\[= d((a_1,b_1),(a',b'))+d((a',b'),(a_2,b_2))\]
+				So all 4 requirements hold for $d$ to be a metric on $E$.
+			\end{proof}
+			\item Prove that if $A$ and $B$ are complete, then so is $E$.
+			\begin{proof}
+				Assume both $A$ and $B$ are complete. Then every Cauchy sequence in $A$ and $B$ will converge.\\
+				It has been shown previously that if $\lim_{n\rightarrow\infty} x_n = x$ and $\lim_{n\rightarrow\infty} y_n = y$, then $\lim_{n\rightarrow\infty} (x_n,y_n) = (x,y)$.\\
+				Let $\langle(a_n,b_n) \rangle_{n=1}^\infty$ be a Cauchy sequence in $E$.\\
+				So then $\forall\epsilon>0$, $\exists N$ s.t. $m,\ell>N \implies d((a_m,b_m),(a_\ell,b_\ell)) < \epsilon$.
+				Since $d = d_A+d_B$, then $d_A(a_m,a_\ell),d_B(b_m,b_\ell) \leq d((a_m,b_m),(a_\ell,b_\ell))$.\\
+				So $d_A(a_m,a_\ell),d_B(b_m,b_\ell) < \epsilon$.\\
+				So then $\langle a_n \rangle_{n=1}^\infty$ and $\langle b_n \rangle_{n=1}^\infty$ are Cauchy sequences in $A$ and $B$ respectively.\\
+				So then $\langle a_n \rangle_{n=1}^\infty$ and $\langle b_n \rangle_{n=1}^\infty$ converge since $A$ and $B$ are complete.\\
+				So then $\langle(a_n,b_n) \rangle_{n=1}^\infty$ also converges, meaning $E$ is also complete.
+			\end{proof}
+			\item Prove that if $A$ and $B$ are both sequentially compact, then so is $E$.
+			\begin{proof}
+				Assume both $A$ and $B$ are seq. compact. Then every sequence in $A$ and $B$ will have a convergent subsequence.\\
+				Let $\langle(a_n,b_n) \rangle_{n=1}^\infty$ be a sequence in $E$.\\
+				So then $\langle a_n \rangle_{n=1}^\infty$ has a convergent subsequence $\langle a_{n_j} \rangle_{j=1}^\infty$.\\
+				We can't say that $\langle b_{n_j} \rangle_{j=1}^\infty$ converges, but since $B$ is seq. compact, can say that there exists $\langle b_{n_{j_k}} \rangle_{k=1}^\infty$ that does converge.\\
+				$\langle a_{n_{j_k}} \rangle_{k=1}^\infty$ is a subsequence of $\langle a_{n_j} \rangle_{j=1}^\infty$, which already converged. So $\langle a_{n_{j_k}} \rangle_{k=1}^\infty$ converges too.\\
+				So then $\langle (a_{n_{j_k}},b_{n_{j_k}}) \rangle_{k=1}^\infty$ is a convergent subsequence of $\langle(a_n,b_n) \rangle_{n=1}^\infty$, proving $E$ is complete.
+			\end{proof}
+		\end{enumerate}
+	
+		\item Let $(E,d)$ and $(E',d')$ be metric spaces and let $f:E\rightarrow E'$ be Lipschitz. Prove if $V \subseteq E'$ is an open set, then \[U \coloneq f^{-1}[V] = \{p\in E : f(p) \in V\}\]
+		is also open.
+		\begin{proof}
+			Let $p \in U$. Then $f(p) \in V$.\\
+			Since $V$ is open, that means $\exists r>0$ s.t. $B(f(p),r) \subseteq V$ by definition of open.\\
+			Let $M$ be the Lipschitz constant for $f$. Let $\delta = r/M$.\\
+			If $q\in B(p,\delta)$, then $d(p,q)<r/M \implies Md(p,q)<r$.\\
+			Since $d'(f(p),f(q))\leq Md(p,q)$, we know $d'(f(p),f(q))<r$ which means $f(q) \in B(f(p),r) \subseteq V$.\\
+			So then $q \in B(p,\delta) \implies f(q) \in V \implies q \in U$.\\
+			So then $B(p,\delta) \subseteq U$, which means $U$ is open by definition of open.
+		\end{proof}
+		
+		\item Let $\R^2$ have its usual metric.
+		\begin{enumerate}
+			\item Let $\vec{a},\vec{b} \in \R^2$. Prove the map $f:\R\rightarrow\R^2$ defined by $f(t) = (1-t)\vec{a} + t\vec{b}$ is Lipschitz.
+			\begin{proof}
+				Let $x,y\in\R$. Then
+				\[||f(x)-f(y)|| = ||(1-x)\vec{a}+x\vec{b}-(1-y)\vec{a}-y\vec{b}||\]
+				\[= ||(y-x)\vec{a}+(x-y)\vec{b}|| = |x-y|\cdot||\vec{b}-\vec{a}||\]
+				Since $||\vec{b}-\vec{a}||\geq0$, $f$ is Lipschitz.
+			\end{proof}
+			
+			\item For $\vec{a},\vec{b} \in \R^2$ define the segment with endpoints $\vec{a}$ and $\vec{b}$ as 
+			\[[\vec{a},\vec{b}] = \{(1-t)\vec{a}+t\vec{b} : 0 \leq t \leq 1\}\]
+			Prove $[\vec{a},\vec{b}]$ is connected.
+			\begin{proof}
+				BWOC, let $[\vec{a},\vec{b}] = A \cupdot B$ be a disconnection.\\
+				Let $A_0 = \{t \in [0,1] : (1-t)\vec{a}+t\vec{b} \in A\}$ and similarly for $B_0$.\\
+				We can rewrite $A_0$ as $\{t \in [0,1] : f(t) \in A\}$ and similarly for $B_0$.\\
+				We know that $f$ is Lipschitz from $(a)$ and since both $A$ and $B$ are open (know from them being a disconnection), Problem 2 tells us that the preimage of $A$ and $B$ through $f$ is also open. So $A_0$ and $B_0$ are both open.\\
+				Since $A$ and $B$ are disjoint, so will $A_0$ and $B_0$ since taking the preimage preserves that property.\\
+				Obviously $A_0 \neq \emptyset \neq B_0$ and $A_0 \cup B_0 = [0,1]$.\\
+				So then $A_0 \cupdot B_0$ is a disconnection of $[0,1]$, which is a contradiction since closed intervals of the reals are connected.\\
+				So then the disconnection $A \cupdot B$ cannot exist, making $\vec{a},\vec{b}]$ connected.
+			\end{proof}
+		\end{enumerate}
+	
+		\item Let $E$ be a metric space.
+		\begin{enumerate}
+			\item Show that if $E$ is compact, then any any collection, $\FF$, of closed subsets of $E$ with the finite intersection property has nonempty intersection. That is if $\FF$ has the finite intersection property, then \[\bigcap\FF\neq\emptyset\]
+			\begin{proof}
+				BWOC, assume $\FF$ has the finite intersection property and $\bigcap\FF=\emptyset$.\\
+				Let $\U = \{F^c : F \in \FF\}$.\\
+				Since $F$ is closed $\forall F \in \FF$, then $F^c$ is open.\\
+				Since $\bigcap\FF=\emptyset$, then there does not exist any element that is in all $F\in\FF$. So then $\forall x\in E,\ \exists F\in\FF$ s.t. $x\in F^c$.\\
+				So then $\U$ is an open cover of $E$.\\
+				Since $E$ is compact, then $\exists\ \{F_1^c,\ldots,F_k^c\}$ that is a finite subcover of $E$.\\
+				Since $E = \bigcup_{i=1}^k F_i^c$, then $E^c = (\bigcup_{i=1}^k F_i^c)^c \implies \emptyset = \bigcap_{i=1}^k F_i$.\\
+				But that contradicts that $\FF$ has the finite intersection property, so $\bigcap\FF\neq\emptyset$.
+			\end{proof}
+		
+			\item Conversely, show if every collection of closed sets, $\FF$, of $E$ with the finite intersection property has nonempty intersection, then $E$ is compact.
+			\begin{proof}
+				Let $\U$ be an open cover of $E$. BWOC, assume $\U$ does not have a finite subcover.\\
+				Let $\FF\coloneq\{U^c : U \in \U\}$.\\
+				Since $U$ are open sets, then $U^c$ are closed, meaning $\FF$ is a collection of closed sets.\\
+				Since no finite subset of $\U$ can cover $E$, that means for every finite subset $\U_0\subseteq\U$ there is an element $x\in E$ s.t. $\forall U\in\U_0,\ x\nin U$. So then $\forall U\in\U_0,\ x\in U^c$.\\
+				So then for any $\FF_0 = \U_0$, there exists an element $x \in E$ s.t. $x\in \bigcap\FF_0$. This means $\FF$ has the finite intersection property.\\
+				Then by our assumption in the problem, $\bigcap\FF\neq\emptyset$. So there is an element in $E$ that is in every element of $\FF$, meaning there is an element of $E$ that is not in every element of $U$, which contradicts that $U$ is an open cover of $E$.\\
+				So then $U$ must have a finite sub cover, meaning $E$ is compact.
+			\end{proof}
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

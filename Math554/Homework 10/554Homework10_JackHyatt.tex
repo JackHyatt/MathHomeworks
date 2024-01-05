@@ -1,0 +1,93 @@
+% !TeX program = lualatex
+
+\documentclass[14pt]{extarticle}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 10 (Due Oct 25, 2023)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 554 - Analysis I - Fall 2023} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $E$ be a metric space, $p \in E$ and $r_1,\ldots,r_n$ positive real numbers. Let $\U$ be the collection of open balls
+		\[\U = \{B(p,r_1),\ldots,B(p,r_n)\}.\]
+		Let $r_{\max} = \max(r_1,\ldots,r_n)$ and $r_{\min} = \min(r_1,\ldots,r_n)$. Prove 
+		\[\bigcup\U = B(p,r_{\max}),\qquad \bigcap\U = B(p,r_{\min})\]
+		\begin{proof}
+			Let $\beta \in \bigcup\U$. Then $\beta \in B(p,r_j)$ for some $j\in[n]$. So then $\beta \in B(p,r_{\max})$ since $d(p,\beta) < r_j \leq r_{\max}$. So $\bigcup\U \subseteq B(p,r_{\max})$.\\
+			Let $\beta \in B(p,r_{\max})$. Since $r_{\max} = r_j$ for some $j\in[n]$, $\beta \in \bigcup\U$. So $B(p,r_{\max}) \subseteq \bigcup\U$.\\
+			So $\bigcup\U = B(p,r_{\max})$.\m
+			Let $\beta \in \bigcap\U$. Then $\beta \in B(p,r_j)$ for all $j\in[n]$. So then $\beta \in B(p,r_{\min})$ since the min ball has the radius of at least one of the $r_j$'s. So $\bigcap\U \subseteq B(p,r_{\min})$.\\
+			Let $\beta \in B(p,r_{\min})$. So then $d(p,\beta) < r_{\min} \leq r_j$ for all $j\in[n]$. So $\beta \in \bigcap\U$. So $B(p,r_j) \subseteq \bigcap\U$.\\
+			So $\bigcap\U = B(p,r_{\min})$.\m
+		\end{proof}
+		
+		\item Let $E$ be a metric space and $p \in E$. Let $R$ be a set of positive real numbers which is bounded above and set $$\U = \{B(p, r) : r \in R\}.$$
+		Let $$r_0 = \inf R, \qquad r_1 = \sup R.$$
+		Show $$\bigcup \U = B(p,r_1).$$
+		Give an example where $$\bigcap \U \neq B(p,r_0).$$
+		\begin{proof}
+			Let $\beta \in \bigcup\U$. Then $\beta \in B(p,r)$ for some $r\in R$. Since $d(p,\beta) < r < r_1$, $\beta \in B(p,r_1)$. So $\bigcup\U \subseteq B(p,r_1)$.\\
+			Let $\beta \in B(p,r_1)$. So $d(p,\beta) < r_1$. Since $r_1$ is the supremum, then $\beta \in B(p,r)$ for some $r \in R$ since $d(p,\beta)$ would be a better supremum otherwise.
+			So $B(p,r_1) \subseteq \bigcup\U$.\\
+			So $\bigcup\U = B(p,r_1)$.
+		\end{proof}
+		An example where $\bigcap \U \neq B(p,r_0)$ holds is $R = (0,\infty)$ and $p=0$. $r_0$ will be $0$, making the ball $B(0,0) = \emptyset$ and $\bigcap \U = \{0\}$.
+		
+		\item Let $\U = \{(-n, n) : n \in N\}$. Show the following are equivalent:
+		\begin{enumerate}
+			\item $\U$ is an open cover of $\R$.
+			\item Archimedes' Axiom.
+		\end{enumerate}
+		\begin{proof}
+			($a \implies b$)\\
+			Since $\U$ is an open cover of $\R$, $\forall x\in\R$, $\exists n\in N$ s.t. $x\in(-n,n)$. So then $x < n$.\\
+			So then for every real number, $x$, there exists a natural number, $n$, such that $x<n$. This is Archimedes' Axiom\\
+			($b \implies a$)\\
+			Let $\U = \{(-n, n) : n \in N\}$. Let $x \in \R$. By Archimedes' Axiom, $\exists n_1\in\N$ s.t. $x<n_1$, and similar for $-x < n_2$. Then $x\in(-n',n')$ for $n'=\max(n_1,n_2)$. Since $(-n',n') \in \U$ and $(-n',n')$ is an open subset of $\R$, $\U$ is an open cover of $\R$.
+		\end{proof}
+	
+		\item Let $S$ be a subset of the metric space $E$. For each $p \in S$, let $r_p $ be a positive number. Prove $\U = \{B(p, r_p) : p \in S\}$ is an open cover of $S$.
+		\begin{proof}
+			Let $p \in S$. Then $r_p > 0$. Also, $d(p,p) = 0 < r_p$. So then $p \in B(p,r_p)$. Since $B(p,r_p) \in \U$, $S \subseteq \bigcup\U$.\\
+			Obviously, each element of $\U$ is an open ball, which is an open subset of $E$.\\
+			So $\U$ is an open cover of $S$.
+		\end{proof}
+	
+		\item Let $E$ be a metric space and $S \subseteq E$. Let $p \in E$. Prove $\U = \{B(p, r) : r > 0\}$ is an open cover of $S$.
+		\begin{proof}
+			Let $s \in S$. Then $d(p,s)+1 > 0$. So then $s \in B(p,d(p,s)+1)$ and $B(p,d(p,s)+1) \in \U$. So $S \subseteq \bigcup\U$.\\
+			Obviously, every element in $\U$ is an open subset of $E$.\\
+			So $\U$ is an open cover of $S$.
+		\end{proof}
+		
+		\item Let $S$ be a set that has a finite open cover $\U$. Assume that for each $U \in \U$ that $U \cap S$ is finite. Prove $S$ is finite.
+		\begin{proof}
+			Since for each $U \in \U$, $U \cap S$ is finite and $\U$ covers $S$, we can create an upper bound for $|S|$ with $\sum_{U\in\U} |U \cap S|$. Since $\U$ is finite, there are finite terms in that sum. So then $|S|$ is finite.
+		\end{proof}
+		
+		\item Let $S$ be a subset of the metric space $E$ that has has the
+		property that if $\U$ is an open cover of $S$, then $\U$ has a finite subset $\U_0$ which is also a cover of $S$. Prove that $S$ is bounded.
+		\begin{proof}
+			Let $p \in E$. Then from problem 5, $\U = \{B(p,r):r>0\}$ is an open cover of $S$. So then by the property of $S$, $\U_0 = \{B(p,r_1),\ldots,B(p,r_n)\}$ is a cover of $S$. So $S \subseteq \bigcup\U_0$.\\
+			Let $r_{\max} = \max\{r_1,\ldots,r_n\}$. Then by problem 1, $\bigcup\U_0 = B(p,r_{\max})$.\\
+			So $S \subseteq B(p,r_{\max})$, meaning $S$ is bounded.
+		\end{proof}
+	\end{enumerate}
+\end{document}
