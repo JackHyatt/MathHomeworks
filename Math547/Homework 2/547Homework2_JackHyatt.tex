@@ -1,0 +1,114 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 2 (Due Jan 29, 2025)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 547 - Algebraic Structures II - Spring 2025} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $F$ be a field, $f(X) \in F[X]$ a polynomial, and $u \in F$ a root of $f$. Prove that $u$ is a multiple root of $f(X)$ if and only if it is also a root of the derivative $f'(x)$.
+		\begin{proof}
+			For both directions, $u$ is a root of $f$.\\
+			$(\implies)$\\
+			Assume $u$ is a multiple root of $f(x)$.
+			
+			Then $f(x) = g(x)(x-u)^k$ with $k\geq2$.
+			
+			Consider $f'(x)$.
+			
+			\[f'(x) = g(x)k(x-u)^{k-1} + g'(x)(x-u)^k = (x-u)^{k-1} (kg(x)+g'(x)(x-u))\]
+			
+			Since $k \geq 2$, we have $k-1\geq1$. So $x-u \divides f'$, making $u$ a root of $f'$.
+			
+			$(\impliedby)$\\
+			Assume $u$ is a root of $f'$ (still is also a root of $f$).
+			
+			Then $x-u \divides f$, we have $f(x) = g(x)(x-u)$ for some polynomial $g$.
+			
+			Consider $f'(x)$.
+			
+			\[f'(x) = g(x) + g'(x)(x-u)\]
+			\[0 = f'(u) = g(u) + g'(u)(u-u) \implies g(u) = 0\]
+			Since $u$ is a root of $g$, it also divides. So we have $g(u) = h(u)(x-u)$ for some function $h$. So then 
+			\[f(x) = g(x)(x-u) = h(x)(x-u)(x-u)\]
+			making $u$ a multiple root.
+		\end{proof}
+		
+		\item Let $f(x) = x^5 + 4x^4 + 2x^3 + 3x^2 \in \Z_5[x]$ and $g(x) = x^2 + 3 \in \Z_5[x]$. Find the quotient and the remainder when $f(x)$ is divided by $g(x)$.\m
+		First divide and subtract the first terms:
+		\[x^5/x^2 = x^3 \implies (x^5 + 4x^4 + 2x^3 + 3x^2) - (x^2 + 3)x^3 = 4x^4 + 4x^3 + 3x^2\]
+		Next term:
+		\[4x^4/x^2 = 4x^2 \implies (4x^4 + 4x^3 + 3x^2) - (x^2 + 3)4x^2 = 4x^3 + x^2\]
+		Next term:
+		\[4x^3/x^2 = 4x \implies (4x^3 + x^2) - (x^2 + 3)4x = x^2 + 3x\]
+		Next term:
+		\[x^2/x^2 = 1 \implies (x^2 + 3x) - (x^2 + 3)1 = 3x + 2\]
+		So then we finally have 
+		\[x^5 + 4x^4 + 2x^3 + 3x^2 = (x^2 + 3)(x^3 + 4x^2 + 4x + 4) + (3x+2)\]
+		
+		\item Let $f(x) = x^4 - 5x^2 + 6$. Observe that $f(x)$ can be viewed as a polynomial in $\Q[x]$, or $\R[x]$, or $\Z_p[x]$. A different one of these fields is used in each of the parts below.
+		\begin{enumerate}
+			\item Find all the roots of $f$ in $\Q$.\m
+			Let us act like we are looking for roots in $\R$, and see if the values would land in $\Q$.
+			\[f(x) = (x^2)^2 -5(x^2)+6 \implies x^2 = \frac{5 \pm \sqrt{(-5)^2 -4(1)(6)}}{2(1)} = 3,2\]
+			\[x = \pm \sqrt{3}, \pm \sqrt{2}\]
+			So there are no roots in $\Q$.
+			
+			\item Find all the roots of $f$ in $\R$.\m
+			Found in part (a), $\{-\sqrt{3},-\sqrt{2},\sqrt{2},\sqrt{3}\}$
+			
+			\item Find all the roots of $f$ in $\Z_3$.\m
+			Since $f$ is in $\Z_3[x]$, we can write it as
+			\[f(x) = x^4+x^2 = x^2(x^2+1)\]
+			which gives roots of just $0$, since no element in $Z_3$ squares to $2$ (i.e. $-1$).
+			
+			\item Find all the roots of $f$ in $\Z_5$.\m
+			Since $f$ is in $\Z_5[x]$, we can write it as
+			\[f(x) = x^4+1.\]
+			We can just check all 5 elements to look for $x^4 = 4$.
+			\[((0)^4,(1)^4,(2)^4,(3)^4,(4)^4) = (0,1,1,1,1)\]
+			So we have no roots.
+			
+		\end{enumerate}
+	
+		\item Let $f(x) = x^4 + 5x^2 + 6 \in \R[x]$.
+		\begin{enumerate}
+			\item Prove that $f(x)$ does not have any roots in $\R$.\m
+			\[x^2 = \frac{-5 \pm \sqrt{5^2 -4(1)(6)}}{2(1)} = -3,-2\]
+			We can stop here, as we know that no elements in $\R$ can square to $-3$ or $-2$. So therefore, $f$ does not have any roots in $\R$.
+			
+			\item Find all the roots of $f(x)$ in $\C$.\m
+			Continuing from part (a), we have
+			\[x = \pm \sqrt{-3},\pm \sqrt{-2}\]
+			
+			\item Factor $f$ into irreducible factors in $\R[x]$. Explain why the factors are irreducible.\m
+			Using our work from part (a), we can easily get 
+			\[f(x) = (x^2 + 3)(x^2 + 2)\]
+			We know these terms are irreducible since they have degree less than or equal to 3, and no roots in $\R$.
+			
+			\item Factor $f$ into irreducible factors in $\C[x]$. Explain why the factors are irreducible.\m
+			\[f(x) = (x-i\sqrt{3})(x+i\sqrt{3})(x+i\sqrt{2})(x-i\sqrt{2})\]
+			Since these are linear terms, they are obviously irreducible.
+		\end{enumerate}
+		
+	\end{enumerate}
+\end{document}

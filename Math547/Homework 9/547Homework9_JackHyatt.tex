@@ -1,0 +1,113 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+\newtheorem{lemma}[theorem]{Lemma}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 9 (Due April 11, 2025)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 547 - Algebraic Structures II - Spring 2025} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	
+	For the next problem, you may use the following lemma (which you
+	proved in Homework 8 for $\theta = (2\pi)/7$, but the proof is the same for any $\theta$):
+	\begin{lemma}
+		Let $z = \cos\theta + i\sin\theta$ be a complex number with $\sin\theta \neq 0$. Then $\Q(\cos\theta) \subseteq \Q(z)$, and $[\Q(z) : \Q(\cos\theta)] = 2$
+	\end{lemma}
+
+	\begin{enumerate}
+		\item 
+		\begin{enumerate}
+			\item Prove that $\cos(2\pi/5)$ is constructible.
+			\begin{proof}
+				One can easily see that $z = \cos(2\pi/5) + i\sin(2\pi/5)$ is a primitive 5th root of unity. This means that $z$ is a root of the 5th cyclotomic polynomial, which is also irreducible. Meaning that $[\Q(z):\Q]$ is the degree of $\Phi_5(x)$. Since $\Phi_n(x)$ is defined to be
+				\[\Phi_n(x) =  \prod_{\substack{1 \leq k \leq n \\ \gcd(k,n)=1}} (x - e^{2i\pi\frac{k}{n}})\]
+				and $n$ is prime, that means $\Phi_5$ has degree $\varphi(5) = 4$.
+				
+				So then $4 = [\Q(z):\Q] = [\Q(z):\Q(\cos(2\pi/5))] \cdot [\Q(\cos(2\pi/5)):\Q] = 2 \cdot [\Q(\cos(2\pi/5)):\Q] \implies [\Q(\cos(2\pi/5)):\Q] = 2$. So then $\cos(2\pi/5)$ is constructible since its extension has degree a power of 2.
+			\end{proof}
+			\item Prove that $\cos(2\pi/7)$ is not constructible.
+			\begin{proof}
+				Let $z = \cos(2\pi/7) + i\sin(2\pi/7)$.\\
+				By the same argument in part $a$, we see that $\Phi_7$ has degree $6$, meaning that $6 = [\Q(z):\Q] = [\Q(z):\Q(\cos(2\pi/7))] \cdot [\Q(\cos(2\pi/7)):\Q] = 2 \cdot [\Q(\cos(2\pi/7)):\Q] \implies [\Q(\cos(2\pi/7)):\Q] = 3$. So then $\cos(2\pi/7)$ is not constructible since its extension has degree not a power of 2.
+			\end{proof}
+		\end{enumerate}
+
+		\item Let $F$ be a field and $f(x) \in F[x]$ a polynomial. Consider the tower of field extensions $F \subseteq F(f(x)) \subseteq F(x)$. For each of the two intermediary extensions, decide whether the extension is algebraic or not. Prove your answers.
+		\begin{proof}
+			For the field extension $F \subseteq F(f(x))$, one can easily see that a rational function contains indeterminates if it is a nonzero nonconstant polynomial (e.g. the literal '$x$' in a polynomial). It is also clear that indeterminates are not algebraic since they cannot be zeros of a polynomial. So $f(x)$ is transcendental, making $F \subseteq F(f(x))$ not algebraic.\\\\
+			
+			For the field extension $F(f(x)) \subseteq F(x)$, we can just consider the indeterminate $x$ being algebraic, since adjoining $x$ generates the whole field $F(x)$. This is because any rational function with coefficients in $F$ is also a rational function with coefficients in $F(f(x))$.\\
+			Now to find a polynomial with coefficients in $F(f(x))$ s.t. $x$ is a root. With $T$ being a temporary (meta) indeterminate, let our polynomial be $f(T) - f(x) \in F(f(x))[T]$. We can see that $x$ is a root of the polynomial, making $x$ algebraic. So the field extension $F(f(x)) \subseteq F(x)$ is algebraic.
+		\end{proof}
+		
+		\item 
+		\begin{enumerate} 
+			\item Let $\Z_2 \subseteq E$ be a field extension of $\Z_2$, $f(x) \in \Z_2[x]$, and $u \in E$ a root of $f(x)$. Prove that $u^2$ is also a root of $f(x)$.
+			\begin{proof}
+				It is important to note that squaring over $\Z_2$ does not change the element. Now denote $f(x) = \sum_{k=0}^{n} a_k x^k$. Then plugging in $u$ and $u^2$, we see that
+				\begin{align*}
+					f(u)^2 &= \left(\sum_{k=0}^{n} a_k u^k\right)^2 \\
+					&= \left(\sum_{k=0}^{n} a_k^2 u^{2k}\right) + \left(2 \sum_{0\leq i < j \leq n} a_ia_j u^{i+j}\right) \\
+					&= \sum_{k=0}^{n} a_k^2 u^{2k} = \sum_{k=0}^{n} a_k (u^2)^k \\
+					&= f(u^2)
+				\end{align*}
+				So $0 = 0^2 = f(u)^2 = f(u^2)$.
+			\end{proof}
+			\item Let $E = \Z_2[x]/(x^2 + x + 1)$. Prove that $E$ is a splitting field of $f(x) = x^2 + x + 1$ over $\Z_2$.
+			\begin{proof}
+				First, let us note that it is clear that there are no roots of $f(x)$ in $\Z_2$. And since $f(x)$ has degree 2, then the function is irreducible.\\
+				As $E$ is the quotient ring from the ideal $(x^2+x+1)$, then $\bar{x}$, denoted by $\alpha$ for convenience, is a "root" of the function $x^2+x+1$.\\
+				By part (a), we then have $\alpha^2$ also a root.\\
+				Since the polynomial was degree 2, we only needed these two roots: $\alpha, \alpha^2$.\\
+				Now to check that $\alpha \neq \alpha^2$. BWOC, assume $\alpha + \alpha^2 = 0 \implies \alpha(\alpha+1)=0$. But $\alpha \neq 0$ nor $\alpha \neq 1$. So $\alpha \neq \alpha^2$.\\ 
+				We now have that $f$ is irreducible over $\Z_2[x]$, and all two of its roots are in $E$. These facts together make $E$ the splitting field.
+			\end{proof}
+			\item Let $L = \Z_2[x]/(x^3 + x^2 + 1)$. Prove that $L$ is a splitting field of $g(x) = x^3 + x^2 + 1$ over $\Z_2$.
+			\begin{proof}
+				First, let us note that it is clear that there are no roots of $g(x)$ in $\Z_2$. And since $g(x)$ has degree 3, then the function is irreducible.\\
+				As $L$ is the quotient ring from the ideal $(x^3+x^2+1)$, then $\bar{x}$, denoted by $\alpha$ for convenience, is a "root" of the function $x^3+x^2+1$.\\
+				By part (a), we then have $\alpha^2$ also a root, with then $\alpha^4$ subsequently being a root too.\\
+				Since the polynomial was degree 3, we only needed these three roots: $\alpha, \alpha^2, \alpha^4$.\\
+				To check that they are distinct roots, we would show two roots adding to 0 makes a contradiction. This would be tedious and long, so it is skipped.
+				We now have that $g$ is irreducible over $\Z_2[x]$, and all three of its roots are in $L$. These facts together make $L$ the splitting field.
+			\end{proof}
+		\end{enumerate}
+	
+		\item For each of the following choices of $u$, decide whether $\Q(u) = \Q(u^2)$ or not. Prove your answers.
+		\begin{enumerate}
+			\item $u = \sqrt[3]{2}$
+			\begin{proof}
+					We have $\Q(u) = \{a + b\sqrt[3]{2} + c\sqrt[3]{2^2}: a,b,c\in\Q\}$ and $\Q(u^2) = \{a + b\sqrt[3]{4} + c\sqrt[3]{2^4}: a,b,c\in\Q\}$. Note that these sets are the same as $\sqrt[3]{2^4} = 2\sqrt[3]{2}$, making $c\sqrt[3]{2^4}$ match up with $b\sqrt[3]{2}$ between the two sets. So then the extensions are the same.
+			\end{proof}
+			\item $u = 1 + \sqrt{2}$
+			\begin{proof}
+				One can see that $u^2 = 3 + 2\sqrt{2} = 2u + 1$. So since we can rewrite $u^2$ in terms of $u$ with field operations, $\Q(u^2) \subseteq \Q(u)$. The other direction is shown through $u = \frac{u^2-1}{2}$, making $\Q(u) \subseteq \Q(u^2)$. So $\Q(u^2) = \Q(u)$.
+			\end{proof}
+			\item $u = \sqrt{2} + \sqrt{3}$
+			\begin{proof}
+				One can see check that $u$ is a root of $f(x) = x^4-10x^2+1$, and that $f(x)$ is irreducible over $\Q$ since the roots are the four values $\pm\sqrt{2}\pm\sqrt{3} \nin \Q$. Therefore $[\Q(u):\Q] = 4$.\\
+				Then, we can see also check that $u^2 = 5+2\sqrt{6}$ is a root of $f(x) = x^2-10x+1$, and that $f(x)$ is irreducible over $\Q$ since the roots are the two values $5\pm2\sqrt{6} \nin \Q$. Therefore $[\Q(u^2):\Q] = 2$.\\
+				Since the two extensions have different degrees, they are not the same extension.
+			\end{proof}
+		\end{enumerate}
+		
+	\end{enumerate}
+\end{document}

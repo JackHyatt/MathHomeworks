@@ -1,0 +1,120 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 4 (Due Feb 19, 2025)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 547 - Algebraic Structures II - Spring 2025} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $R$ be a commutative ring and let $I,J$ be ideals of $R$. Prove that each of the following subsets of $R$ is also an ideal.
+		\begin{enumerate}
+			\item $I \cap J = \{x \in R : x \in I \text{ and } x \in J\}$
+			\begin{proof}
+				First to show $I \cap J$ is a group with respect to $+$.\\
+				Operation is associative. Since both $I$ and $J$ are ideals, they both contain additive inverses, the identity element, and are closed, so then their intersection is also all of that.
+				
+				Now to show the ideal part. Let $x \in I \cap J$ and $r \in R$. Then $x \in I$ and $x \in J$.  Since they are ideals, then $rx \in I$ and $rx \in J$, meaning $rx \in I \cap J$.
+			\end{proof}
+			
+			
+			\item $I + J = \{x+y : x \in I, y \in J\}$
+			\begin{proof}
+				First to show $I + J$ is a group with respect to $+$.\\
+				The only non-trivial group property to show is inverses. Let $a = x+y \in I + J$. It is easy to see that $(-x) + (-y) \in I+J$ and is the inverse.
+				
+				Now to show the ideal part. Let $a=x+y \in I + J$ and $r \in R$. $ra = rx + ry$, and $rx \in I$ and $ry \in J$ since both are ideals. So $ra \in I+J$.
+			\end{proof}
+			
+			\item $IJ = \{\sum_{k=1}^{n} a_kb_k : n\geq0, a_k \in I, b_k \in J \ \forall k\in[n]\}$
+			\begin{proof}
+				First to show $IJ$ is a group with respect to $+$.\\
+				Same operation as in $R$, so it is associative. The identity 0 is clearly in $IJ$. Inverses are also in $IJ$, take one inverse of $a_k$ or $b_k$, just not both to get the inverse. 
+				
+				Now for closure. Let $x,y \in IJ$ where $x = \sum_{k=1}^{n} a_kb_k$ and $y = \sum_{k=1}^{m} a'_kb'_k$. Then $x+y$ is just an even bigger sum, where each term is a product of an element from $I$ and an element from $J$, meaning $x+y \in IJ$.
+				
+				Now to show the ideal part. Let $x \in IJ$ and $r \in R$, with $x = \sum_{k=1}^{n} a_kb_k$. $rx = \sum_{k=1}^{n} ra_kb_k$, and $ra_k \in I$ since $I$ is an ideal. So $rx \in IJ$.
+			\end{proof}
+
+		\end{enumerate}
+		
+		\item Using the notation form problem 1:
+		\begin{enumerate}
+			\item Prove that if $K$ is any ideal of $R$ such that $I \subseteq K$ and $J \subseteq K$, then $I+J \subseteq K$ (i.e. $I+J$ is the smallest ideal fo $R$ that contains both $I$ and $J$).
+			\begin{proof}
+				Assume the above assumption. Let $x+y \in I+J$. Then $x \in I$ and $y \in J$, meaning $x,y \in K$. Since $K$ is an ideal, it is closed under addition, so $x+y \in K$.
+			\end{proof}
+			
+			\item Prove that $IJ \subseteq I \cap J$.
+			\begin{proof}
+				Let $x = \sum_{k=1}^{n} a_kb_k \in IJ$. Since $I$ is an ideal, then any multiple of an element in $I$ is also in $I$. So any $a_kb_k \in I$ since $a_k$ is defined to be in $I$. Symmetric argument can be made for $J$. So every $a_kb_k \in I \cap J$. Since $I \cap J$ is an ideal, it is closed under addition, meaning $x \in I \cap J$.
+			\end{proof}
+			
+			\item Give an example of two ideal $I$ and $J$ of the ring $\Z$ s.t. $I \neq J$ and $IJ \neq I \cap J$.\m 
+			Let $I = 4\Z$ and $J = 6\Z$. Clearly they are ideals and are not the same. It is not hard to see that $I \cap J = 12\Z$ (12 is the LCM of 4 \& 6). It is also not hard to see that $IJ = 24\Z$, as every term is the sum will have a factor of 4 from $I$ and a separate factor of 6 from $J$.
+		\end{enumerate}
+	
+		
+		\item Let $R$ be a commutative ring. Let $I$ be the set of all the elements $x \in R$ with the property that $x^n = 0$ for some exponent $n\geq0$ (the elements with this property are called nilpotent elements).
+		\begin{enumerate}
+			\item Prove that $I$ is an ideal of $R$.
+			\begin{proof}
+				First to show $I$ is a group with respect to $+$.\\
+				Same operation as in $R$, so it is associative. The identity 0 is clearly in $I$. For inverses, let $x \in I$ with $x^n=0$. Take $-x \in R$. $(-x)^n = (-1)^nx^n = (-1^n)0 = 0$. So $-x \in I$.
+				
+				Now for closure. Let $x,y \in I$ where $x^n = 0$ and $y^m = =0$. Then $(x+y)^{n+m} = \sum_{i=0}^{n+m}\binom{n+m}{i} x^i y^{n+m-i}$. When $i \leq n$, then $y^{n+m-i} = 0$ since the exponent is greater than $m$, and similarly for $x^i$ when $i \geq n$. So every term is 0, meaning $(x+y)^{n+m} = 0$, showing $x+y \in I$.
+				
+				Now to show the ideal part. Let $x \in I$ and $r \in R$, with $x^n = 0$. $(rx)^n = r^nx^n = r^n0 = 0$. So $rx \in I$.
+			\end{proof}
+			
+			\item Let $R = \Z_n$, where $n = p_1^{\alpha_1} \ldots p_k^{\alpha_k}$ is the prime factorization of $n$. Prove that $[x]_n$ is a nilpotent element of $R$ if and only if $p_1 \ldots p_k$ divides $x$.
+			\begin{proof}
+				$(\implies)$\\
+				Assume $x^m \equiv 0$ for some $m\geq0$. Then $x^m = nq$ for some integer $q$. So then $n \divides x^m$. So then $n$'s prime factors must divide $x$.\\
+				$(\impliedby)$\\
+				Assume $p_1 \ldots p_k \divides x$. Then $x = p_1 \ldots p_k q$ for some integer $q$. Let $\alpha = \max\{\alpha_1,\ldots,\alpha_k\}$. Then $x^\alpha = p_1^\alpha \ldots p_k^\alpha q^\alpha$, which is a multiple of $p_1^{\alpha_1} \ldots p_k^{\alpha_k} = n$. So then $x^\alpha \equiv 0 \mod n$, making $[x]_n$ a nilpotent element. 
+			\end{proof}
+		\end{enumerate}
+		
+		
+		\item Let $R = \Z[X]$. Let $I$ denote the set of all the polynomials $f(X) \in \Z[X]$ that have an even number as the constant term.
+		\begin{enumerate}
+			\item Prove that $I$ is an ideal of $R$.
+			\begin{proof}
+				It is quite clear that $I$ is a subgroup over addition, as 0 is even, even numbers have inverses, and are closed.
+				
+				Now to show the ideal part. Let $f(x) \in I$ and $r(x) \in R$. We care not for any terms of $f$ or $r$ except for the constant term. Denote $f_0$ and $r_0$ as the constants terms of $f$ and $r$ respectively, with the assumption that $f_0$ is even. Then the constant term of $f(x)r(x)$ is $f_0r_0$, which is even since $f_0$ is even. So $f(x)r(x) \in I$.
+			\end{proof}
+			
+			\item Find two polynomials $f_1(X),f_2(X)$ such that $I = (f_1(X),f_2(X))$.\m
+			This is quite easy, as one of the functions needs to be $2$ to take care of the constant being even, with the other needing to give access to different degrees, so $x$. So $I = (2,x)$.
+			
+			\item Prove that $I$ is not a principal ideal of $R$ (cannot be generated by a single element; it follows that $\Z[X]$ is not a PID).
+			\begin{proof}
+				BWOC, let $I = (f(x))$. Since $f$ has to generate $2$ and $x$, $f$ must be a constant function that divides $x$. So then $f$ is a unit in $\Z$. But the only units in $\Z$ are $\pm1$, which is not a polynomial with even constant. $\contra$
+			\end{proof}
+			
+			\item Let $J$ be the set of all polynomials in $\Z[X]$ that have an even number as the leading coefficient. Is $J$ an ideal of $R$? Explain.\m
+			
+			No, as $J$ is not closed under addition. Let $f = 2x^2-x$ and $g = -2x^2$. We have $f+g = -x \nin J$.
+		\end{enumerate}
+	\end{enumerate}
+\end{document}

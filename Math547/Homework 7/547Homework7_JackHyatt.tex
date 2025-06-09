@@ -1,0 +1,222 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 7 (Due March 19, 2025)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 547 - Algebraic Structures II - Spring 2025} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Let $\phi : R \rightarrow S$ be a ring homomorphism.
+		\begin{enumerate}
+			\item Let $J$ be an ideal of $R$. Assume that $\phi$ is surjective. Prove that $\phi(J) \coloneq \{\phi(x) : x \in J\}$ is an ideal of $S$.
+			\begin{proof}
+				Let $\phi(x),\phi(y) \in \phi(J)$. Then since $\phi$ is a homomorphism, $\phi(x) - \phi(y) = \phi(x-y) \in \phi(J)$. So $(\phi(J), +)$ is a subgroup of $(S,+)$.
+				
+				Let $\phi(x) \in \phi(J), s \in S$. Then since $\phi$ is surjective, $\exists y \in R$ s.t. $\phi(y) = s$. So $s\phi(x) = \phi(y)\phi(x) = \phi(yx) \in \phi(J)$.
+				
+				So $\phi(J)$ is an ideal of $S$.
+			\end{proof}
+			
+			\item Give a counterexample to show that the conclusion from part a. does not hold if the assumption that $\phi$ is surjective is removed.\m
+			Let $\phi : \Z \rightarrow \Q$ be defined by $\phi(x) = x$. We have $2\Z$ is an ideal of $\Z$, but $\phi(2\Z) = 2\Z$ is not an ideal of $\Q$ since $2 \in 2\Z$ and $\frac{1}{2}\cdot2 \nin 2\Z$.
+			
+			\item Let $K$ be an ideal of $S$. Prove that $\phi^{-1}(K) \coloneq \{x \in R : \phi(x) \in K\}$ is an ideal of $R$.
+			\begin{proof}
+				Let $x,y \in \phi^{-1}(K)$. Then $\phi(x),\phi(y) \in K$, meaning $\phi(x-y) \in K$. So, $x - y \in \phi^{-1}(K)$. So $(\phi^{-1}(K), +)$ is a subgroup of $(R,+)$.
+				
+				Let $x \in \phi^{-1}(K), r \in R$. Then since $\phi$ is a homomorphism and $K$ is an ideal, $\phi(rx) = \phi(r)\phi(x) \in K$ because $\phi(r) \in S$ and $\phi(x) \in K$. So $rx \in \phi^{-1}(K)$.
+				
+				So $\phi^{-1}(K)$ is an ideal of $R$.
+			\end{proof}
+		\end{enumerate}
+	
+	
+		\item Let $R$ be a ring and $I$ an ideal of $R$. Let $\pi : R \rightarrow R/I$ be the canonical projection, $\pi(x) = \overline{x}$. Prove that
+		\begin{enumerate}
+			\item If $J$ is an ideal of $R$ such that $I \subseteq J$, then $\pi^{-1}(\pi(J)) = J$.
+			\begin{proof}
+				\[\pi^{-1}(\pi(J)) = \{ x \in R : \overline{x} \in \pi(J) \}\]
+				Since $\pi(J) = \{ \overline{x} : x \in J \}$, we can rewrite this as:
+				\[\pi^{-1}(\pi(J)) = \{ x \in R : x + I = y + I \text{ for some } y \in J \}\]
+				
+				This means $x - y \in I$, so we can express $x = y + i$ for some $i \in I$. Since $y \in I$ and $i \in I$, and $I \subseteq J$, it follows that $x \in J$. Thus, $\pi^{-1}(\pi(J)) \subseteq J$.
+				
+				Let $x \in J$. Then $\pi(x) = \overline{x} \in \pi(J)$. By definition of preimage, we have that $x \in \pi^{-1}(\pi(J))$. So $J \subseteq \pi^{-1}(\pi(J))$.
+				
+				So $\pi^{-1}(\pi(J)) = J$.
+			\end{proof}
+			
+			\item If $K$ is an ideal of $R/I$, then $\pi(\pi^{-1}(K)) = K$.
+			\begin{proof}
+				Consider the preimage under $\pi$:
+				
+				\[\pi^{-1}(K) = \{ x \in R : \overline{x} \in K \}.\]
+				
+				Applying $\pi$ to this set, we obtain:
+				
+				\[\pi(\pi^{-1}(K)) = \{ \pi(x) : x \in R, \overline{x} \in K \}.\]
+				
+				Since $\pi(x) = \overline{x}$, this simplifies to:
+				
+				\[\pi(\pi^{-1}(K)) = \{ \overline{x} : \overline{x} \in K \}.\]
+				
+				Since $K$ consists of equivalence classes $\overline{x}$, we immediately conclude:
+				\[\pi(\pi^{-1}(K)) = K.\]
+			\end{proof}
+		\end{enumerate}
+	
+		
+		\item 
+		\begin{enumerate}
+			\item Let $R$ be a commutative ring and $I$ an ideal of $R$. Let $J$ be an ideal of $R$ that contains $I$, and consider $\pi(J) = J/I$ as an ideal of $R/I$ (as per the correspondence theorem). Prove that
+			\[\frac{R}{J} \cong \frac{\left(\frac{R}{I}\right)}{\left(\frac{J}{I}\right)}\]
+			\begin{proof}
+				By the correspondence theorem, the set $\pi(J) = J/I$ is an ideal of $R/I$.
+				Consider the canonical projection $\pi: R \to R/I$ given by $\pi(x) = \overline{x} = x + I$. This induces a natural projection
+				\[
+				\overline{\pi}: R/I \to (R/I)/(J/I)
+				\]
+				given by $\overline{\pi}(\overline{x}) = \overline{x} + J/I$. 
+				
+				Define the map $\varphi: R \to (R/I)/(J/I)$ by 
+				\[
+				\varphi(x) = \overline{x} + J/I.
+				\]
+				Since $\varphi$ is the composition of two quotient maps, it is a ring homomorphism. The kernel of $\varphi$ consists of elements $x \in R$ such that 
+				\[
+				\overline{x} + J/I = J/I,
+				\]
+				which means $\overline{x} \in J/I$, or equivalently, $x \in J$. Thus, $\ker \varphi = J$.
+				
+				By the F.H.T, we conclude that 
+				\[
+				\frac{R}{J} \cong \frac{\left(\frac{R}{I}\right)}{\left(\frac{J}{I}\right)},
+				\]
+				as required.
+
+			\end{proof}
+			
+			\item With notation as in part a., prove that $J$ is a prime ideal of $R$ if and only if $\frac{J}{I}$ is a prime ideal of $\frac{R}{I}$.
+			\begin{proof}
+				Suppose $J$ is a prime ideal of $R$. To show that $J/I$ is prime in $R/I$, assume that $\overline{ab} \in J/I$ for some $\overline{a}, \overline{b} \in R/I$. This means that $ab \in J$. Since $J$ is prime, we must have either $a \in J$ or $b \in J$, implying $\overline{a} \in J/I$ or $\overline{b} \in J/I$. Thus, $J/I$ is prime in $R/I$.
+				
+				Conversely, suppose $J/I$ is prime in $R/I$. Assume that $ab \in J$ for some $a, b \in R$. Then $\overline{ab} \in J/I$. Since $J/I$ is prime, we must have $\overline{a} \in J/I$ or $\overline{b} \in J/I$, which means $a \in J$ or $b \in J$. Hence, $J$ is prime in $R$.
+				
+				So, $J$ is prime in $R$ if and only if $J/I$ is prime in $R/I$.
+				
+			\end{proof}
+		\end{enumerate}
+	
+		
+		\item Let $R = \Z[X]$ and let $P$ be a prime ideal such that $(X) \subseteq P \subseteq (X, 5)$. Use the result from 3b. to prove that $P$ must be equal to $(X)$ or $(X, 5)$ (that is, there are no other prime ideals in between).
+		\begin{proof}
+			First, we want to quickly prove that isomorphisms preserve prime ideals. Let $\phi: R \rightarrow S$ be an isomorphism between rings $R$ and $S$, and let $P$ be a prime ideal of $R$. We want to check that $\phi(P)$ is a prime ideal (we already get that it is an ideal from problem 1).
+			
+			Let $\phi(a)\phi(b) \in \phi(P)$. We then have $\phi(ab) \in \phi(P)$, giving $ab \in P$. And since $P$ is prime, we have $a \in P$ or $b \in P$, which finally implies $\phi(a) \in \phi(P)$ or $\phi(b) \in \phi(P)$.
+			
+			So isomorphisms preserve prime ideals.
+			
+			From 3b, we know that $P$ being a prime ideal of $\Z[X]$ with $(X) \subseteq P$ implies that $P/(X)$ is a prime ideal of $\Z[X]/(X)$. We also have that $\Z[X]/(X) \cong \Z$ with $\phi(\overline{a}) = a$ as the isomorphism.
+			
+			Then we have $\phi(P/(X))$ is a prime ideal of $\Z$.
+
+			The only prime ideals in $\Z$ are $(0)$ and $(p)$ for prime numbers $p$. This means $P/(X)$ must either be $\overline{0}$ or $\overline{p}$.
+			
+			\textbf{Case 1:} $P/(X) = \overline{0}$, corresponding to $P = (X)$.
+			
+			\textbf{Case 2:} $P/(X) = \overline{p}$, meaning $P = (X,p)$. Since $P \subseteq (X,5)$, that forces $p$ to be $5$. So $P = (X,5)$.
+		\end{proof}
+		
+		
+		\item Prove that
+		\begin{enumerate}
+			\item $\frac{\Z[x]}{(2,x^2+5)} \cong \frac{\Z_2[x]}{(x^2+5)}$
+			\begin{proof}
+				Let us first note that $(2) \subseteq (2, x^2 + 5)$. Then right away, problem 3a gives that 
+				
+				\[
+				\frac{\Z[x]}{(2, x^2+5)} \cong \frac{\left(\frac{\Z[X]}{(2)}\right)}{\left(\frac{(2,x^2+5)}{(2)}\right)}.
+				\]
+				
+				It is clear that $\frac{\Z[X]}{(2)} \cong \Z_2[X]$ and $\frac{(2,x^2+5)}{(2)} \cong (x^2 + 5)$. So we easily get that
+				\[\frac{\Z[x]}{(2,x^2+5)} \cong \frac{\Z_2[x]}{(x^2+5)}\]
+				
+			\end{proof}
+			
+			\item $(2,x^2+5)$ is not a prime ideal of $\Z[x]$.
+			\begin{proof}
+				To show that $(2, x^2+5)$ is not prime, we must find $f(x), g(x) \in \Z[x]$ such that 
+				\[
+				f(x) g(x) \in (2, x^2+5)
+				\]
+				but neither $f(x)$ nor $g(x)$ belongs to $(2, x^2+5)$.
+				
+				Consider $f(x) = x+1$ and $g(x) = x-1$. Then,
+				\[
+				f(x) g(x) = (x+1)(x-1) = x^2 - 1.
+				\]
+				We rewrite this as
+				\[
+				x^2 - 1 = x^2+5 - 3\cdot2 \in (2, x^2+5),
+				\]
+				
+				However $f(x) = x+1 \not\in (2, x^2+5)$ and $g(x) = x-1 \not\in (2, x^2+5)$. This is easy to see since their linear combination $a\cdot2 + b\cdot(x^2+5)$ both require $b$ to be $0$, which immediately fails since they are not strictly a multiple of $2$.
+			\end{proof}
+		\end{enumerate}
+	
+		
+		\item
+		\begin{enumerate}
+			\item Let $R,S$ be rings and let $(r,s) \in R \times S$. Prove that $(r,s) \in (R \times S)^* \iff r \in R^*$ and $s \in S^*$.
+			\begin{proof}
+				An element $(r,s) \in R \times S$ is a unit if and only if there exists an element $(r',s') \in R \times S$ such that
+				\[
+				(r,s) (r',s') = (1,1).
+				\]
+				Expanding the product in the direct product ring,
+				\[
+				(r r', s s') = (1,1).
+				\]
+				This implies that $r r' = 1$ in $R$ and $s s' = 1$ in $S$, which means that $r \in R^*$ and $s \in S^*$.
+				
+				Conversely, if $r \in R^*$ and $s \in S^*$, then there exist elements $r' \in R$ and $s' \in S$ such that $r r' = 1$ and $s s' = 1$. Then, $(r',s')$ is an inverse of $(r,s)$, proving that $(r,s) \in (R \times S)^*$. 
+			\end{proof}
+			
+			\item Use the result from part a. and the Chinese Remainder Theorem to find and prove a formula for the number of units in $\Z_N$, in terms of the prime factorization of $n$.
+			\begin{proof}
+				The units in $\Z_{p^k}$ are elements that are coprime to $p^k$. The total number of elements in $\Z_{p^k}$ is $p^k$, and the number of elements that are divisible by $p$ is $p^{k-1}$ since they are of the form $mp$ for $m = 0,1,2,\dots, p^{k-1}-1$.
+				
+				Let $N$ have the prime factorization
+				\[N = p_1^{k_1} p_2^{k_2} \cdots p_m^{k_m}.\]
+				Since we know $\Z_N \cong \frac{\Z}{(N)}$, the Chinese Remainder Theorem gives us an isomorphism:
+				\[
+				\Z_N \cong \Z_{p_1^{k_1}} \times \Z_{p_2^{k_2}} \times \cdots \times \Z_{p_m^{k_m}}.
+				\]
+				By part (a), the number of units in $\Z_N$, is the product of the number of units in each factor, giving
+				\[
+				o(\Z_n^*) = (p_1^{k_1} - p_1^{k_1-1}) (p_2^{k_2} - p_2^{k_2-1}) \ldots (p_m^{k_m} - p_m^{k_m-1}).
+				\]
+			\end{proof}
+		\end{enumerate}
+		
+	\end{enumerate}
+\end{document}

@@ -1,0 +1,119 @@
+% !TeX program = lualatex
+
+\documentclass[12pt]{article}
+
+\input{C:/Users/jhyat/WorkSpaces/Latex Workspace/School/Header.tex}
+\setlength\parindent{24pt}
+
+
+\begin{document}
+	
+	% --------------------------------------------------------------
+	%                         Start here
+	% --------------------------------------------------------------
+	
+	
+	\title{Homework 6 (Due March 5, 2025)}
+	\author{Jack Hyatt\\ %replace with your name
+		MATH 547 - Algebraic Structures II - Spring 2025} 
+	
+	\maketitle
+	
+	Justify all of your answers completely.\\
+	
+	
+	\medskip 
+	
+	\begin{enumerate}
+		\item Prove that $\frac{\Z[x]}{(x^2-2)}$ is isomorphic to $\Z[\sqrt{2}] = \{a + b\sqrt{2} : a,b \in \Z\}$.
+		\begin{proof}
+			Let $\phi:\Z[x] \rightarrow \R$ be the evaluation map $\phi(f(x)) = f(\sqrt{2})$. It is quite easy to see that $(x^2-2) \subseteq \ker \phi$. To show $(x^2-2) \supseteq \ker \phi$, we can see that any $f(x) \in \Z[x]$ with $f(\sqrt{2}) = 0$ will have $x^2-2$ as a factor, meaning it is a multiple, meaning it is in $(x^2-2)$. So then $(x^2-2) = \ker \phi$.
+			
+			Since evaluation maps are homomorphisms, the F.H.T. gives us $\frac{\Z[x]}{(x^2-2)} \cong \Ima\phi$. Now to find what $\Ima\phi$ is.
+			
+			When a term in a polynomial has degree $0 \mod 2$, we get the term evaluated at $\sqrt{2}$ is an integer. 
+			
+			When a term in a polynomial has degree $1 \mod 2$, we get the term evaluated at $\sqrt{2}$ is a multiple of $\sqrt{2}$.
+			
+			Putting this together, we can easily see that 
+			\[\Ima\phi = \{a + b\sqrt{2} : a,b \in \Z\}\]
+		\end{proof}
+		
+		
+		\item Prove that $I = (2,x)$ is a maximal ideal in $\Z[x]$.
+		\begin{proof}
+			Let $\phi:\Z[x] \rightarrow \Z_2$ be the map $\phi(f(x)) = [f(0)]_2$. It is quite easy to see that $(2,x) \subseteq \ker \phi$, since the functions evaluated at 0 leave only the constant term, and that term is always even. To show $(2,x) \supseteq \ker \phi$, we can see that any $f(x) \in \Z[x]$ with $f(0) \equiv 0 \mod 2$ will have the constant be even, meaning it is in $(2,x)$. So then $(2,x) = \ker \phi$.
+			
+			Since evaluation maps are homomorphisms, and modulus is also a homomorphism, $\phi$ is a homomorphism. So the F.H.T. gives us $\frac{\Z[x]}{(2,x)} \cong \Ima\phi$. It is trivial to check that $\Ima\phi = \Z_2$ since there are only 2 elements.
+			
+			We know that any $\Z_q$ is a field as long as $q$ is a prime power. So then $\Z_2$ is a field. That implies that $\frac{\Z[x]}{(2,x)}$ is also a field, meaning $(2,x)$ is a maximal ideal.
+		\end{proof}
+		
+		
+		\item Find a subring of $\R$ that is isomorphic to $\frac{\Z[x]}{(x^3-2)}$. Prove the isomorphism.
+		\begin{proof}
+			Let $\phi:\Z[x] \rightarrow \R$ be the evaluation map $\phi(f(x)) = f(\sqrt[3]{2})$. It is quite easy to see that $(x^3-2) \subseteq \ker \phi$. To show $(x^3-2) \supseteq \ker \phi$, we can see that any $f(x) \in \Z[x]$ with $f(\sqrt[3]{2}) = 0$ will have $x^3-2$ as a factor, meaning it is a multiple, meaning it is in $(x^3-2)$. So then $(x^3-2) = \ker \phi$.
+			
+			Since evaluation maps are homomorphisms, the F.H.T. gives us $\frac{\Z[x]}{(x^3-2)} \cong \Ima\phi$. Now to find what $\Ima\phi$ is.
+			
+			When a term in a polynomial has degree $0 \mod 3$, we get the term evaluated at $\sqrt[3]{2}$ is an integer. 
+			
+			When a term in a polynomial has degree $1 \mod 3$, we get the term evaluated at $\sqrt[3]{2}$ is a multiple of $\sqrt[3]{2}$.
+			
+			When a term in a polynomial has degree $2 \mod 3$, we get the term evaluated at $\sqrt[3]{2}$ is a multiple of $\sqrt[3]{4}$.
+			
+			Putting this together, we can easily see that 
+			\[\Ima\phi = \{a + b\sqrt[3]{2} + c\sqrt[3]{4} : a,b,c \in \Z\}\]
+		\end{proof}
+		
+		 
+		\item Let $R,S$ be commutative rings and let $F : R \rightarrow S$ be a ring isomorphism. Let $I$ be an ideal of $R$. Consider 
+		\[F(I) = \{F(x) : x \in I\}.\]
+		\begin{enumerate}
+			\item[a.] Prove that $F(I)$ is an ideal of $S$ and that $R/I$ is isomorphic to $S/F(I)$.
+			\begin{proof}
+				Let $F(x) \in F(I)$ and $s \in S$. Since $F$ is a bijection, there is an $s' \in R$ s.t. $F(s') = s$. Since $I$ is an ideal, then $s'x \in I$. So then $sF(x) = F(s')F(x) = F(s'x) \in F(I)$, making $F(I)$ an ideal of $S$.
+				
+				Define $\phi : R/I \rightarrow S/F(I)$ with $\phi(x + I) = F(x) + F(I)$. We need to check if $\phi$ is well defined.
+				
+				Let $r + I = r' + I$ be two representations of the same coset. Then $r-r' \in I$, which means $F(r-r') \in F(I)$. Since $F$ is a isomorphism, we can get to $F(r) + F(I) = F(r') + F(I)$. So $\phi$ is well defined.
+				
+				It is also easy to see that $\phi$ is an isomorphism since addition and multiplication of cosets are preserved, and that $F$ is an isomorphism.
+				
+				S0 then $R/I$ is isomorphic to $S/F(I)$.
+			\end{proof}
+			
+			\item[b.] Use the result from part a. to prove that
+			\[\frac{\Q[x]}{(x^2-2)} \cong \frac{\Q[x]}{(x^2+4x+2)}\]
+			\begin{proof}
+				Let $F : \Q[x] \rightarrow \Q[x]$ with $F(f(x)) = f(x+2)$. We can observe that $F(x^2-2) = (x+2)^2-2 = x^2+4x+2$.
+				
+				$F$ has an inverse $F^{-1}(f(x)) = f(x-2)$. This is shown by $F(F^{-1}(f(x))) =  F(f(x-2)) = f(x)$ and $F^{-1}(F(f(x))) =  F^{-1}(f(x+2)) = f(x)$.
+				
+				So then $F$ is a bijection. We also know that function composition preserves structure through addition and multiplication, so that means $F$ is an isomorphism.
+				
+				So all together with part a., we have that
+				\[\frac{\Q[x]}{(x^2-2)} \cong \frac{\Q[x]}{(x^2+4x+2)}\]
+			\end{proof}
+		\end{enumerate}
+	
+		
+		\item Prove that the rings $R_1 = \frac{\Z[x]}{(x^2-2)}$ and $R_2 = \frac{\Z[x]}{(x^2-5)}$ are not isomorphic to each other.
+
+		\begin{proof}
+			BWOC, assume that $F:R_1 \rightarrow R_2$ is an isomorphism. Let $\bar{x} \in R_1$, meaning $\bar{x} = x + (x^2-2)$, making $\bar{x}^2 = 2$. Let $u \coloneq F(\bar{x}) \in R_2$. We then have 
+			\begin{align*}
+				u^2 &= F(\bar{x})^2 \\
+				&= F(\bar{x}^2) \\
+				&= F(2) \\
+				&= 2
+			\end{align*}
+			In $R_2$, any element is of the form $a+b\bar{y}$, where $\bar{y} = x + (x^2-5)$ satisfies $\bar{y}^2 = 5$.
+			
+			Then we have that $u^2 = (a+b\bar{y})^2 = a^2 + 5b^2 + 2ab\bar{y}$. Since $u^2 = 2$, we have that $ab=0$, giving either $a$ or $b$ is 0.
+			
+			If $b=0$, then $a^2 = 2$. This has no integer solutions however, a contradiction.
+			If $a=0$, then $5b^2 = 2$. This has no integer solutions however, a contradiction.
+		\end{proof}
+	\end{enumerate}
+\end{document}
